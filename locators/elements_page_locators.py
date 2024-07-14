@@ -20,3 +20,12 @@ class CheckBoxPageLocators:
     TITLE_ITEM = ("xpath", ".//ancestor::span[@class='rct-text']")
     OUTPUT_RESULT = ("xpath", "//span[@class='text-success']")
 
+
+class RadioButtonPageLocators:
+    YES_RADIO_ACTIVE = ("xpath", "//label[@for='yesRadio']")
+    IMPRESSIVE_RADIO_ACTIVE = ("xpath", "//label[@for='impressiveRadio']")
+    NO_RADIO_ACTIVE = ("xpath", "//label[@for='noRadio']")
+
+    YES_RADIO_STATUS = ("xpath", "//input[@id='yesRadio']")
+    IMPRESSIVE_RADIO_STATUS = ("xpath", "//input[@id='impressiveRadio']")
+    NO_RADIO_STATUS = ("xpath", "//input[@id='noRadio']")
