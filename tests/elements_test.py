@@ -57,3 +57,18 @@ class TestElements:
             web_tables.search_some_person(key_word)
             table_result = web_tables.check_search_person()
             assert key_word in table_result, "the person was not found in the table"
+
+        def test_web_table_update_person_info(self, driver):
+            web_tables = WebTablesPage(driver)
+            web_tables.open()
+            lastname = web_tables.add_new_person()[0][1]
+            web_tables.search_some_person(lastname)
+            old_table_result = web_tables.check_search_person()
+            field_index, updated_value = web_tables.update_person_info()
+            web_tables.search_some_person(updated_value)
+            new_table_result = web_tables.check_search_person()
+            old_data_to_compare = old_table_result[:field_index] + old_table_result[field_index + 1:]
+            new_data_to_compare = new_table_result[:field_index] + new_table_result[field_index + 1:]
+            assert old_data_to_compare == new_data_to_compare, (f"the user's data does not match after update, "
+                                                                f"excluding field_index {field_index}")
+            assert updated_value == new_table_result[field_index], "the person card has not been changed"

@@ -45,6 +45,8 @@ class WebTablesPageLocators:
     # table
     FULL_PEOPLE_LIST = ("xpath", "//div[@class='rt-tr-group']")
     SEARCH_FIELD = ("xpath", "//input[@id='searchBox']")
-    EDIT_PERSON_ACTION = ("xpath", "//span[@title='Edit']")
     DELETE_PERSON_ACTION = ("xpath", "//span[@title='Delete']")
     ROW_PERSON = ("xpath", "//div[@class='rt-tr-group']")
+
+    # update
+    UPDATE_BUTTON = ("xpath", "//span[@title='Edit']")

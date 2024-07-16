@@ -1,4 +1,5 @@
 import random
+import time
 
 from pages.base_page import BasePage
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
@@ -128,7 +129,44 @@ class WebTablesPage(BasePage):
     def search_some_person(self, key_word):
         search_field = self.element_is_visible(self.locators.SEARCH_FIELD)
         search_field.click()
+        search_field.clear()
         search_field.send_keys(key_word)
 
     def check_search_person(self):
         return self.element_is_visible(self.locators.ROW_PERSON).text.splitlines()
+
+    def update_person_info(self):
+        person_info = next(generated_person())
+        fields = {
+            'firstname': person_info.firstname,
+            'lastname': person_info.lastname,
+            'age': person_info.age,
+            'email': person_info.email,
+            'salary': person_info.salary,
+            'department': person_info.department
+        }
+        field_to_update = random.choice(list(fields.keys()))
+        field_index = list(fields.keys()).index(field_to_update)
+
+        self.element_is_visible(self.locators.UPDATE_BUTTON).click()
+
+        if field_to_update == 'firstname':
+            self.element_is_visible(self.locators.FIRST_NAME).clear()
+            self.element_is_visible(self.locators.FIRST_NAME).send_keys(fields['firstname'])
+        if field_to_update == 'lastname':
+            self.element_is_visible(self.locators.LAST_NAME).clear()
+            self.element_is_visible(self.locators.LAST_NAME).send_keys(fields['lastname'])
+        if field_to_update == 'email':
+            self.element_is_visible(self.locators.EMAIL).clear()
+            self.element_is_visible(self.locators.EMAIL).send_keys(fields['email'])
+        if field_to_update == 'age':
+            self.element_is_visible(self.locators.AGE).clear()
+            self.element_is_visible(self.locators.AGE).send_keys(fields['age'])
+        if field_to_update == 'salary':
+            self.element_is_visible(self.locators.SALARY).clear()
+            self.element_is_visible(self.locators.SALARY).send_keys(fields['salary'])
+        if field_to_update == 'department':
+            self.element_is_visible(self.locators.DEPARTMENT).clear()
+            self.element_is_visible(self.locators.DEPARTMENT).send_keys(fields['department'])
+        self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+        return field_index, str(fields[field_to_update])
