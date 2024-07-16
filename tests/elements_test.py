@@ -1,4 +1,7 @@
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage
+import random
+import time
+
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage
 
 
 class TestElements:
@@ -37,3 +40,20 @@ class TestElements:
             assert yes_radio_status, "'Yes' radio button is not selected"
             assert impressive_radio_status, "'Impressive' radio button is not selected"
             assert no_radio_status, "'No' radio button is not selected"
+
+    class TestWebTables:
+        def test_web_table_add_person(self, driver):
+            web_tables = WebTablesPage(driver)
+            web_tables.open()
+            new_persons = web_tables.add_new_person(random.randint(1, 10))
+            table_result = web_tables.check_new_added_person()
+            for new_person in new_persons:
+                assert new_person in table_result, f"the user's data {new_person} does not match"
+
+        def test_web_table_search_person(self, driver):
+            web_tables = WebTablesPage(driver)
+            web_tables.open()
+            key_word = web_tables.add_new_person()[0][random.randint(0, 5)]
+            web_tables.search_some_person(key_word)
+            table_result = web_tables.check_search_person()
+            assert key_word in table_result, "the person was not found in the table"

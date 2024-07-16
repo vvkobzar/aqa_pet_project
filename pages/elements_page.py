@@ -1,7 +1,8 @@
 import random
 
 from pages.base_page import BasePage
-from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators
+from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
+    WebTablesPageLocators
 from config.links import ElementsPageLinks
 from generator.generator import generated_person
 
@@ -87,3 +88,47 @@ class RadioButtonPage(BasePage):
 
     def check_status_no_radio_button(self):
         return self.element_is_present(self.locators.NO_RADIO_STATUS).is_selected()
+
+
+class WebTablesPage(BasePage):
+    PAGE_URL = ElementsPageLinks.WEB_TABLES
+    locators = WebTablesPageLocators()
+
+    def add_new_person(self, count=1):
+        added_persons = []
+        while count != 0:
+            person_info = next(generated_person())
+            firstname = person_info.firstname
+            lastname = person_info.lastname
+            email = person_info.email
+            age = person_info.age
+            salary = person_info.salary
+            department = person_info.department
+            self.element_is_visible(self.locators.ADD_BUTTON).click()
+            self.element_is_visible(self.locators.FIRST_NAME).send_keys(firstname)
+            self.element_is_visible(self.locators.LAST_NAME).send_keys(lastname)
+            self.element_is_visible(self.locators.EMAIL).send_keys(email)
+            self.element_is_visible(self.locators.AGE).send_keys(age)
+            self.element_is_visible(self.locators.SALARY).send_keys(salary)
+            self.element_is_visible(self.locators.DEPARTMENT).send_keys(department)
+            self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
+
+            new_person = [firstname, lastname, str(age), email, str(salary), department]
+            added_persons.append(new_person)
+            count -= 1
+        return added_persons
+
+    def check_new_added_person(self):
+        person_list = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
+        data = []
+        for person in person_list:
+            data.append(person.text.splitlines())
+        return data
+
+    def search_some_person(self, key_word):
+        search_field = self.element_is_visible(self.locators.SEARCH_FIELD)
+        search_field.click()
+        search_field.send_keys(key_word)
+
+    def check_search_person(self):
+        return self.element_is_visible(self.locators.ROW_PERSON).text.splitlines()
