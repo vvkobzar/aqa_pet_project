@@ -82,3 +82,9 @@ class TestElements:
             text = web_tables.check_deleted()
             assert text == "No rows found", "the person has not been deleted"
 
+        def test_web_table_change_count_row(self, driver):
+            web_tables = WebTablesPage(driver)
+            web_tables.open()
+            count = web_tables.select_up_to_some_rows()
+            assert count == [5, 10, 20, 25, 50,
+                             100], "the number of rows in the table has not been changed or has changed incorrectly"

@@ -48,6 +48,7 @@ class WebTablesPageLocators:
     DELETE_PERSON_BUTTON = ("xpath", "//span[@title='Delete']")
     NO_ROWS_FOUND = ("xpath", "//div[@class='rt-noData']")
     ROW_PERSON = ("xpath", "//div[@class='rt-tr-group']")
+    COUNT_ROW_LIST = ("xpath", "//select[@aria-label='rows per page']")
 
     # update
     UPDATE_BUTTON = ("xpath", "//span[@title='Edit']")

@@ -1,6 +1,5 @@
 import random
-import time
-
+from selenium.webdriver.support.select import Select
 from pages.base_page import BasePage
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
     WebTablesPageLocators
@@ -176,3 +175,18 @@ class WebTablesPage(BasePage):
 
     def check_deleted(self):
         return self.element_is_visible(self.locators.NO_ROWS_FOUND).text
+
+    def select_up_to_some_rows(self):
+        data = []
+        count_row_select = self.element_is_visible(self.locators.COUNT_ROW_LIST)
+        DROPDOWN = Select(count_row_select)
+        all_options = DROPDOWN.options
+        for option in all_options:
+            DROPDOWN.select_by_index(all_options.index(option))
+            data.append(self.check_count_rows())
+        return data
+
+    def check_count_rows(self):
+        list_rows = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
+        return len(list_rows)
+
