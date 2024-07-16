@@ -72,3 +72,13 @@ class TestElements:
             assert old_data_to_compare == new_data_to_compare, (f"the user's data does not match after update, "
                                                                 f"excluding field_index {field_index}")
             assert updated_value == new_table_result[field_index], "the person card has not been changed"
+
+        def test_web_table_delete_person(self, driver):
+            web_tables = WebTablesPage(driver)
+            web_tables.open()
+            email = web_tables.add_new_person()[0][3]
+            web_tables.search_some_person(email)
+            web_tables.delete_person()
+            text = web_tables.check_deleted()
+            assert text == "No rows found", "the person has not been deleted"
+

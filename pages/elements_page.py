@@ -170,3 +170,9 @@ class WebTablesPage(BasePage):
             self.element_is_visible(self.locators.DEPARTMENT).send_keys(fields['department'])
         self.element_is_visible(self.locators.SUBMIT_BUTTON).click()
         return field_index, str(fields[field_to_update])
+
+    def delete_person(self):
+        self.element_is_visible(self.locators.DELETE_PERSON_BUTTON).click()
+
+    def check_deleted(self):
+        return self.element_is_visible(self.locators.NO_ROWS_FOUND).text
