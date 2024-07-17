@@ -13,3 +13,4 @@ class ElementsPageLinks:
     API_MOVED = f"{HOST}/moved/"
     API_BAD_REQUEST = f"{HOST}/bad-request/"
     API_UNAUTHORIZED = f"{HOST}/unauthorized/"
+    API_FORBIDDEN = f"{HOST}/forbidden/"
