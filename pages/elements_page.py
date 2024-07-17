@@ -1,8 +1,10 @@
 import random
+
+import requests
 from selenium.webdriver.support.select import Select
 from pages.base_page import BasePage
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-    WebTablesPageLocators, ButtonsPageLocators
+    WebTablesPageLocators, ButtonsPageLocators, LinksPageLocators
 from config.links import ElementsPageLinks
 from generator.generator import generated_person
 
@@ -212,3 +214,42 @@ class ButtonsPage(BasePage):
 
     def check_click_on_the_button(self):
         return self.element_is_present(self.locators.CLICK_ME_MESSAGE).text
+
+
+class LinksPage(BasePage):
+    PAGE_URL = ElementsPageLinks.LINKS
+    locators = LinksPageLocators()
+
+    def click_on_the_home_link(self):
+        self.element_is_visible(self.locators.HOME_LINK).click()
+
+    def click_on_the_dynamic_link(self):
+        self.element_is_visible(self.locators.DYNAMIC_HOME_LINK).click()
+
+    def check_on_the_api_created(self):
+        response = requests.get(ElementsPageLinks.API_CREATED)
+        return response.status_code, response.reason
+
+    def check_on_the_api_no_content(self):
+        response = requests.get(ElementsPageLinks.API_NO_CONTENT)
+        return response.status_code, response.reason
+
+    def check_on_the_api_moved(self):
+        response = requests.get(ElementsPageLinks.API_MOVED)
+        return response.status_code, response.reason
+
+    def check_on_the_api_bad_request(self):
+        response = requests.get(ElementsPageLinks.API_BAD_REQUEST)
+        return response.status_code, response.reason
+
+    def check_on_the_api_unauthorized(self):
+        response = requests.get(ElementsPageLinks.API_UNAUTHORIZED)
+        return response.status_code, response.reason
+
+    def check_on_the_api_forbidden(self):
+        response = requests.get(ElementsPageLinks.API_FORBIDDEN)
+        return response.status_code, response.reason
+
+    def check_on_the_api_not_found(self):
+        response = requests.get(ElementsPageLinks.API_NOT_FOUND)
+        return response.status_code, response.reason

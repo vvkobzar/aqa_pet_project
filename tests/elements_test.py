@@ -1,5 +1,5 @@
 import random
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage
 
 
 class TestElementsPage:
@@ -116,3 +116,77 @@ class TestElementsPage:
             buttons_page.click_on_the_button()
             message = buttons_page.check_click_on_the_button()
             assert message == "You have done a dynamic click", "the click button did not work"
+
+    class TestLinksPage:
+        def test_of_switching_to_new_home_page(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            main_page = links_page.get_current_window_handle()
+            links_page.click_on_the_home_link()
+            list_page = links_page.get_list_windows_handles()
+            links_page.switch_to_new_windows(list_page[1])
+            url = links_page.get_url_page()
+            new_page = links_page.get_current_window_handle()
+            assert main_page != new_page, "error switching between tabs"
+            assert url == "https://demoqa.com/", "the link does not match the home page"
+
+        def test_of_switching_to_dynamic_link(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            main_page = links_page.get_current_window_handle()
+            links_page.click_on_the_dynamic_link()
+            list_page = links_page.get_list_windows_handles()
+            links_page.switch_to_new_windows(list_page[1])
+            url = links_page.get_url_page()
+            new_page = links_page.get_current_window_handle()
+            assert main_page != new_page, "error switching between tabs"
+            assert url == "https://demoqa.com/", "the link does not match the home page"
+
+        def test_api_created(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            response_status_code, response_reason = links_page.check_on_the_api_created()
+            assert response_status_code == 201, "the status code does not match the response"
+            assert response_reason == 'Created', "the status text does not match the response"
+
+        def test_api_no_content(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            response_status_code, response_reason = links_page.check_on_the_api_no_content()
+            assert response_status_code == 204, "the status code does not match the response"
+            assert response_reason == 'No Content', "the status text does not match the response"
+
+        def test_api_moved(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            response_status_code, response_reason = links_page.check_on_the_api_moved()
+            assert response_status_code == 301, "the status code does not match the response"
+            assert response_reason == 'Moved Permanently', "the status text does not match the response"
+
+        def test_api_bad_request(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            response_status_code, response_reason = links_page.check_on_the_api_bad_request()
+            assert response_status_code == 400, "the status code does not match the response"
+            assert response_reason == 'Bad Request', "the status text does not match the response"
+
+        def test_api_unauthorized(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            response_status_code, response_reason = links_page.check_on_the_api_unauthorized()
+            assert response_status_code == 401, "the status code does not match the response"
+            assert response_reason == 'Unauthorized', "the status text does not match the response"
+
+        def test_api_forbidden(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            response_status_code, response_reason = links_page.check_on_the_api_forbidden()
+            assert response_status_code == 403, "the status code does not match the response"
+            assert response_reason == 'Forbidden', "the status text does not match the response"
+
+        def test_api_not_found(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            response_status_code, response_reason = links_page.check_on_the_api_not_found()
+            assert response_status_code == 404, "the status code does not match the response"
+            assert response_reason == 'Not Found', "the status text does not match the response"
