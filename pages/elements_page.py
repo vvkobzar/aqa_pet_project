@@ -237,3 +237,7 @@ class LinksPage(BasePage):
     def check_on_the_api_moved(self):
         response = requests.get(ElementsPageLinks.API_MOVED)
         return response.status_code, response.reason
+
+    def check_on_the_api_bad_request(self):
+        response = requests.get(ElementsPageLinks.API_BAD_REQUEST)
+        return response.status_code, response.reason
