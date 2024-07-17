@@ -26,17 +26,25 @@ class TestElementsPage:
             assert checked_checkboxes == output_result, "checkboxes have not been selected"
 
     class TestRadioButtonPage:
-        def test_radio_button(self, driver):
+        def test_yes_radio_button(self, driver):
             radio_button_page = RadioButtonPage(driver)
             radio_button_page.open()
             radio_button_page.click_yes_radio_button()
             yes_radio_status = radio_button_page.check_status_yes_radio_button()
+            assert yes_radio_status, "'Yes' radio button is not selected"
+
+        def test_impressive_radio_button(self, driver):
+            radio_button_page = RadioButtonPage(driver)
+            radio_button_page.open()
             radio_button_page.click_impressive_radio_button()
             impressive_radio_status = radio_button_page.check_status_impressive_radio_button()
+            assert impressive_radio_status, "'Impressive' radio button is not selected"
+
+        def test_no_radio_button(self, driver):
+            radio_button_page = RadioButtonPage(driver)
+            radio_button_page.open()
             radio_button_page.click_no_radio_button()
             no_radio_status = radio_button_page.check_status_no_radio_button()
-            assert yes_radio_status, "'Yes' radio button is not selected"
-            assert impressive_radio_status, "'Impressive' radio button is not selected"
             assert no_radio_status, "'No' radio button is not selected"
 
     class TestWebTablesPage:
