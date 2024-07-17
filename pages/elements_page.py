@@ -220,3 +220,6 @@ class LinksPage(BasePage):
 
     def click_on_the_home_link(self):
         self.element_is_visible(self.locators.HOME_LINK).click()
+
+    def click_on_the_dynamic_link(self):
+        self.element_is_visible(self.locators.DYNAMIC_HOME_LINK).click()

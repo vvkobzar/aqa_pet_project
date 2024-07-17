@@ -129,3 +129,15 @@ class TestElementsPage:
             new_page = links_page.get_current_window_handle()
             assert main_page != new_page, "error switching between tabs"
             assert url == "https://demoqa.com/", "the link does not match the home page"
+
+        def test_of_switching_to_dynamic_link(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            main_page = links_page.get_current_window_handle()
+            links_page.click_on_the_dynamic_link()
+            list_page = links_page.get_list_windows_handles()
+            links_page.switch_to_new_windows(list_page[1])
+            url = links_page.get_url_page()
+            new_page = links_page.get_current_window_handle()
+            assert main_page != new_page, "error switching between tabs"
+            assert url == "https://demoqa.com/", "the link does not match the home page"
