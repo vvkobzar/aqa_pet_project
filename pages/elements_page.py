@@ -1,4 +1,6 @@
 import random
+
+import requests
 from selenium.webdriver.support.select import Select
 from pages.base_page import BasePage
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
@@ -223,3 +225,7 @@ class LinksPage(BasePage):
 
     def click_on_the_dynamic_link(self):
         self.element_is_visible(self.locators.DYNAMIC_HOME_LINK).click()
+
+    def check_on_the_api_created(self):
+        response = requests.get(ElementsPageLinks.API_CREATED)
+        return response.status_code, response.reason

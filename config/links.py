@@ -8,3 +8,4 @@ class ElementsPageLinks:
     WEB_TABLES = f"{HOST}/webtables/"
     BUTTONS = f"{HOST}/buttons/"
     LINKS = f"{HOST}/links/"
+    API_CREATED = f"{HOST}/created/"

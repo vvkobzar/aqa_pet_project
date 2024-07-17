@@ -141,3 +141,10 @@ class TestElementsPage:
             new_page = links_page.get_current_window_handle()
             assert main_page != new_page, "error switching between tabs"
             assert url == "https://demoqa.com/", "the link does not match the home page"
+
+        def test_api_created(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            response_status_code, response_reason = links_page.check_on_the_api_created()
+            assert response_status_code == 201, "the status code does not match the response"
+            assert response_reason == 'Created', "the status text does not match the response"
