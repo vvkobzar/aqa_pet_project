@@ -241,3 +241,7 @@ class LinksPage(BasePage):
     def check_on_the_api_bad_request(self):
         response = requests.get(ElementsPageLinks.API_BAD_REQUEST)
         return response.status_code, response.reason
+
+    def check_on_the_api_unauthorized(self):
+        response = requests.get(ElementsPageLinks.API_UNAUTHORIZED)
+        return response.status_code, response.reason

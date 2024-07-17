@@ -169,3 +169,10 @@ class TestElementsPage:
             response_status_code, response_reason = links_page.check_on_the_api_bad_request()
             assert response_status_code == 400, "the status code does not match the response"
             assert response_reason == 'Bad Request', "the status text does not match the response"
+
+        def test_api_unauthorized(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            response_status_code, response_reason = links_page.check_on_the_api_unauthorized()
+            assert response_status_code == 401, "the status code does not match the response"
+            assert response_reason == 'Unauthorized', "the status text does not match the response"

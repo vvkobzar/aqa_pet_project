@@ -12,3 +12,4 @@ class ElementsPageLinks:
     API_NO_CONTENT = f"{HOST}/no-content/"
     API_MOVED = f"{HOST}/moved/"
     API_BAD_REQUEST = f"{HOST}/bad-request/"
+    API_UNAUTHORIZED = f"{HOST}/unauthorized/"
