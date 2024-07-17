@@ -183,3 +183,10 @@ class TestElementsPage:
             response_status_code, response_reason = links_page.check_on_the_api_forbidden()
             assert response_status_code == 403, "the status code does not match the response"
             assert response_reason == 'Forbidden', "the status text does not match the response"
+
+        def test_api_not_found(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            response_status_code, response_reason = links_page.check_on_the_api_not_found()
+            assert response_status_code == 404, "the status code does not match the response"
+            assert response_reason == 'Not Found', "the status text does not match the response"

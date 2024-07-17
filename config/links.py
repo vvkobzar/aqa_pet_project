@@ -14,3 +14,4 @@ class ElementsPageLinks:
     API_BAD_REQUEST = f"{HOST}/bad-request/"
     API_UNAUTHORIZED = f"{HOST}/unauthorized/"
     API_FORBIDDEN = f"{HOST}/forbidden/"
+    API_NOT_FOUND = f"{HOST}/invalid-url/"
