@@ -233,4 +233,7 @@ class LinksPage(BasePage):
     def check_on_the_api_no_content(self):
         response = requests.get(ElementsPageLinks.API_NO_CONTENT)
         return response.status_code, response.reason
-    
+
+    def check_on_the_api_moved(self):
+        response = requests.get(ElementsPageLinks.API_MOVED)
+        return response.status_code, response.reason

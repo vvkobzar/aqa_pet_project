@@ -10,3 +10,4 @@ class ElementsPageLinks:
     LINKS = f"{HOST}/links/"
     API_CREATED = f"{HOST}/created/"
     API_NO_CONTENT = f"{HOST}/no-content/"
+    API_MOVED = f"{HOST}/moved/"
