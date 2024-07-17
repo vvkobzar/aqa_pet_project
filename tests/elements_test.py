@@ -148,3 +148,10 @@ class TestElementsPage:
             response_status_code, response_reason = links_page.check_on_the_api_created()
             assert response_status_code == 201, "the status code does not match the response"
             assert response_reason == 'Created', "the status text does not match the response"
+
+        def test_api_no_content(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            response_status_code, response_reason = links_page.check_on_the_api_no_content()
+            assert response_status_code == 204, "the status code does not match the response"
+            assert response_reason == 'No Content', "the status text does not match the response"
