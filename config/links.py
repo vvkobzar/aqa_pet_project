@@ -7,3 +7,4 @@ class ElementsPageLinks:
     RADIO_BUTTON = f"{HOST}/radio-button/"
     WEB_TABLES = f"{HOST}/webtables/"
     BUTTONS = f"{HOST}/buttons/"
+    LINKS = f"{HOST}/links/"

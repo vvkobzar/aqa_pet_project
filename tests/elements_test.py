@@ -1,5 +1,5 @@
 import random
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage
 
 
 class TestElementsPage:
@@ -116,3 +116,16 @@ class TestElementsPage:
             buttons_page.click_on_the_button()
             message = buttons_page.check_click_on_the_button()
             assert message == "You have done a dynamic click", "the click button did not work"
+
+    class TestLinksPage:
+        def test_of_switching_to_new_home_page(self, driver):
+            links_page = LinksPage(driver)
+            links_page.open()
+            main_page = links_page.get_current_window_handle()
+            links_page.click_on_the_home_link()
+            list_page = links_page.get_list_windows_handles()
+            links_page.switch_to_new_windows(list_page[1])
+            url = links_page.get_url_page()
+            new_page = links_page.get_current_window_handle()
+            assert main_page != new_page, "error switching between tabs"
+            assert url == "https://demoqa.com/", "the link does not match the home page"

@@ -38,3 +38,15 @@ class BasePage:
     def action_right_click(self, element):
         action = ActionChains(self.driver)
         action.context_click(element).perform()
+
+    def get_list_windows_handles(self):
+        return self.driver.window_handles
+
+    def get_current_window_handle(self):
+        return self.driver.current_window_handle
+
+    def get_url_page(self):
+        return self.driver.current_url
+
+    def switch_to_new_windows(self, page):
+        self.driver.switch_to.window(page)

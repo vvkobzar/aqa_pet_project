@@ -2,7 +2,7 @@ import random
 from selenium.webdriver.support.select import Select
 from pages.base_page import BasePage
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-    WebTablesPageLocators, ButtonsPageLocators
+    WebTablesPageLocators, ButtonsPageLocators, LinksPageLocators
 from config.links import ElementsPageLinks
 from generator.generator import generated_person
 
@@ -212,3 +212,11 @@ class ButtonsPage(BasePage):
 
     def check_click_on_the_button(self):
         return self.element_is_present(self.locators.CLICK_ME_MESSAGE).text
+
+
+class LinksPage(BasePage):
+    PAGE_URL = ElementsPageLinks.LINKS
+    locators = LinksPageLocators()
+
+    def click_on_the_home_link(self):
+        self.element_is_visible(self.locators.HOME_LINK).click()
