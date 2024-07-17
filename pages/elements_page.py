@@ -179,14 +179,13 @@ class WebTablesPage(BasePage):
     def select_up_to_some_rows(self):
         data = []
         count_row_select = self.element_is_visible(self.locators.COUNT_ROW_LIST)
-        DROPDOWN = Select(count_row_select)
-        all_options = DROPDOWN.options
+        dropdown = Select(count_row_select)
+        all_options = dropdown.options
         for option in all_options:
-            DROPDOWN.select_by_index(all_options.index(option))
+            dropdown.select_by_index(all_options.index(option))
             data.append(self.check_count_rows())
         return data
 
     def check_count_rows(self):
         list_rows = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
         return len(list_rows)
-
