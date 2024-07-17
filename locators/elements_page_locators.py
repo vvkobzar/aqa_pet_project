@@ -52,3 +52,13 @@ class WebTablesPageLocators:
 
     # update
     UPDATE_BUTTON = ("xpath", "//span[@title='Edit']")
+
+
+class ButtonsPageLocators:
+    DOUBLE_CLICK_ME_BUTTON = ("xpath", "//button[@id='doubleClickBtn']")
+    RIGHT_CLICK_ME_BUTTON = ("xpath", "//button[@id='rightClickBtn']")
+    CLICK_ME_BUTTON = ("xpath", "//button[text()='Click Me']")
+
+    DOUBLE_CLICK_MESSAGE = ("xpath", "//p[@id='doubleClickMessage']")
+    RIGHT_CLICK_MESSAGE = ("xpath", "//p[@id='rightClickMessage']")
+    CLICK_ME_MESSAGE = ("xpath", "//p[@id='dynamicClickMessage']")

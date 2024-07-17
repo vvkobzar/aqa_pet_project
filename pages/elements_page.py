@@ -2,7 +2,7 @@ import random
 from selenium.webdriver.support.select import Select
 from pages.base_page import BasePage
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-    WebTablesPageLocators
+    WebTablesPageLocators, ButtonsPageLocators
 from config.links import ElementsPageLinks
 from generator.generator import generated_person
 
@@ -189,3 +189,26 @@ class WebTablesPage(BasePage):
     def check_count_rows(self):
         list_rows = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
         return len(list_rows)
+
+
+class ButtonsPage(BasePage):
+    PAGE_URL = ElementsPageLinks.BUTTONS
+    locators = ButtonsPageLocators()
+
+    def double_click_on_the_button(self):
+        self.action_double_click(self.element_is_visible(self.locators.DOUBLE_CLICK_ME_BUTTON))
+
+    def right_click_on_the_button(self):
+        self.action_right_click(self.element_is_visible(self.locators.RIGHT_CLICK_ME_BUTTON))
+
+    def click_on_the_button(self):
+        self.element_is_visible(self.locators.CLICK_ME_BUTTON).click()
+
+    def check_double_click_on_the_button(self):
+        return self.element_is_present(self.locators.DOUBLE_CLICK_MESSAGE).text
+
+    def check_right_click_on_the_button(self):
+        return self.element_is_present(self.locators.RIGHT_CLICK_MESSAGE).text
+
+    def check_click_on_the_button(self):
+        return self.element_is_present(self.locators.CLICK_ME_MESSAGE).text
