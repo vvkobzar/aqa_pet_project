@@ -9,7 +9,7 @@ from pages.base_page import BasePage
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
     WebTablesPageLocators, ButtonsPageLocators, LinksPageLocators, UploadAndDownloadPageLocators
 from config.links import ElementsPageLinks
-from generator.generator import generated_person
+from generator.generator import generated_person, generated_file
 
 
 class TextBoxPage(BasePage):
@@ -280,3 +280,13 @@ class UploadAndDownloadPage(BasePage):
         dir_path = os.path.join(os.getcwd(), "downloads")
         if os.path.exists(dir_path) and os.path.isdir(dir_path):
             shutil.rmtree(dir_path)
+
+    def upload_file(self):
+        file_name, path = generated_file()
+        self.element_is_visible(self.locators.CHOOSE_FILE_BUTTON).send_keys(path)
+        return file_name
+
+    def getting_name_of_the_uploaded_file(self):
+        file_path = self.element_is_visible(self.locators.UPLOADED_FILE_PATH).text
+        return file_path.split('\\')[-1]
+

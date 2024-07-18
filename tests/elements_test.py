@@ -201,3 +201,12 @@ class TestElementsPage:
             name_file = upload_and_download_page.get_name_download_file()
             upload_and_download_page.delite_download_file()
             assert name_file == "sampleFile.jpeg", "the name of the downloaded file does not match"
+
+        def test_upload_file(self, driver):
+            upload_and_download_page = UploadAndDownloadPage(driver)
+            upload_and_download_page.open()
+            upload_and_download_page.create_download_dir()
+            created_file_name = upload_and_download_page.upload_file()
+            uploaded_file_name = upload_and_download_page.getting_name_of_the_uploaded_file()
+            upload_and_download_page.delite_download_file()
+            assert created_file_name == uploaded_file_name, "the name of the uploaded file does not match"
