@@ -1,3 +1,4 @@
+import os
 import random
 
 from config.data import Person
@@ -20,3 +21,11 @@ def generated_person():
         permanent_address=faker_ru.address(),
 
     )
+
+
+def generated_file():
+    file_name = f"{random.randint(0, 999)}.txt"
+    file_path = os.path.join(os.getcwd(), "downloads", file_name)
+    with open(file_path, 'w', encoding='utf-8') as file:
+        file.write(f"Hellow World{random.randint(0, 999)}")
+    return file_name, file_path
