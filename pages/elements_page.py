@@ -301,3 +301,10 @@ class DynamicPropertiesPage(BasePage):
 
     def check_click_the_button_after_5_seconds(self):
         return self.element_is_visible(self.locators.WILL_ENABLE_5_SECONDS_BUTTON).is_enabled()
+
+    def checking_for_button_color_changes(self):
+        color_button = self.element_is_visible(self.locators.COLOR_CHANGE_BUTTON)
+        color_button_before = color_button.value_of_css_property('color')
+        time.sleep(5)
+        color_button_after = color_button.value_of_css_property('color')
+        return color_button_before, color_button_after

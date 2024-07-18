@@ -218,3 +218,9 @@ class TestElementsPage:
             dynamic_properties_page.click_the_button_after_5_seconds()
             click_button_status = dynamic_properties_page.check_click_the_button_after_5_seconds()
             assert click_button_status == True, "the button was not clicked"
+
+        def test_button_color_change(self, driver):
+            dynamic_properties_page = DynamicPropertiesPage(driver)
+            dynamic_properties_page.open()
+            color_button_before, color_button_after = dynamic_properties_page.checking_for_button_color_changes()
+            assert color_button_before != color_button_after, "the color of the button was not changed"
