@@ -1,10 +1,13 @@
+import os
 import random
+import shutil
+import time
 
 import requests
 from selenium.webdriver.support.select import Select
 from pages.base_page import BasePage
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-    WebTablesPageLocators, ButtonsPageLocators, LinksPageLocators
+    WebTablesPageLocators, ButtonsPageLocators, LinksPageLocators, UploadAndDownloadPageLocators
 from config.links import ElementsPageLinks
 from generator.generator import generated_person
 
@@ -253,3 +256,27 @@ class LinksPage(BasePage):
     def check_on_the_api_not_found(self):
         response = requests.get(ElementsPageLinks.API_NOT_FOUND)
         return response.status_code, response.reason
+
+
+class UploadAndDownloadPage(BasePage):
+    PAGE_URL = ElementsPageLinks.UPLOAD_AND_DOWNLOAD
+    locators = UploadAndDownloadPageLocators()
+
+    def create_download_dir(self):
+        dir_path = os.path.join(os.getcwd(), "downloads")
+        if not os.path.exists(dir_path):
+            os.makedirs(dir_path)
+
+    def click_of_the_download_button(self):
+        self.element_is_visible(self.locators.DOWNLOAD_BUTTON).click()
+        time.sleep(1)
+
+    def get_name_download_file(self):
+        dir_path = os.path.join(os.getcwd(), "downloads")
+        files = os.listdir(dir_path)
+        return files[0]
+
+    def delite_download_file(self):
+        dir_path = os.path.join(os.getcwd(), "downloads")
+        if os.path.exists(dir_path) and os.path.isdir(dir_path):
+            shutil.rmtree(dir_path)

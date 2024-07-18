@@ -15,3 +15,4 @@ class ElementsPageLinks:
     API_UNAUTHORIZED = f"{HOST}/unauthorized/"
     API_FORBIDDEN = f"{HOST}/forbidden/"
     API_NOT_FOUND = f"{HOST}/invalid-url/"
+    UPLOAD_AND_DOWNLOAD = f"{HOST}/upload-download/"

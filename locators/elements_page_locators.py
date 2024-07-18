@@ -68,3 +68,7 @@ class LinksPageLocators:
     # following links will open new tab
     HOME_LINK = ("xpath", "//a[@id='simpleLink']")
     DYNAMIC_HOME_LINK = ("xpath", "//a[@id='dynamicLink']")
+
+
+class UploadAndDownloadPageLocators:
+    DOWNLOAD_BUTTON = ("xpath", "//a[@id='downloadButton']")

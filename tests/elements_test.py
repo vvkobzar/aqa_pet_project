@@ -1,5 +1,6 @@
 import random
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage, \
+    UploadAndDownloadPage
 
 
 class TestElementsPage:
@@ -190,3 +191,13 @@ class TestElementsPage:
             response_status_code, response_reason = links_page.check_on_the_api_not_found()
             assert response_status_code == 404, "the status code does not match the response"
             assert response_reason == 'Not Found', "the status text does not match the response"
+
+    class TestUploadAndDownloadPage:
+        def test_download_file(self, driver):
+            upload_and_download_page = UploadAndDownloadPage(driver)
+            upload_and_download_page.open()
+            upload_and_download_page.create_download_dir()
+            upload_and_download_page.click_of_the_download_button()
+            name_file = upload_and_download_page.get_name_download_file()
+            upload_and_download_page.delite_download_file()
+            assert name_file == "sampleFile.jpeg", "the name of the downloaded file does not match"
