@@ -7,7 +7,8 @@ import requests
 from selenium.webdriver.support.select import Select
 from pages.base_page import BasePage
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-    WebTablesPageLocators, ButtonsPageLocators, LinksPageLocators, UploadAndDownloadPageLocators
+    WebTablesPageLocators, ButtonsPageLocators, LinksPageLocators, UploadAndDownloadPageLocators, \
+    DynamicPropertiesPageLocators
 from config.links import ElementsPageLinks
 from generator.generator import generated_person, generated_file
 
@@ -290,3 +291,13 @@ class UploadAndDownloadPage(BasePage):
         file_path = self.element_is_visible(self.locators.UPLOADED_FILE_PATH).text
         return file_path.split('\\')[-1]
 
+
+class DynamicPropertiesPage(BasePage):
+    PAGE_URL = ElementsPageLinks.DYNAMIC_PROPERTIES
+    locators = DynamicPropertiesPageLocators()
+
+    def click_the_button_after_5_seconds(self):
+        self.element_is_clickable(self.locators.WILL_ENABLE_5_SECONDS_BUTTON).click()
+
+    def check_click_the_button_after_5_seconds(self):
+        return self.element_is_visible(self.locators.WILL_ENABLE_5_SECONDS_BUTTON).is_enabled()

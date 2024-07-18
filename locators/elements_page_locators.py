@@ -74,3 +74,7 @@ class UploadAndDownloadPageLocators:
     DOWNLOAD_BUTTON = ("xpath", "//a[@id='downloadButton']")
     CHOOSE_FILE_BUTTON = ("xpath", "//input[@id='uploadFile']")
     UPLOADED_FILE_PATH = ("xpath", "//p[@id='uploadedFilePath']")
+
+
+class DynamicPropertiesPageLocators:
+    WILL_ENABLE_5_SECONDS_BUTTON = ("xpath", "//button[@id='enableAfter']")

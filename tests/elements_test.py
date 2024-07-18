@@ -1,6 +1,6 @@
 import random
 from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage, \
-    UploadAndDownloadPage
+    UploadAndDownloadPage, DynamicPropertiesPage
 
 
 class TestElementsPage:
@@ -210,3 +210,11 @@ class TestElementsPage:
             uploaded_file_name = upload_and_download_page.getting_name_of_the_uploaded_file()
             upload_and_download_page.delite_download_file()
             assert created_file_name == uploaded_file_name, "the name of the uploaded file does not match"
+
+    class TestDynamicPropertiesPage:
+        def test_click_the_button_after_5_seconds(self, driver):
+            dynamic_properties_page = DynamicPropertiesPage(driver)
+            dynamic_properties_page.open()
+            dynamic_properties_page.click_the_button_after_5_seconds()
+            click_button_status = dynamic_properties_page.check_click_the_button_after_5_seconds()
+            assert click_button_status == True, "the button was not clicked"

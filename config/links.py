@@ -16,3 +16,4 @@ class ElementsPageLinks:
     API_FORBIDDEN = f"{HOST}/forbidden/"
     API_NOT_FOUND = f"{HOST}/invalid-url/"
     UPLOAD_AND_DOWNLOAD = f"{HOST}/upload-download/"
+    DYNAMIC_PROPERTIES = f"{HOST}/dynamic-properties/"
