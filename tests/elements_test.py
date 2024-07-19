@@ -1,6 +1,6 @@
 import random
 from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage, \
-    UploadAndDownloadPage
+    UploadAndDownloadPage, DynamicPropertiesPage
 
 
 class TestElementsPage:
@@ -210,3 +210,25 @@ class TestElementsPage:
             uploaded_file_name = upload_and_download_page.getting_name_of_the_uploaded_file()
             upload_and_download_page.delite_download_file()
             assert created_file_name == uploaded_file_name, "the name of the uploaded file does not match"
+
+    class TestDynamicPropertiesPage:
+        def test_click_the_button_after_5_seconds(self, driver):
+            dynamic_properties_page = DynamicPropertiesPage(driver)
+            dynamic_properties_page.open()
+            dynamic_properties_page.click_the_button_after_5_seconds()
+            click_button_status = dynamic_properties_page.check_click_the_button_after_5_seconds()
+            assert click_button_status is True, "the button was not clicked"
+
+        def test_button_color_change(self, driver):
+            dynamic_properties_page = DynamicPropertiesPage(driver)
+            dynamic_properties_page.open()
+            color_button_before, color_button_after = dynamic_properties_page.checking_for_button_color_changes()
+            assert color_button_before != color_button_after, "the color of the button was not changed"
+
+        def test_appearance_of_an_invisible_button(self, driver):
+            dynamic_properties_page = DynamicPropertiesPage(driver)
+            dynamic_properties_page.open()
+            button_invisibility_status = dynamic_properties_page.check_button_is_invisible()
+            button_visibility_status = dynamic_properties_page.check_button_is_visible()
+            assert button_invisibility_status is True, "the button is not invisible"
+            assert button_visibility_status is True, "the button has not become visible"
