@@ -308,3 +308,9 @@ class DynamicPropertiesPage(BasePage):
         time.sleep(5)
         color_button_after = color_button.value_of_css_property('color')
         return color_button_before, color_button_after
+
+    def check_button_is_invisible(self):
+        return self.elements_is_not_visible(self.locators.INVISIBLE_BUTTON)
+
+    def check_button_is_visible(self):
+        return self.element_is_visible(self.locators.INVISIBLE_BUTTON).is_displayed()

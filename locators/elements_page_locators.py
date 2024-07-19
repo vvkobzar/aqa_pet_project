@@ -79,3 +79,4 @@ class UploadAndDownloadPageLocators:
 class DynamicPropertiesPageLocators:
     WILL_ENABLE_5_SECONDS_BUTTON = ("xpath", "//button[@id='enableAfter']")
     COLOR_CHANGE_BUTTON = ("xpath", "//button[@id='colorChange']")
+    INVISIBLE_BUTTON = ("xpath", "//button[@id='visibleAfter']")
