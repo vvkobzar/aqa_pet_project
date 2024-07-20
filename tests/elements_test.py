@@ -54,10 +54,17 @@ class TestElementsPage:
         def test_web_table_add_person(self, driver):
             web_tables_page = WebTablesPage(driver)
             web_tables_page.open()
+            web_tables_page.add_20_rows_to_the_table()
+            initial_data = web_tables_page.check_new_added_person()
             new_persons = web_tables_page.add_new_person(random.randint(1, 10))
             table_result = web_tables_page.check_new_added_person()
-            for new_person in new_persons:
-                assert new_person in table_result, f"the user's data {new_person} does not match"
+            initial_data_set = set(tuple(person) for person in initial_data)
+            table_result_set = set(tuple(person) for person in table_result)
+            new_persons_set = set(tuple(person) for person in new_persons)
+            expected_data_set = initial_data_set.union(new_persons_set)
+            for person in new_persons:
+                assert tuple(person) in table_result_set, "the added person was not found in the table"
+            assert expected_data_set == table_result_set, "no users have been added to the table"
 
         def test_web_table_search_person(self, driver):
             web_tables_page = WebTablesPage(driver)

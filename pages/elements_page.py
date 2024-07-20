@@ -196,6 +196,10 @@ class WebTablesPage(BasePage):
         list_rows = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
         return len(list_rows)
 
+    def add_20_rows_to_the_table(self):
+        count_row_select = self.element_is_visible(self.locators.COUNT_ROW_LIST)
+        dropdown = Select(count_row_select)
+        dropdown.select_by_value('20')
 
 class ButtonsPage(BasePage):
     PAGE_URL = ElementsPageLinks.BUTTONS
