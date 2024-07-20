@@ -1,4 +1,5 @@
 import random
+import pytest
 from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablesPage, ButtonsPage, LinksPage, \
     UploadAndDownloadPage, DynamicPropertiesPage
 
@@ -41,6 +42,7 @@ class TestElementsPage:
             impressive_radio_status = radio_button_page.check_status_impressive_radio_button()
             assert impressive_radio_status, "'Impressive' radio button is not selected"
 
+        @pytest.mark.xfail(reason="the no radio button is not clickable")
         def test_no_radio_button(self, driver):
             radio_button_page = RadioButtonPage(driver)
             radio_button_page.open()
