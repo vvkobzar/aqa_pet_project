@@ -12,6 +12,7 @@ preferences = {
 }
 options = Options()
 options.add_experimental_option("prefs", preferences)
+options.add_argument("--headless")
 service = Service(ChromeDriverManager().install())
 
 
