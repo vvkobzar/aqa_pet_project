@@ -28,3 +28,9 @@ class TestAlertsFrameWindowsPage:
             alert_text = alerts_page.check_alert_appear_5_sec()
             assert alert_text == "This alert appeared after 5 seconds", "the alert did not appear after 5 seconds"
 
+        def test_alert_confirm_box_will_appear(self, driver):
+            alerts_page = AlertsPage(driver)
+            alerts_page.open()
+            chose_option = alerts_page.alert_confirm_box_appear_accept_or_dismiss()
+            result = alerts_page.check_alert_confirm_box_appear()
+            assert chose_option == result, "the selected result does not match"

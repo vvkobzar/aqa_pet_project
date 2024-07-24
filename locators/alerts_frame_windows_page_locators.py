@@ -7,4 +7,6 @@ class BrowserWindowsPageLocators:
 class AlertsPageLocators:
     CLICK_BUTTON_TO_SEE_ALERT = ("xpath", "//button[@id='alertButton']")
     ALERT_APPEAR_5_SEC_BUTTON = ("xpath", "//button[@id='timerAlertButton']")
+    ALERT_CONFIRM_BOX_APPEAR_BUTTON = ("xpath", "//button[@id='confirmButton']")
+    ALERT_CONFIRM_BOX_RESULT = ("xpath", "//span[@id='confirmResult']")
 

@@ -1,3 +1,5 @@
+import random
+
 from config.links import AlertsFrameWindowsPageLinks
 from locators.alerts_frame_windows_page_locators import BrowserWindowsPageLocators, AlertsPageLocators
 from pages.base_page import BasePage
@@ -36,3 +38,17 @@ class AlertsPage(BasePage):
         alert = self.alert_is_present()
         return alert.text
 
+    def alert_confirm_box_appear_accept_or_dismiss(self):
+        self.element_is_visible(self.locators.ALERT_CONFIRM_BOX_APPEAR_BUTTON).click()
+        alert = self.driver.switch_to.alert
+        if random.choice([True, False]):
+            alert.accept()
+            result = "Ok"
+        else:
+            alert.dismiss()
+            result = "Cancel"
+        return result
+
+    def check_alert_confirm_box_appear(self):
+        alert_result = self.element_is_visible(self.locators.ALERT_CONFIRM_BOX_RESULT).text
+        return alert_result.split()[-1]
