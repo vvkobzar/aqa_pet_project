@@ -21,3 +21,7 @@ class ElementsPageLinks:
 
 class FormsPageLinks:
     PRACTICE_FORM = f"{HOST}/automation-practice-form/"
+
+
+class AlertsFrameWindowsPageLinks:
+    BROWSER_WINDOWS = f"{HOST}/browser-windows/"
