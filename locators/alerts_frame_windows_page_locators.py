@@ -6,4 +6,5 @@ class BrowserWindowsPageLocators:
 
 class AlertsPageLocators:
     CLICK_BUTTON_TO_SEE_ALERT = ("xpath", "//button[@id='alertButton']")
+    ALERT_APPEAR_5_SEC_BUTTON = ("xpath", "//button[@id='timerAlertButton']")
 

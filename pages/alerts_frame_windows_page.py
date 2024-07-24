@@ -31,3 +31,8 @@ class AlertsPage(BasePage):
         alert = self.driver.switch_to.alert
         return alert.text
 
+    def check_alert_appear_5_sec(self):
+        self.element_is_visible(self.locators.ALERT_APPEAR_5_SEC_BUTTON).click()
+        alert = self.alert_is_present()
+        return alert.text
+

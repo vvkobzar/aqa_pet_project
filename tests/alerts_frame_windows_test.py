@@ -21,4 +21,10 @@ class TestAlertsFrameWindowsPage:
             alerts_page.open()
             alert_text = alerts_page.check_button_to_see_alert()
             assert alert_text == "You clicked a button", "the alert is not visible"
-            
+
+        def test_alert_will_appear_after_5_seconds(self, driver):
+            alerts_page = AlertsPage(driver)
+            alerts_page.open()
+            alert_text = alerts_page.check_alert_appear_5_sec()
+            assert alert_text == "This alert appeared after 5 seconds", "the alert did not appear after 5 seconds"
+
