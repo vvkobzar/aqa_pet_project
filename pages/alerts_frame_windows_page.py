@@ -1,5 +1,5 @@
 from config.links import AlertsFrameWindowsPageLinks
-from locators.alerts_frame_windows_page_locators import BrowserWindowsPageLocators
+from locators.alerts_frame_windows_page_locators import BrowserWindowsPageLocators, AlertsPageLocators
 from pages.base_page import BasePage
 
 
@@ -20,3 +20,14 @@ class BrowserWindowsPage(BasePage):
         self.switch_to_new_windows(list_handles[1])
         text_title = self.element_is_visible(self.locators.NEW_TAB_TEXT).text
         return text_title
+
+
+class AlertsPage(BasePage):
+    PAGE_URL = AlertsFrameWindowsPageLinks.ALERTS
+    locators = AlertsPageLocators()
+
+    def check_button_to_see_alert(self):
+        self.element_is_visible(self.locators.CLICK_BUTTON_TO_SEE_ALERT).click()
+        alert = self.driver.switch_to.alert
+        return alert.text
+

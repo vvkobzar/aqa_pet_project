@@ -25,3 +25,4 @@ class FormsPageLinks:
 
 class AlertsFrameWindowsPageLinks:
     BROWSER_WINDOWS = f"{HOST}/browser-windows/"
+    ALERTS = f"{HOST}/alerts/"
