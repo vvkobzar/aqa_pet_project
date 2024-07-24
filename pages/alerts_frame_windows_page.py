@@ -1,6 +1,7 @@
 import random
 
 from config.links import AlertsFrameWindowsPageLinks
+from generator.generator import generated_person
 from locators.alerts_frame_windows_page_locators import BrowserWindowsPageLocators, AlertsPageLocators
 from pages.base_page import BasePage
 
@@ -52,3 +53,15 @@ class AlertsPage(BasePage):
     def check_alert_confirm_box_appear(self):
         alert_result = self.element_is_visible(self.locators.ALERT_CONFIRM_BOX_RESULT).text
         return alert_result.split()[-1]
+
+    def input_alert_prompt_box_will_appear(self):
+        person = next(generated_person())
+        self.element_is_visible(self.locators.ALERT_PROMPT_BOX_WILL_APPEAR_BUTTON).click()
+        alert = self.driver.switch_to.alert
+        alert.send_keys(person.firstname)
+        alert.accept()
+        return person.firstname
+
+    def check_alert_prompt_box_will_appear(self):
+        result = self.element_is_visible(self.locators.ALERT_PROMPT_BOX_WILL_APPEAR_RESULT).text
+        return result.split()[-1]

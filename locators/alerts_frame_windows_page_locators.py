@@ -9,4 +9,7 @@ class AlertsPageLocators:
     ALERT_APPEAR_5_SEC_BUTTON = ("xpath", "//button[@id='timerAlertButton']")
     ALERT_CONFIRM_BOX_APPEAR_BUTTON = ("xpath", "//button[@id='confirmButton']")
     ALERT_CONFIRM_BOX_RESULT = ("xpath", "//span[@id='confirmResult']")
+    ALERT_PROMPT_BOX_WILL_APPEAR_BUTTON = ("xpath", "//button[@id='promtButton']")
+    ALERT_PROMPT_BOX_WILL_APPEAR_RESULT = ("xpath", "//span[@id='promptResult']")
+
 

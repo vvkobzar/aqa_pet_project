@@ -34,3 +34,10 @@ class TestAlertsFrameWindowsPage:
             chose_option = alerts_page.alert_confirm_box_appear_accept_or_dismiss()
             result = alerts_page.check_alert_confirm_box_appear()
             assert chose_option == result, "the selected result does not match"
+
+        def test_alert_prompt_box_will_appear(self, driver):
+            alerts_page = AlertsPage(driver)
+            alerts_page.open()
+            input_name = alerts_page.input_alert_prompt_box_will_appear()
+            result_name = alerts_page.check_alert_prompt_box_will_appear()
+            assert input_name == result_name, "the name entered in the alert will not match the result"
