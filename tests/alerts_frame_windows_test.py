@@ -1,3 +1,5 @@
+import pytest
+
 from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage, NestedFramesPage, \
     ModalDialogsPage
 
@@ -68,3 +70,12 @@ class TestAlertsFrameWindowsPage:
             assert modal_title == "Small Modal", "wrong title of a small modal"
             assert modal_text == "This is a small modal. It has very less content", "wrong text in the small modal"
             assert modal_size == {'height': 222, 'width': 300}, "wrong size for a small modal"
+
+        @pytest.mark.xfail(reason="wrong size large modal")
+        def test_large_modal(self, driver):
+            modal_dialogs_page = ModalDialogsPage(driver)
+            modal_dialogs_page.open()
+            modal_title, modal_len_text, modal_size = modal_dialogs_page.getting_a_large_modal_title_text_size()
+            assert modal_title == "Large Modal", "wrong title of a large modal"
+            assert modal_len_text == 574, "wrong text in the large modal"
+            assert modal_size == {'height': 430, 'width': 500}, "wrong size for a large modal"
