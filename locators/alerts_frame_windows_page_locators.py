@@ -19,3 +19,8 @@ class FramesPageLocators:
     TITLE_FRAME = ("xpath", "//h1[@id='sampleHeading']")
 
 
+class NestedFramesPageLocators:
+    PARENT_FRAME = ("xpath", "//iframe[@id='frame1']")
+    PARENT_FRAME_TEXT = ("xpath", "//body")
+    CHILD_IFRAME = ("xpath", "//iframe[@srcdoc='<p>Child Iframe</p>']")
+    CHILD_FRAME_TEXT = ("xpath", "//p")
