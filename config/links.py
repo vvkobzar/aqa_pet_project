@@ -27,3 +27,5 @@ class AlertsFrameWindowsPageLinks:
     BROWSER_WINDOWS = f"{HOST}/browser-windows/"
     ALERTS = f"{HOST}/alerts/"
     FRAMES = f"{HOST}/frames/"
+    NESTED_FRAMES = f"{HOST}/nestedframes/"
+
