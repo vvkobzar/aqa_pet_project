@@ -50,3 +50,9 @@ class BasePage:
 
     def switch_to_new_windows(self, page):
         self.driver.switch_to.window(page)
+
+    def alert_is_present(self, timeout=6):
+        return wait(self.driver, timeout).until(EC.alert_is_present())
+
+    def switch_to_frame(self, iframe):
+        self.driver.switch_to.frame(iframe)
