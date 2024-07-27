@@ -28,4 +28,5 @@ class AlertsFrameWindowsPageLinks:
     ALERTS = f"{HOST}/alerts/"
     FRAMES = f"{HOST}/frames/"
     NESTED_FRAMES = f"{HOST}/nestedframes/"
+    MODAL_DIALOGS = f"{HOST}/modal-dialogs/"
 

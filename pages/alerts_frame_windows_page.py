@@ -3,7 +3,7 @@ import random
 from config.links import AlertsFrameWindowsPageLinks
 from generator.generator import generated_person
 from locators.alerts_frame_windows_page_locators import BrowserWindowsPageLocators, AlertsPageLocators, \
-    FramesPageLocators, NestedFramesPageLocators
+    FramesPageLocators, NestedFramesPageLocators, ModalDialogsPageLocators
 from pages.base_page import BasePage
 
 
@@ -103,3 +103,16 @@ class NestedFramesPage(BasePage):
         self.switch_to_frame(child_frame)
         child_frame_text = self.element_is_visible(self.locators.CHILD_FRAME_TEXT).text
         return parent_frame_text, child_frame_text
+
+
+class ModalDialogsPage(BasePage):
+    PAGE_URL = AlertsFrameWindowsPageLinks.MODAL_DIALOGS
+    locators = ModalDialogsPageLocators()
+
+    def getting_a_small_modal_title_text_size(self):
+        self.element_is_visible(self.locators.SMALL_MODAL_BUTTON).click()
+        modal_title = self.element_is_visible(self.locators.SMALL_MODAL_TITLE).text
+        modal_text = self.element_is_visible(self.locators.SMALL_MODAL_TEXT).text
+        size = self.element_is_present(self.locators.SMALL_MODAL).size
+        self.element_is_visible(self.locators.SMALL_MODAL_CLOSE_BUTTON).click()
+        return modal_title, modal_text, size
