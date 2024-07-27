@@ -1,4 +1,4 @@
-from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage
+from pages.alerts_frame_windows_page import BrowserWindowsPage, AlertsPage, FramesPage
 
 
 class TestAlertsFrameWindowsPage:
@@ -41,3 +41,12 @@ class TestAlertsFrameWindowsPage:
             input_name = alerts_page.input_alert_prompt_box_will_appear()
             result_name = alerts_page.check_alert_prompt_box_will_appear()
             assert input_name == result_name, "the name entered in the alert will not match the result"
+
+    class TestFramesPage:
+        def test_frames(self, driver):
+            frames_page = FramesPage(driver)
+            frames_page.open()
+            result_frame1 = frames_page.check_frame('frame1')
+            result_frame2 = frames_page.check_frame('frame2')
+            assert result_frame1 == ['This is a sample page', '500px', '350px'], "the frame does not exist"
+            assert result_frame2 == ['This is a sample page', '100px', '100px'], "the frame does not exist"
