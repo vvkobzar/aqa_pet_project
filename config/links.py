@@ -33,3 +33,4 @@ class AlertsFrameWindowsPageLinks:
 
 class WidgetsPageLinks:
     ACCORDIAN = f"{HOST}/accordian/"
+    AUTO_COMPLETE = f"{HOST}/auto-complete/"

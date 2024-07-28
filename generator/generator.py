@@ -82,3 +82,10 @@ def generated_student_state_and_city():
     cities = states_and_city[random_region]
     random_city = random.choice(cities)
     return random_region, random_city
+
+
+def generator_color_names():
+    colors = ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black', 'White', 'Voilet', 'Indigo', 'Magenta', 'Aqua']
+    num_subjects = random.randint(1, len(colors))
+    selected_colors = random.sample(colors, num_subjects)
+    return selected_colors
