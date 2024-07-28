@@ -30,3 +30,6 @@ class AlertsFrameWindowsPageLinks:
     NESTED_FRAMES = f"{HOST}/nestedframes/"
     MODAL_DIALOGS = f"{HOST}/modal-dialogs/"
 
+
+class WidgetsPageLinks:
+    ACCORDIAN = f"{HOST}/accordian/"
