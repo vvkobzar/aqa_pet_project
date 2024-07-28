@@ -14,5 +14,4 @@ class AutoCompletePageLocators:
     MULTIPLE_COLOR_FIELD = ("xpath", "//input[@id='autoCompleteMultipleInput']")
     COLOR_NAMES = ("xpath", "//div[@class='css-12jo7m5 auto-complete__multi-value__label']")
     COLOR_REMOVE_BUTTON = ("xpath", "//div[@class='css-xb97g8 auto-complete__multi-value__remove']")
-    ALL_REMOVE_COLOR_FIELD_BUTTON = ("xpath", "//div[@class='auto-complete__indicator auto-complete__clear-indicator "
-                                              "css-tlfecz-indicatorContainer']")
+    ALL_REMOVE_COLOR_FIELD_BUTTON = ("xpath", "//div[@class='auto-complete__indicators css-1wy0on6']")

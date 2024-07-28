@@ -73,3 +73,6 @@ class AutoCompletePage(BasePage):
         random_color_remove = random.sample(colors_remove, num_colors)
         for color in random_color_remove:
             color.click()
+
+    def deleting_add_colors_from_multiple_color_field(self):
+        self.element_is_visible(self.locators.ALL_REMOVE_COLOR_FIELD_BUTTON).click()
