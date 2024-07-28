@@ -5,5 +5,7 @@ class AccordianPageLocators:
     CARD_SECOND = ("xpath", "//div[@id='section2Heading']")
     CARD_SECOND_COLLAPSE_STATUS = ("xpath", "//div[@id='section2Heading']/following-sibling::div[@class]")
     CARD_SECOND_TEXT = ("xpath", "//div[@id='section2Content']/p")
-
+    CARD_THIRD = ("xpath", "//div[@id='section3Heading']")
+    CARD_THIRD_COLLAPSE_STATUS = ("xpath", "//div[@id='section3Heading']/following-sibling::div[@class]")
+    CARD_THIRD_TEXT = ("xpath", "//div[@id='section3Content']/p")
 
