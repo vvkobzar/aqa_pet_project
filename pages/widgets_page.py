@@ -76,3 +76,21 @@ class AutoCompletePage(BasePage):
 
     def deleting_add_colors_from_multiple_color_field(self):
         self.element_is_visible(self.locators.ALL_REMOVE_COLOR_FIELD_BUTTON).click()
+
+    def added_color_to_single_color_name_field(self):
+        data = []
+        colors = generator_color_names()
+        single_color_field = self.element_is_visible(self.locators.SINGLE_COLOR_FIELD)
+        for color in colors:
+            single_color_field.send_keys(color)
+            single_color_field.send_keys(Keys.TAB)
+            check_colors = self.check_added_colors_to_single_color_name_field()
+            data.append(check_colors)
+        return colors, data
+
+    def check_added_colors_to_single_color_name_field(self):
+        try:
+            added_colors = self.element_is_visible(self.locators.SINGLE_COLOR_NAME).text
+            return added_colors
+        except Exception as e:
+            return None

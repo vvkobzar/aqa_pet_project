@@ -53,3 +53,11 @@ class TestWidgets:
             after_color_delite = auto_complete_page.check_added_colors()
             assert added_colors == before_color_delite, "added colors do not match the result"
             assert after_color_delite is None, "all the colors have not been removed"
+
+        def test_single_color_name_field(self, driver):
+            auto_complete_page = AutoCompletePage(driver)
+            auto_complete_page.open()
+            adding_color, result_colors = auto_complete_page.added_color_to_single_color_name_field()
+            last_added_color = auto_complete_page.check_added_colors_to_single_color_name_field()
+            assert adding_color == result_colors, "added colors do not match the result"
+            assert last_added_color in result_colors, "the last added color is not in the results"
