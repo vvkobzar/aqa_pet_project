@@ -1,9 +1,10 @@
 import random
+import time
 
 from generator.generator import generator_color_names
 from pages.base_page import BasePage
 from config.links import WidgetsPageLinks
-from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators
+from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators
 from selenium.webdriver import Keys
 
 
@@ -94,3 +95,22 @@ class AutoCompletePage(BasePage):
             return added_colors
         except Exception as e:
             return None
+
+
+class DatePickerPage(BasePage):
+    PAGE_URL = WidgetsPageLinks.DATE_PICKER
+    locators = DatePickerPageLocators()
+
+    def month_and_year_selection(self):
+        self.element_is_visible(self.locators.DATE_INPUT).click()
+        self.select_by_value(self.locators.DATE_SELECT_MONTH, random.randint(0, 11))
+        self.select_by_value(self.locators.DATE_SELECT_YEAR, random.randint(1900, 2100))
+
+    def day_selection(self):
+        self.element_is_visible(self.locators.DATE_INPUT).click()
+        days = self.elements_are_visible(self.locators.DATE_SELECT_DAY)
+        day = random.choice(days)
+        day.click()
+
+    def return_date(self):
+        return self.element_is_visible(self.locators.DATE_INPUT).get_attribute('value')

@@ -18,3 +18,11 @@ class AutoCompletePageLocators:
 
     SINGLE_COLOR_FIELD = ("xpath", "//input[@id='autoCompleteSingleInput']")
     SINGLE_COLOR_NAME = ("xpath", "//div[@class='auto-complete__single-value css-1uccc91-singleValue']")
+
+
+class DatePickerPageLocators:
+    DATE_INPUT = ("xpath", "//input[@id='datePickerMonthYearInput']")
+    DATE_SELECT_MONTH = ("xpath", "//select[@class='react-datepicker__month-select']")
+    DATE_SELECT_YEAR = ("xpath", "//select[@class='react-datepicker__year-select']")
+    DATE_SELECT_DAY = ("xpath", "//div[@role='option']")
+

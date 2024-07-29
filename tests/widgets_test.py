@@ -1,4 +1,6 @@
-from pages.widgets_page import AccordianPage, AutoCompletePage
+import time
+
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage
 
 
 class TestWidgets:
@@ -61,3 +63,13 @@ class TestWidgets:
             last_added_color = auto_complete_page.check_added_colors_to_single_color_name_field()
             assert adding_color == result_colors, "added colors do not match the result"
             assert last_added_color in result_colors, "the last added color is not in the results"
+
+    class TestDatePickerPage:
+        def test_change_date(self, driver):
+            date_picker_page = DatePickerPage(driver)
+            date_picker_page.open()
+            value_date_after = date_picker_page.return_date()
+            date_picker_page.month_and_year_selection()
+            date_picker_page.day_selection()
+            value_date_before = date_picker_page.return_date()
+            assert value_date_after != value_date_before, "the date has not changed"

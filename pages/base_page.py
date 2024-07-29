@@ -1,6 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver import ActionChains
+from selenium.webdriver.support.select import Select
 
 
 class BasePage:
@@ -56,3 +57,7 @@ class BasePage:
 
     def switch_to_frame(self, iframe):
         self.driver.switch_to.frame(iframe)
+
+    def select_by_value(self, element, value):
+        select = Select(self.element_is_present(element))
+        select.select_by_value(str(value))
