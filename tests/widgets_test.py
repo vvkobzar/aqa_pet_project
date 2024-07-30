@@ -1,4 +1,6 @@
-from pages.widgets_page import AccordianPage, AutoCompletePage
+import time
+
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage
 
 
 class TestWidgets:
@@ -61,3 +63,24 @@ class TestWidgets:
             last_added_color = auto_complete_page.check_added_colors_to_single_color_name_field()
             assert adding_color == result_colors, "added colors do not match the result"
             assert last_added_color in result_colors, "the last added color is not in the results"
+
+    class TestDatePickerPage:
+        def test_change_date(self, driver):
+            date_picker_page = DatePickerPage(driver)
+            date_picker_page.open()
+            date_result_after = date_picker_page.return_value_date_from_date()
+            date_picker_page.month_and_year_and_day_selection()
+            date_result_before = date_picker_page.return_value_date_from_date()
+            assert date_result_after != date_result_before, "the date has not changed"
+
+        def test_change_date_and_time(self, driver):
+            date_picker_page = DatePickerPage(driver)
+            date_picker_page.open()
+            selected_year = date_picker_page.select_year_from_date_and_time_field()
+            selected_month, selected_day = date_picker_page.select_month_and_day_from_date_and_time_field()
+            selected_time = date_picker_page.select_time_from_date_and_time_field()
+            date_result = date_picker_page.return_value_date_from_date_and_time_field()
+            assert selected_month == date_result[0], "the selected month does not match the result"
+            assert selected_day == date_result[1].replace(",", ""), "the selected day does not match the result"
+            assert selected_year == date_result[2], "the selected year does not match the result"
+            assert selected_time == date_result[3], "the selected time does not match the result"
