@@ -68,8 +68,19 @@ class TestWidgets:
         def test_change_date(self, driver):
             date_picker_page = DatePickerPage(driver)
             date_picker_page.open()
-            value_date_after = date_picker_page.return_date()
-            date_picker_page.month_and_year_selection()
-            date_picker_page.day_selection()
-            value_date_before = date_picker_page.return_date()
-            assert value_date_after != value_date_before, "the date has not changed"
+            date_result_after = date_picker_page.return_value_date_from_date()
+            date_picker_page.month_and_year_and_day_selection()
+            date_result_before = date_picker_page.return_value_date_from_date()
+            assert date_result_after != date_result_before, "the date has not changed"
+
+        def test_change_date_and_time(self, driver):
+            date_picker_page = DatePickerPage(driver)
+            date_picker_page.open()
+            selected_year = date_picker_page.select_year_from_date_and_time_field()
+            selected_month, selected_day = date_picker_page.select_month_and_day_from_date_and_time_field()
+            selected_time = date_picker_page.select_time_from_date_and_time_field()
+            date_result = date_picker_page.return_value_date_from_date_and_time_field()
+            assert selected_month == date_result[0], "the selected month does not match the result"
+            assert selected_day == date_result[1].replace(",", ""), "the selected day does not match the result"
+            assert selected_year == date_result[2], "the selected year does not match the result"
+            assert selected_time == date_result[3], "the selected time does not match the result"

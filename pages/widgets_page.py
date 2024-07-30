@@ -1,6 +1,4 @@
 import random
-import time
-
 from generator.generator import generator_color_names
 from pages.base_page import BasePage
 from config.links import WidgetsPageLinks
@@ -101,16 +99,64 @@ class DatePickerPage(BasePage):
     PAGE_URL = WidgetsPageLinks.DATE_PICKER
     locators = DatePickerPageLocators()
 
-    def month_and_year_selection(self):
+    def month_and_year_and_day_selection(self):
         self.element_is_visible(self.locators.DATE_INPUT).click()
-        self.select_by_value(self.locators.DATE_SELECT_MONTH, random.randint(0, 11))
         self.select_by_value(self.locators.DATE_SELECT_YEAR, random.randint(1900, 2100))
+        self.select_by_value(self.locators.DATE_SELECT_MONTH, random.randint(0, 11))
+        selected_month = self.element_is_visible(self.locators.DATE_MONTH_STATUS).text.split()[0]
+        self.day_selection(selected_month)
 
-    def day_selection(self):
-        self.element_is_visible(self.locators.DATE_INPUT).click()
-        days = self.elements_are_visible(self.locators.DATE_SELECT_DAY)
-        day = random.choice(days)
-        day.click()
+    def day_selection(self, month):
+        days_list = self.elements_are_visible(self.locators.DATE_SELECT_DAY(month))
+        selected_day = random.choice(days_list)
+        selected_day_text = selected_day.text
+        selected_day.click()
 
-    def return_date(self):
-        return self.element_is_visible(self.locators.DATE_INPUT).get_attribute('value')
+    def return_value_date_from_date(self):
+        return self.element_is_present(self.locators.DATE_INPUT).get_attribute('value')
+
+    def select_month_and_day_from_date_and_time_field(self):
+        self.element_is_visible(self.locators.DATE_AND_TIME_MONTH).click()
+        months_list = self.elements_are_visible(self.locators.DATE_AND_TIME_MONTH_LIST)
+        selected_month = random.choice(months_list)
+        selected_month_text = selected_month.text
+        selected_month.click()
+        selected_day_text = self.select_day_from_date_and_time_field(selected_month_text)
+        return selected_month_text, selected_day_text
+
+    def select_day_from_date_and_time_field(self, month):
+        day_list = self.elements_are_visible(self.locators.DATE_SELECT_DAY(month))
+        selected_day = random.choice(day_list)
+        selected_day_text = selected_day.text
+        selected_day.click()
+        return selected_day_text
+
+    def select_year_from_date_and_time_field(self):
+        self.element_is_visible(self.locators.DATE_AND_TIME_INPUT).click()
+        self.element_is_visible(self.locators.DATE_AND_TIME_YEAR).click()
+        year_list = self.elements_are_present(self.locators.DATE_AND_TIME_YEAR_LIST)
+        selected_year = random.choice(year_list)
+        selected_year_text = selected_year.text
+        selected_year.click()
+        return selected_year_text
+
+    def select_time_from_date_and_time_field(self):
+        times_list = self.elements_are_present(self.locators.DATE_AND_TIME_TIME_LIST)
+        selected_time = random.choice(times_list)
+        selected_time_text = selected_time.text
+        selected_time.click()
+        convert_time = self.convert_to_12_hour_format(selected_time_text)
+        return convert_time
+
+    def return_value_date_from_date_and_time_field(self):
+        date = self.element_is_visible(self.locators.DATE_AND_TIME_INPUT).get_attribute('value')
+        return date.split()
+
+    @staticmethod
+    def convert_to_12_hour_format(time_str):
+        hours, minutes = map(int, time_str.split(':'))
+        hours = hours % 12
+        if hours == 0:
+            hours = 12
+        formatted_time = f"{hours}:{minutes:02}"
+        return formatted_time

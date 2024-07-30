@@ -21,8 +21,19 @@ class AutoCompletePageLocators:
 
 
 class DatePickerPageLocators:
+    def DATE_SELECT_DAY(self, selected_month_text):
+        return ("xpath", f"//div[contains(@aria-label, '{selected_month_text}')]")
+
     DATE_INPUT = ("xpath", "//input[@id='datePickerMonthYearInput']")
     DATE_SELECT_MONTH = ("xpath", "//select[@class='react-datepicker__month-select']")
     DATE_SELECT_YEAR = ("xpath", "//select[@class='react-datepicker__year-select']")
-    DATE_SELECT_DAY = ("xpath", "//div[@role='option']")
+    DATE_MONTH_STATUS = ("xpath", "//div[@class='react-datepicker__current-month "
+                                  "react-datepicker__current-month--hasYearDropdown "
+                                  "react-datepicker__current-month--hasMonthDropdown']")
 
+    DATE_AND_TIME_INPUT = ("xpath", "//input[@id='dateAndTimePickerInput']")
+    DATE_AND_TIME_MONTH = ("xpath", "//span[@class='react-datepicker__month-read-view--selected-month']")
+    DATE_AND_TIME_YEAR = ("xpath", "//span[@class='react-datepicker__year-read-view--selected-year']")
+    DATE_AND_TIME_TIME_LIST = ("xpath", "//li[@class='react-datepicker__time-list-item ']")
+    DATE_AND_TIME_MONTH_LIST = ("xpath", "//div[@class='react-datepicker__month-option']")
+    DATE_AND_TIME_YEAR_LIST = ("xpath", "//div[@class='react-datepicker__year-option']")
