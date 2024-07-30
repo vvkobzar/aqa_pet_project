@@ -109,7 +109,6 @@ class DatePickerPage(BasePage):
     def day_selection(self, month):
         days_list = self.elements_are_visible(self.locators.DATE_SELECT_DAY(month))
         selected_day = random.choice(days_list)
-        selected_day_text = selected_day.text
         selected_day.click()
 
     def return_value_date_from_date(self):

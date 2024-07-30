@@ -7,7 +7,6 @@ from generator.generator import generated_person, generated_student_subjects, ge
 from pages.base_page import BasePage
 from config.links import FormsPageLinks
 from locators.forms_page_locators import PracticeFormPageLocators
-from selenium.webdriver.support.select import Select
 
 
 class PracticeFormPage(BasePage):
@@ -31,16 +30,16 @@ class PracticeFormPage(BasePage):
 
     def fill_date_of_birth(self):
         self.element_is_visible(self.locators.DATE_OF_BIRTH_CALENDAR).click()
-        dropdown_calendar_month = Select(self.element_is_visible(self.locators.CALENDAR_MONTH_SELECT))
-        dropdown_calendar_month.select_by_value(str(random.randint(0, 11)))
-        dropdown_calendar_year = Select(self.element_is_visible(self.locators.CALENDAR_YEAR_SELECT))
-        dropdown_calendar_year.select_by_value(str(random.randint(1900, 2100)))
-        month_and_year = self.element_is_present(self.locators.GET_MONTH_AND_YEAR).text
-        day_list = self.elements_are_present(self.locators.CALENDAR_DAY)
-        random_day = random.choice(day_list)
-        random_day.click()
-        day = self.element_is_visible(self.locators.DATE_OF_BIRTH_CALENDAR).get_attribute("value")
-        return f"{day[:2]} {month_and_year.replace(" ", ",")}"
+        self.select_by_value(self.locators.CALENDAR_MONTH_SELECT, random.randint(0, 11))
+        self.select_by_value(self.locators.CALENDAR_YEAR_SELECT, random.randint(1900, 2100))
+        month_and_year = self.element_is_visible(self.locators.GET_MONTH_AND_YEAR).text
+        month, year = month_and_year.split()
+        day_list = self.elements_are_present(self.locators.DATE_SELECT_DAY(month))
+        selected_day = random.choice(day_list)
+        selected_day_text = selected_day.text
+        format_day = self.format_date_number(int(selected_day_text))
+        selected_day.click()
+        return f"{format_day} {month},{year}"
 
     def fill_subjects_field(self):
         subjects = generated_student_subjects()
@@ -66,6 +65,7 @@ class PracticeFormPage(BasePage):
         self.delite_download_file()
         img_name = img.split()[-1].split('/')[-1]
         return img_name
+
     def create_download_dir(self):
         dir_path = os.path.join(os.getcwd(), "downloads")
         if not os.path.exists(dir_path):
@@ -98,3 +98,10 @@ class PracticeFormPage(BasePage):
             self.go_to_element(item)
             data.append(item.text)
         return data
+
+    @staticmethod
+    def format_date_number(number):
+        if 1 <= number <= 9:
+            return f"{number:02}"
+        else:
+            return str(number)

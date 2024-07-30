@@ -12,6 +12,9 @@ class PracticeFormPageLocators:
     # mobile
     MOBILE_NUMBER_FIELD = ("xpath", "//input[@id='userNumber']")
     # date of birth
+    def DATE_SELECT_DAY(self, selected_month_text):
+        return ("xpath", f"//div[contains(@aria-label, '{selected_month_text}')]")
+
     DATE_OF_BIRTH_CALENDAR = ("xpath", "//input[@id='dateOfBirthInput']")
     CALENDAR_MONTH_SELECT = ("xpath", "//select[@class='react-datepicker__month-select']")
     GET_MONTH_AND_YEAR = ("xpath", "//div[@class='react-datepicker__current-month "
