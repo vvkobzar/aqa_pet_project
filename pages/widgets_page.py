@@ -2,7 +2,8 @@ import random
 from generator.generator import generator_color_names
 from pages.base_page import BasePage
 from config.links import WidgetsPageLinks
-from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators
+from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
+    SliderPageLocators
 from selenium.webdriver import Keys
 
 
@@ -159,3 +160,21 @@ class DatePickerPage(BasePage):
             hours = 12
         formatted_time = f"{hours}:{minutes:02}"
         return formatted_time
+
+
+class SliderPage(BasePage):
+    PAGE_URL = WidgetsPageLinks.SLIDER
+    locators = SliderPageLocators()
+
+    def change_slider_value(self):
+        slider_input = self.element_is_visible(self.locators.SLIDER_INPUT)
+        slider_value_after = slider_input.get_attribute('value')
+        self.action_drag_and_drop_by_offset(slider_input, random.randint(-325, 325), 0)
+        slider_value_before = slider_input.get_attribute('value')
+        return slider_value_after, slider_value_before
+
+    def get_value_label_range_slider(self):
+        return self.element_is_visible(self.locators.LABEL_SLIDER_VALUE).text
+
+    def get_form_slider_value(self):
+        return self.element_is_visible(self.locators.SLIDER_VALUE_INPUT).get_attribute('value')

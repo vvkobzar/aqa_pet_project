@@ -35,4 +35,5 @@ class WidgetsPageLinks:
     ACCORDIAN = f"{HOST}/accordian"
     AUTO_COMPLETE = f"{HOST}/auto-complete"
     DATE_PICKER = f"{HOST}/date-picker"
+    SLIDER = f"{HOST}/slider"
 
