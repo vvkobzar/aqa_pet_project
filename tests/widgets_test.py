@@ -1,6 +1,6 @@
 import time
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage
 
 
 class TestWidgets:
@@ -84,3 +84,14 @@ class TestWidgets:
             assert selected_day == date_result[1].replace(",", ""), "the selected day does not match the result"
             assert selected_year == date_result[2], "the selected year does not match the result"
             assert selected_time == date_result[3], "the selected time does not match the result"
+
+    class TestSliderPage:
+        def test_slider_value_change(self, driver):
+            slider_page = SliderPage(driver)
+            slider_page.open()
+            form_slider_after = slider_page.get_form_slider_value()
+            slider_value_after, slider_value_before = slider_page.change_slider_value()
+            slider_label_before = slider_page.get_value_label_range_slider()
+            form_slider_before = slider_page.get_form_slider_value()
+            assert slider_value_after == form_slider_after
+            assert slider_value_before == slider_label_before == form_slider_before
