@@ -1,7 +1,4 @@
-import time
-
 import pytest
-
 from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
     ToolTipsPage
 
