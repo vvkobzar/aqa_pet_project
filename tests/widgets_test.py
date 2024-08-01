@@ -1,6 +1,6 @@
 import time
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage
 
 
 class TestWidgets:
@@ -95,3 +95,15 @@ class TestWidgets:
             form_slider_before = slider_page.get_form_slider_value()
             assert slider_value_after == form_slider_after
             assert slider_value_before == slider_label_before == form_slider_before
+
+    class TestProgressBarPage:
+        def test_appearance_reset_stop_start_button_in_progress_bar(self, driver):
+            progress_bar_page = ProgressBarPage(driver)
+            progress_bar_page.open()
+            restart_button = progress_bar_page.check_appears_reset_button_after_reaching_100_percent_in_the_process_bar()
+            stop_button, start_button = progress_bar_page.check_appears_stop_and_start_button()
+            assert restart_button == "Reset", "reset button does not appear when 100% progress bar is reached"
+            assert stop_button == "Stop", "the stop button did not appear"
+            assert start_button == "Start", "the start button did not appear"
+
+
