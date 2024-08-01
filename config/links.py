@@ -38,3 +38,4 @@ class WidgetsPageLinks:
     SLIDER = f"{HOST}/slider"
     PROGRESS_BAR = f"{HOST}/progress-bar"
     TABS = f"{HOST}/tabs"
+    TOOL_TIPS = f"{HOST}/tool-tips"

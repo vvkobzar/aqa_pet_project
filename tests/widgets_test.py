@@ -2,7 +2,8 @@ import time
 
 import pytest
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
+    ToolTipsPage
 
 
 class TestWidgets:
@@ -118,6 +119,18 @@ class TestWidgets:
             after_use_tab_status, before_use_tab_status, use_tab_text = tabs_page.check_tabs('Use')
             after_more_tab_status, before_more_tab_status, more_tab_text = tabs_page.check_tabs('More')
             assert after_what_tab_status == 'true' and before_what_tab_status == 'true' and what_tab_text == [574]
-            assert after_origin_tab_status == 'false' and before_origin_tab_status == 'true' and origin_tab_text == [763, 295]
+            assert after_origin_tab_status == 'false' \
+                   and before_origin_tab_status == 'true' and origin_tab_text == [763, 295]
             assert after_use_tab_status == 'false' and before_use_tab_status == 'true' and use_tab_text == [613]
             assert after_more_tab_status == 'false' and before_more_tab_status == 'true' and more_tab_text == []
+
+    class TestToolTipsPage:
+        def test_appearance_tool_tips(self, driver):
+            tool_tips_page = ToolTipsPage(driver)
+            tool_tips_page.open()
+            tool_tip_text_button, tool_tip_text_field, \
+                tool_tip_text_contrary, tool_tip_text_section = tool_tips_page.check_tool_tips()
+            assert tool_tip_text_button == "You hovered over the Button"
+            assert tool_tip_text_field == "You hovered over the text field"
+            assert tool_tip_text_contrary == "You hovered over the Contrary"
+            assert tool_tip_text_section == "You hovered over the 1.10.32"

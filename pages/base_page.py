@@ -45,6 +45,11 @@ class BasePage:
         action.drag_and_drop_by_offset(element, x_coords, y_coords)
         action.perform()
 
+    def action_move_to_element(self, element):
+        action = ActionChains(self.driver)
+        action.move_to_element(element)
+        action.perform()
+
     def get_list_windows_handles(self):
         return self.driver.window_handles
 
