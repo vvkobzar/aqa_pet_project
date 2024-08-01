@@ -5,7 +5,7 @@ from generator.generator import generator_color_names
 from pages.base_page import BasePage
 from config.links import WidgetsPageLinks
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators
 from selenium.webdriver import Keys
 
 
@@ -207,3 +207,33 @@ class ProgressBarPage(BasePage):
                 start_button = self.element_is_visible(self.locators.START_BUTTON).text
                 break
         return stop_button, start_button
+
+
+class TabsPage(BasePage):
+    PAGE_URL = WidgetsPageLinks.TABS
+    locators = TabsPageLocators()
+
+    def check_tabs(self, name_tab):
+        tabs_text = []
+        tabs = {
+            'What':
+                {'tab_status': self.locators.WHAT_TAB,
+                 'tab_text': self.locators.WHAT_TAB_TEXT},
+            'Origin':
+                {'tab_status': self.locators.ORIGIN_TAB,
+                 'tab_text': self.locators.ORIGIN_TAB_TEXT},
+            'Use':
+                {'tab_status': self.locators.USE_TAB,
+                 'tab_text': self.locators.USE_TAB_TEXT},
+            'More':
+                {'tab_status': self.locators.MORE_TAB,
+                 'tab_text': self.locators.MORE_TAB_TEXT}
+        }
+        button = self.element_is_visible(tabs[name_tab]['tab_status'])
+        after_tab_status = self.element_is_present(tabs[name_tab]['tab_status']).get_attribute('aria-selected')
+        button.click()
+        before_tab_status = self.element_is_present(tabs[name_tab]['tab_status']).get_attribute('aria-selected')
+        tab_text = self.elements_are_visible(tabs[name_tab]['tab_text'])
+        for text in tab_text:
+            tabs_text.append(len(text.text))
+        return after_tab_status, before_tab_status, tabs_text

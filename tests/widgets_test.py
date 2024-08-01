@@ -1,6 +1,8 @@
 import time
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage
+import pytest
+
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage
 
 
 class TestWidgets:
@@ -106,4 +108,16 @@ class TestWidgets:
             assert stop_button == "Stop", "the stop button did not appear"
             assert start_button == "Start", "the start button did not appear"
 
-
+    class TestTabsPage:
+        @pytest.mark.xfail(reason="'More' tab non-clickable, doesn't open")
+        def test_status_change_opening_tabs_and_text_tab(self, driver):
+            tabs_page = TabsPage(driver)
+            tabs_page.open()
+            after_what_tab_status, before_what_tab_status, what_tab_text = tabs_page.check_tabs('What')
+            after_origin_tab_status, before_origin_tab_status, origin_tab_text = tabs_page.check_tabs('Origin')
+            after_use_tab_status, before_use_tab_status, use_tab_text = tabs_page.check_tabs('Use')
+            after_more_tab_status, before_more_tab_status, more_tab_text = tabs_page.check_tabs('More')
+            assert after_what_tab_status == 'true' and before_what_tab_status == 'true' and what_tab_text == [574]
+            assert after_origin_tab_status == 'false' and before_origin_tab_status == 'true' and origin_tab_text == [763, 295]
+            assert after_use_tab_status == 'false' and before_use_tab_status == 'true' and use_tab_text == [613]
+            assert after_more_tab_status == 'false' and before_more_tab_status == 'true' and more_tab_text == []
