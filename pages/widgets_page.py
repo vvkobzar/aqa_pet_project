@@ -5,7 +5,7 @@ from generator.generator import generator_color_names
 from pages.base_page import BasePage
 from config.links import WidgetsPageLinks
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators
 from selenium.webdriver import Keys
 
 
@@ -237,3 +237,28 @@ class TabsPage(BasePage):
         for text in tab_text:
             tabs_text.append(len(text.text))
         return after_tab_status, before_tab_status, tabs_text
+
+
+class ToolTipsPage(BasePage):
+    PAGE_URL = WidgetsPageLinks.TOOL_TIPS
+    locators = ToolTipsPageLocators()
+
+    def get_text_from_tool_tips(self, hover_elem, wait_elem):
+        element = self.element_is_present(hover_elem)
+        self.action_move_to_element(element)
+        self.element_is_visible(wait_elem)
+        self.action_move_to_element(element)
+        tool_tip_text = self.element_is_visible(self.locators.TOOL_TIPS_INNERS)
+        text = tool_tip_text.text
+        return text
+
+    def check_tool_tips(self):
+        tool_tip_text_button = self.get_text_from_tool_tips(
+            self.locators.HOVER_ME_TO_SEE_BUTTON, self.locators.TOOL_TIPS_BUTTON)
+        tool_tip_text_field = self.get_text_from_tool_tips(
+            self.locators.HOVER_ME_TO_SEE_FIELD, self.locators.TOOL_TIPS_FIELD)
+        tool_tip_text_contrary = self.get_text_from_tool_tips(
+            self.locators.CONTRARY_LINK, self.locators.TOOL_TIPS_CONTRARY)
+        tool_tip_text_section = self.get_text_from_tool_tips(
+            self.locators.SECTION_LINK, self.locators.TOOL_TIPS_SECTION)
+        return tool_tip_text_button, tool_tip_text_field, tool_tip_text_contrary, tool_tip_text_section

@@ -61,3 +61,19 @@ class TabsPageLocators:
     ORIGIN_TAB_TEXT = ("xpath", "//div[@id='demo-tabpane-origin']/p")
     USE_TAB_TEXT = ("xpath", "//div[@id='demo-tabpane-use']/p")
     MORE_TAB_TEXT = ("xpath", "//div[@id='demo-tabpane-more']/p")
+
+
+class ToolTipsPageLocators:
+    HOVER_ME_TO_SEE_BUTTON = ("xpath", "//button[@id='toolTipButton']")
+    TOOL_TIPS_BUTTON = ("xpath", "//button[@aria-describedby='buttonToolTip']")
+
+    HOVER_ME_TO_SEE_FIELD = ("xpath", "//input[@id='toolTipTextField']")
+    TOOL_TIPS_FIELD = ("xpath", "//input[@aria-describedby='textFieldToolTip']")
+
+    CONTRARY_LINK = ("xpath", "//a[text()='Contrary']")
+    TOOL_TIPS_CONTRARY = ("xpath", "//a[@aria-describedby='contraryTexToolTip']")
+
+    SECTION_LINK = ("xpath", "//a[text()='1.10.32']")
+    TOOL_TIPS_SECTION = ("xpath", "//a[@aria-describedby='sectionToolTip']")
+
+    TOOL_TIPS_INNERS = ("xpath", "//div[@class='tooltip-inner']")
