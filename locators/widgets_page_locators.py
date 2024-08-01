@@ -43,3 +43,9 @@ class SliderPageLocators:
     SLIDER_INPUT = ("xpath", "//input[@class='range-slider range-slider--primary']")
     LABEL_SLIDER_VALUE = ("xpath", "//div[@class='range-slider__tooltip__label']")
     SLIDER_VALUE_INPUT = ("xpath", "//input[@id='sliderValue']")
+
+
+class ProgressBarPageLocators:
+    PROGRESS_BAR_VALUE = ("xpath", "//div[@role='progressbar']")
+    START_BUTTON = ("xpath", "//button[@id='startStopButton']")
+    RESET_BUTTON = ("xpath", "//button[@id='resetButton']")

@@ -1,9 +1,11 @@
 import random
+import time
+
 from generator.generator import generator_color_names
 from pages.base_page import BasePage
 from config.links import WidgetsPageLinks
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators
+    SliderPageLocators, ProgressBarPageLocators
 from selenium.webdriver import Keys
 
 
@@ -178,3 +180,30 @@ class SliderPage(BasePage):
 
     def get_form_slider_value(self):
         return self.element_is_visible(self.locators.SLIDER_VALUE_INPUT).get_attribute('value')
+
+
+class ProgressBarPage(BasePage):
+    PAGE_URL = WidgetsPageLinks.PROGRESS_BAR
+    locators = ProgressBarPageLocators()
+
+    def check_appears_reset_button_after_reaching_100_percent_in_the_process_bar(self):
+        self.element_is_visible(self.locators.START_BUTTON).click()
+        while True:
+            progress_value = self.element_is_visible(self.locators.PROGRESS_BAR_VALUE).text
+            if progress_value == '100%':
+                time.sleep(0.1)
+                reset_button = self.element_is_visible(self.locators.RESET_BUTTON).text
+                self.element_is_visible(self.locators.RESET_BUTTON).click()
+                break
+        return reset_button
+
+    def check_appears_stop_and_start_button(self):
+        self.element_is_visible(self.locators.START_BUTTON).click()
+        while True:
+            progress_value = self.element_is_visible(self.locators.PROGRESS_BAR_VALUE).text
+            if progress_value == f"{random.randint(1, 99)}%":
+                stop_button = self.element_is_visible(self.locators.START_BUTTON).text
+                self.element_is_visible(self.locators.START_BUTTON).click()
+                start_button = self.element_is_visible(self.locators.START_BUTTON).text
+                break
+        return stop_button, start_button
