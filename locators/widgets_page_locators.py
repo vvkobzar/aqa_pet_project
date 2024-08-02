@@ -81,3 +81,10 @@ class ToolTipsPageLocators:
 
 class MenuPageLocators:
     MENU_ITEM_LIST = ("xpath", "//ul/li/a")
+
+
+class SelectMenuPageLocators:
+    SELECT_VALUE_INPUT = ("xpath", "//input[@id='react-select-2-input']")
+    SELECT_VALUE_SPAN = ("xpath", "//div[@class=' css-1hwfws3']")
+    SELECT_VALUE_SELECTED_OPTION = ("xpath", "(//div[@class=' css-1hwfws3']/div[@class=' css-1uccc91-singleValue'])[1]")
+    SELECT_VALUE_TAB = ("xpath", "//div[@tabindex]")

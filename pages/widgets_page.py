@@ -5,7 +5,8 @@ from generator.generator import generator_color_names
 from pages.base_page import BasePage
 from config.links import WidgetsPageLinks
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators, \
+    SelectMenuPageLocators
 from selenium.webdriver import Keys
 
 
@@ -275,3 +276,39 @@ class MenuPage(BasePage):
             self.action_move_to_element(item)
             data.append(item.text)
         return data
+
+
+class SelectMenuPage(BasePage):
+    PAGE_URL = WidgetsPageLinks.SELECT_MENU
+    locators = SelectMenuPageLocators()
+
+    def check_if_options_can_be_added_by_clicking_to_select_value_field(self):
+        selected_option = []
+        result_option = []
+        index = 0
+        select_value = self.element_is_visible(self.locators.SELECT_VALUE_SPAN)
+        select_value.click()
+        while index < 6:
+            tab_list = self.elements_are_visible(self.locators.SELECT_VALUE_TAB)
+            tab = tab_list[index]
+            selected_option.append(tab.text)
+            tab.click()
+            result_option.append(self.element_is_visible(self.locators.SELECT_VALUE_SELECTED_OPTION).text)
+            select_value.click()
+            index += 1
+        return selected_option, result_option
+
+    def checking_the_selection_of_options_from_the_keypad_to_select_value_field(self):
+        selected_option = []
+        result_option = []
+        groups = [
+            'Group 1, option 1', 'Group 1, option 2', 'Group 2, option 1', 'Group 2, option 2', 'A root option',
+            'Another root option'
+        ]
+        menu_input = self.element_is_visible(self.locators.SELECT_VALUE_INPUT)
+        for group in groups:
+            selected_option.append(group)
+            menu_input.send_keys(group)
+            menu_input.send_keys(Keys.TAB)
+            result_option.append(self.element_is_visible(self.locators.SELECT_VALUE_SELECTED_OPTION).text)
+        return selected_option, result_option

@@ -1,6 +1,6 @@
 import pytest
 from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
-    ToolTipsPage, MenuPage
+    ToolTipsPage, MenuPage, SelectMenuPage
 
 
 class TestWidgets:
@@ -255,3 +255,18 @@ class TestWidgets:
             ]
 
             assert actual_menu_items == expected_menu_items, "Menu items do not match the expected values"
+
+    class TestSelectMenuPage:
+        def test_selecting_items_via_click_and_keyboard_in_the_select_value_menu(self, driver):
+            select_menu_page = SelectMenuPage(driver)
+            select_menu_page.open()
+
+            click_selected_option, click_result_option = (
+                select_menu_page.check_if_options_can_be_added_by_clicking_to_select_value_field()
+            )
+            keypad_selected_option, keypad_result_option = (
+                select_menu_page.checking_the_selection_of_options_from_the_keypad_to_select_value_field()
+            )
+
+            assert click_selected_option == click_result_option, "the clicked items do not match "
+            assert keypad_selected_option == keypad_result_option, "entered items do not match"
