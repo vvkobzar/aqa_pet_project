@@ -270,3 +270,13 @@ class TestWidgets:
 
             assert click_selected_option == click_result_option, "the clicked items do not match "
             assert keypad_selected_option == keypad_result_option, "entered items do not match"
+
+        def test_color_selected_from_old_style_select_menu(self, driver):
+            select_menu_page = SelectMenuPage(driver)
+            select_menu_page.open()
+
+            actual_colors_menu, expected_colors_menu = (
+                select_menu_page.check_item_selection_from_old_style_select_menu()
+            )
+
+            assert actual_colors_menu == expected_colors_menu, "actual colors doesn't match expected colors menu"

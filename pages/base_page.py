@@ -50,6 +50,14 @@ class BasePage:
         action.move_to_element(element)
         action.perform()
 
+    def select_by_value(self, element, value):
+        select = Select(self.element_is_present(element))
+        select.select_by_value(str(value))
+
+    def select_by_text(self, element, text):
+        select = Select(self.element_is_present(element))
+        select.select_by_visible_text(text)
+
     def get_list_windows_handles(self):
         return self.driver.window_handles
 
@@ -67,7 +75,3 @@ class BasePage:
 
     def switch_to_frame(self, iframe):
         self.driver.switch_to.frame(iframe)
-
-    def select_by_value(self, element, value):
-        select = Select(self.element_is_present(element))
-        select.select_by_value(str(value))

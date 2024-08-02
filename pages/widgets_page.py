@@ -312,3 +312,11 @@ class SelectMenuPage(BasePage):
             menu_input.send_keys(Keys.TAB)
             result_option.append(self.element_is_visible(self.locators.SELECT_VALUE_SELECTED_OPTION).text)
         return selected_option, result_option
+
+    def check_item_selection_from_old_style_select_menu(self):
+        actual_colors_menu = []
+        expected_colors_menu = ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black', 'White', 'Voilet', 'Indigo', 'Magenta', 'Aqua']
+        for color in expected_colors_menu:
+            self.select_by_text(self.locators.OLD_STYLE_SELECT_MENU, color)
+            actual_colors_menu.append(color)
+        return actual_colors_menu, expected_colors_menu

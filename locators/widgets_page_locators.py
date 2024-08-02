@@ -84,7 +84,11 @@ class MenuPageLocators:
 
 
 class SelectMenuPageLocators:
+    # Select Value
     SELECT_VALUE_INPUT = ("xpath", "//input[@id='react-select-2-input']")
     SELECT_VALUE_SPAN = ("xpath", "//div[@class=' css-1hwfws3']")
     SELECT_VALUE_SELECTED_OPTION = ("xpath", "(//div[@class=' css-1hwfws3']/div[@class=' css-1uccc91-singleValue'])[1]")
     SELECT_VALUE_TAB = ("xpath", "//div[@tabindex]")
+
+    # Old Style Select Menu
+    OLD_STYLE_SELECT_MENU = ("xpath", "//select[@id='oldSelectMenu']")
