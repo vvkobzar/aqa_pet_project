@@ -5,7 +5,7 @@ from generator.generator import generator_color_names
 from pages.base_page import BasePage
 from config.links import WidgetsPageLinks
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators
 from selenium.webdriver import Keys
 
 
@@ -262,3 +262,16 @@ class ToolTipsPage(BasePage):
         tool_tip_text_section = self.get_text_from_tool_tips(
             self.locators.SECTION_LINK, self.locators.TOOL_TIPS_SECTION)
         return tool_tip_text_button, tool_tip_text_field, tool_tip_text_contrary, tool_tip_text_section
+
+
+class MenuPage(BasePage):
+    PAGE_URL = WidgetsPageLinks.MENU
+    locators = MenuPageLocators()
+
+    def check_menu(self):
+        menu_item_list = self.elements_are_present(self.locators.MENU_ITEM_LIST)
+        data = []
+        for item in menu_item_list:
+            self.action_move_to_element(item)
+            data.append(item.text)
+        return data

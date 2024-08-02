@@ -1,6 +1,6 @@
 import pytest
 from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
-    ToolTipsPage
+    ToolTipsPage, MenuPage
 
 
 class TestWidgets:
@@ -236,3 +236,22 @@ class TestWidgets:
             assert tool_tip_text_section == "You hovered over the 1.10.32", (
                 "the tool tips section didn't show up "
             )
+
+    class TestMenuPage:
+        def test_contents_of_the_menu_on_the_page(self, driver):
+            menu_page = MenuPage(driver)
+            menu_page.open()
+
+            actual_menu_items = menu_page.check_menu()
+            expected_menu_items = [
+                'Main Item 1',
+                'Main Item 2',
+                'Sub Item',
+                'Sub Item',
+                'SUB SUB LIST »',
+                'Sub Sub Item 1',
+                'Sub Sub Item 2',
+                'Main Item 3'
+            ]
+
+            assert actual_menu_items == expected_menu_items, "Menu items do not match the expected values"
