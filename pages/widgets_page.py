@@ -320,3 +320,26 @@ class SelectMenuPage(BasePage):
             self.select_by_text(self.locators.OLD_STYLE_SELECT_MENU, color)
             actual_colors_menu.append(color)
         return actual_colors_menu, expected_colors_menu
+
+    def click_to_select_items_from_multiselect_drop_down(self):
+        added_element = []
+        self.element_is_visible(self.locators.MULTISELECT_BUTTON).click()
+        items_list = self.elements_are_visible(self.locators.MULTISELECT_LIST_ITEM_TEXT)
+        for item in items_list:
+            added_element.append(item.text)
+            item.click()
+        return added_element
+
+    def check_items_in_the_multiselect_drop_down(self):
+        field_items = []
+        check_item_field = self.elements_are_visible(self.locators.MULTISELECT_ADDED_ITEM_TEXT)
+        for item in check_item_field:
+            field_items.append(item.text)
+        return field_items
+
+    def remove_selected_items_from_multiselect_drop_down(self):
+        items_list = self.elements_are_visible(self.locators.MULTISELECT_ITEM_CLOSE)
+        for item in items_list:
+            item.click()
+        check_empty_field = self.element_is_visible(self.locators.MULTISELECT_EMPTY_FIELD).text
+        return check_empty_field

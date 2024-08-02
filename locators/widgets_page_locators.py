@@ -92,3 +92,12 @@ class SelectMenuPageLocators:
 
     # Old Style Select Menu
     OLD_STYLE_SELECT_MENU = ("xpath", "//select[@id='oldSelectMenu']")
+
+    # Multiselect drop down
+    MULTISELECT_INPUT = ("xpath", "//input[@id='react-select-15-input']")
+    MULTISELECT_BUTTON = ("xpath", "(//div[@class=' css-1hwfws3'])[3]")
+    MULTISELECT_LIST_ITEM_TEXT = ("xpath", "//div[@tabindex]")
+    MULTISELECT_ADDED_ITEM_TEXT = ("xpath", "//div[@class='css-12jo7m5']")
+    MULTISELECT_ITEM_CLOSE = ("xpath", "//div[@class='css-xb97g8']")
+    MULTISELECT_ALL_ITEM_CLOSE = ("xpath", "//div[@class=' css-tlfecz-indicatorContainer']")
+    MULTISELECT_EMPTY_FIELD = ("xpath", "(//div[@class=' css-1wa3eu0-placeholder'])[3]")

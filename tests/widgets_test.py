@@ -280,3 +280,18 @@ class TestWidgets:
             )
 
             assert actual_colors_menu == expected_colors_menu, "actual colors doesn't match expected colors menu"
+
+        def test_click_to_select_items_from_multiselect_drop_down(self, driver):
+            select_menu_page = SelectMenuPage(driver)
+            select_menu_page.open()
+
+            added_element = select_menu_page.click_to_select_items_from_multiselect_drop_down()
+            field_items = select_menu_page.check_items_in_the_multiselect_drop_down()
+            empty_field = select_menu_page.remove_selected_items_from_multiselect_drop_down()
+
+            assert added_element == field_items, (
+                "added items do not match the items in the field"
+            )
+            assert empty_field == "Select...", (
+                "items in the form are not deleted"
+            )
