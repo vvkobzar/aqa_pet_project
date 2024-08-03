@@ -343,3 +343,18 @@ class SelectMenuPage(BasePage):
             item.click()
         check_empty_field = self.element_is_visible(self.locators.MULTISELECT_EMPTY_FIELD).text
         return check_empty_field
+
+    def select_items_from_standard_multi_select(self):
+        selected_items = []
+        check_added_items = []
+        expected_items = ['Volvo', 'Saab', 'Opel', 'Audi']
+        num_subjects = random.randint(1, len(expected_items))
+        random_items = random.sample(expected_items, num_subjects)
+        for item in random_items:
+            self.select_by_text(self.locators.MULTI_SELECT, item)
+            selected_items.append(item)
+
+        check_selected_items = self.get_all_selected_options(self.locators.MULTI_SELECT)
+        for item in check_selected_items:
+            check_added_items.append(item.text)
+        return set(selected_items), set(check_added_items)

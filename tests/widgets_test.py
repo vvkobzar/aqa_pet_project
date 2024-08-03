@@ -295,3 +295,11 @@ class TestWidgets:
             assert empty_field == "Select...", (
                 "items in the form are not deleted"
             )
+
+        def test_selection_of_elements_from_standard_multi_select(self, driver):
+            select_menu_page = SelectMenuPage(driver)
+            select_menu_page.open()
+
+            selected_items, check_added_items = select_menu_page.select_items_from_standard_multi_select()
+
+            assert selected_items == check_added_items, "the selected items do not match "

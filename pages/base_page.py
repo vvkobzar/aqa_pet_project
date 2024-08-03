@@ -58,6 +58,10 @@ class BasePage:
         select = Select(self.element_is_present(element))
         select.select_by_visible_text(text)
 
+    def get_all_selected_options(self, element):
+        select = Select(self.element_is_present(element))
+        return select.all_selected_options
+
     def get_list_windows_handles(self):
         return self.driver.window_handles
 
