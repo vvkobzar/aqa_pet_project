@@ -1,6 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver import ActionChains
+from selenium.webdriver.support.select import Select
 
 
 class BasePage:
@@ -38,6 +39,28 @@ class BasePage:
     def action_right_click(self, element):
         action = ActionChains(self.driver)
         action.context_click(element).perform()
+
+    def action_drag_and_drop_by_offset(self, element, x_coords, y_coords):
+        action = ActionChains(self.driver)
+        action.drag_and_drop_by_offset(element, x_coords, y_coords)
+        action.perform()
+
+    def action_move_to_element(self, element):
+        action = ActionChains(self.driver)
+        action.move_to_element(element)
+        action.perform()
+
+    def select_by_value(self, element, value):
+        select = Select(self.element_is_present(element))
+        select.select_by_value(str(value))
+
+    def select_by_text(self, element, text):
+        select = Select(self.element_is_present(element))
+        select.select_by_visible_text(text)
+
+    def get_all_selected_options(self, element):
+        select = Select(self.element_is_present(element))
+        return select.all_selected_options
 
     def get_list_windows_handles(self):
         return self.driver.window_handles
