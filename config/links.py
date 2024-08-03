@@ -41,3 +41,7 @@ class WidgetsPageLinks:
     TOOL_TIPS = f"{HOST}/tool-tips"
     MENU = f"{HOST}/menu"
     SELECT_MENU = f"{HOST}/select-menu"
+
+
+class InteractionsPageLinks:
+    SORTABLE = f"{HOST}/sortable"
