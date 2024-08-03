@@ -40,3 +40,4 @@ class WidgetsPageLinks:
     TABS = f"{HOST}/tabs"
     TOOL_TIPS = f"{HOST}/tool-tips"
     MENU = f"{HOST}/menu"
+    SELECT_MENU = f"{HOST}/select-menu"

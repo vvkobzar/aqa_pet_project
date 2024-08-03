@@ -5,7 +5,8 @@ from generator.generator import generator_color_names
 from pages.base_page import BasePage
 from config.links import WidgetsPageLinks
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators, \
+    SelectMenuPageLocators
 from selenium.webdriver import Keys
 
 
@@ -275,3 +276,85 @@ class MenuPage(BasePage):
             self.action_move_to_element(item)
             data.append(item.text)
         return data
+
+
+class SelectMenuPage(BasePage):
+    PAGE_URL = WidgetsPageLinks.SELECT_MENU
+    locators = SelectMenuPageLocators()
+
+    def check_if_options_can_be_added_by_clicking_to_select_value_field(self):
+        selected_option = []
+        result_option = []
+        index = 0
+        select_value = self.element_is_visible(self.locators.SELECT_VALUE_SPAN)
+        select_value.click()
+        while index < 6:
+            tab_list = self.elements_are_visible(self.locators.SELECT_VALUE_TAB)
+            tab = tab_list[index]
+            selected_option.append(tab.text)
+            tab.click()
+            result_option.append(self.element_is_visible(self.locators.SELECT_VALUE_SELECTED_OPTION).text)
+            select_value.click()
+            index += 1
+        return selected_option, result_option
+
+    def checking_the_selection_of_options_from_the_keypad_to_select_value_field(self):
+        selected_option = []
+        result_option = []
+        groups = [
+            'Group 1, option 1', 'Group 1, option 2', 'Group 2, option 1', 'Group 2, option 2', 'A root option',
+            'Another root option'
+        ]
+        menu_input = self.element_is_visible(self.locators.SELECT_VALUE_INPUT)
+        for group in groups:
+            selected_option.append(group)
+            menu_input.send_keys(group)
+            menu_input.send_keys(Keys.TAB)
+            result_option.append(self.element_is_visible(self.locators.SELECT_VALUE_SELECTED_OPTION).text)
+        return selected_option, result_option
+
+    def check_item_selection_from_old_style_select_menu(self):
+        actual_colors_menu = []
+        expected_colors_menu = ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Black', 'White', 'Voilet', 'Indigo', 'Magenta', 'Aqua']
+        for color in expected_colors_menu:
+            self.select_by_text(self.locators.OLD_STYLE_SELECT_MENU, color)
+            actual_colors_menu.append(color)
+        return actual_colors_menu, expected_colors_menu
+
+    def click_to_select_items_from_multiselect_drop_down(self):
+        added_element = []
+        self.element_is_visible(self.locators.MULTISELECT_BUTTON).click()
+        items_list = self.elements_are_visible(self.locators.MULTISELECT_LIST_ITEM_TEXT)
+        for item in items_list:
+            added_element.append(item.text)
+            item.click()
+        return added_element
+
+    def check_items_in_the_multiselect_drop_down(self):
+        field_items = []
+        check_item_field = self.elements_are_visible(self.locators.MULTISELECT_ADDED_ITEM_TEXT)
+        for item in check_item_field:
+            field_items.append(item.text)
+        return field_items
+
+    def remove_selected_items_from_multiselect_drop_down(self):
+        items_list = self.elements_are_visible(self.locators.MULTISELECT_ITEM_CLOSE)
+        for item in items_list:
+            item.click()
+        check_empty_field = self.element_is_visible(self.locators.MULTISELECT_EMPTY_FIELD).text
+        return check_empty_field
+
+    def select_items_from_standard_multi_select(self):
+        selected_items = []
+        check_added_items = []
+        expected_items = ['Volvo', 'Saab', 'Opel', 'Audi']
+        num_subjects = random.randint(1, len(expected_items))
+        random_items = random.sample(expected_items, num_subjects)
+        for item in random_items:
+            self.select_by_text(self.locators.MULTI_SELECT, item)
+            selected_items.append(item)
+
+        check_selected_items = self.get_all_selected_options(self.locators.MULTI_SELECT)
+        for item in check_selected_items:
+            check_added_items.append(item.text)
+        return set(selected_items), set(check_added_items)

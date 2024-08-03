@@ -1,6 +1,6 @@
 import pytest
 from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, SliderPage, ProgressBarPage, TabsPage, \
-    ToolTipsPage, MenuPage
+    ToolTipsPage, MenuPage, SelectMenuPage
 
 
 class TestWidgets:
@@ -255,3 +255,51 @@ class TestWidgets:
             ]
 
             assert actual_menu_items == expected_menu_items, "Menu items do not match the expected values"
+
+    class TestSelectMenuPage:
+        def test_selecting_items_via_click_and_keyboard_in_the_select_value_menu(self, driver):
+            select_menu_page = SelectMenuPage(driver)
+            select_menu_page.open()
+
+            click_selected_option, click_result_option = (
+                select_menu_page.check_if_options_can_be_added_by_clicking_to_select_value_field()
+            )
+            keypad_selected_option, keypad_result_option = (
+                select_menu_page.checking_the_selection_of_options_from_the_keypad_to_select_value_field()
+            )
+
+            assert click_selected_option == click_result_option, "the clicked items do not match "
+            assert keypad_selected_option == keypad_result_option, "entered items do not match"
+
+        def test_color_selected_from_old_style_select_menu(self, driver):
+            select_menu_page = SelectMenuPage(driver)
+            select_menu_page.open()
+
+            actual_colors_menu, expected_colors_menu = (
+                select_menu_page.check_item_selection_from_old_style_select_menu()
+            )
+
+            assert actual_colors_menu == expected_colors_menu, "actual colors doesn't match expected colors menu"
+
+        def test_click_to_select_items_from_multiselect_drop_down(self, driver):
+            select_menu_page = SelectMenuPage(driver)
+            select_menu_page.open()
+
+            added_element = select_menu_page.click_to_select_items_from_multiselect_drop_down()
+            field_items = select_menu_page.check_items_in_the_multiselect_drop_down()
+            empty_field = select_menu_page.remove_selected_items_from_multiselect_drop_down()
+
+            assert added_element == field_items, (
+                "added items do not match the items in the field"
+            )
+            assert empty_field == "Select...", (
+                "items in the form are not deleted"
+            )
+
+        def test_selection_of_elements_from_standard_multi_select(self, driver):
+            select_menu_page = SelectMenuPage(driver)
+            select_menu_page.open()
+
+            selected_items, check_added_items = select_menu_page.select_items_from_standard_multi_select()
+
+            assert selected_items == check_added_items, "the selected items do not match "
