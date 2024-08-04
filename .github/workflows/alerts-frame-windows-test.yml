@@ -18,7 +18,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -37,26 +36,26 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Browser Windows Page
-        if: "github.event.inputs.deployment_target == "Browser Windows Page"
+        if: github.event.inputs.deployment_target == 'Browser Windows Page'
         run: pytest -s --headless tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::TestBrowserWindowsPage
         continue-on-error: true
 
       - name: Alerts Page
-        if: "github.event.inputs.deployment_target == "Alerts Page"
+        if: github.event.inputs.deployment_target == 'Alerts Page'
         run: pytest -s --headless tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::TestAlertsPage
         continue-on-error: true
 
       - name: Frames Page
-        if: "github.event.inputs.deployment_target == "Frames Page"
+        if: github.event.inputs.deployment_target == 'Frames Page'
         run: pytest -s --headless tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::TestFramesPage
         continue-on-error: true
 
       - name: Nested Frames Page
-        if: "github.event.inputs.deployment_target == "Nested Frames Page"
+        if: github.event.inputs.deployment_target == 'Nested Frames Page'
         run: pytest -s --headless tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::TestNestedFramesPage
         continue-on-error: true
 
       - name: Modal Dialogs Page
-        if: "github.event.inputs.deployment_target == "Modal Dialogs Page"
+        if: github.event.inputs.deployment_target == 'Modal Dialogs Page'
         run: pytest -s --headless tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::TestModalDialogsPage
         continue-on-error: true
