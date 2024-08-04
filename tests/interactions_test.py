@@ -1,4 +1,4 @@
-from pages.interactions_page import SortablePage, SelectablePage
+from pages.interactions_page import SortablePage, SelectablePage, ResizablePage
 
 
 class TestInteractions:
@@ -23,3 +23,17 @@ class TestInteractions:
 
             assert len(items_list) > 0, "no elements were selected"
             assert len(items_grid) > 0, "no elements were selected"
+
+    class TestResizablePage:
+        def test_resizable_box_expected_maximum_and_minimum_size(self, driver):
+            resizable_page = ResizablePage(driver)
+            resizable_page.open()
+
+            max_size, min_size = resizable_page.change_size_resizable_box()
+
+            assert max_size == ('500px', '300px'), (
+                "the maximum size does not correspond to the expected result"
+            )
+            assert min_size == ('150px', '150px'), (
+                "the minimum size does not correspond to the expected result"
+            )
