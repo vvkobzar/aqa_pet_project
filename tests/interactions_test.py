@@ -29,11 +29,27 @@ class TestInteractions:
             resizable_page = ResizablePage(driver)
             resizable_page.open()
 
-            max_size, min_size = resizable_page.change_size_resizable_box()
+            starting_size, max_size, min_size = resizable_page.change_size_resizable_box()
 
+            assert starting_size == ('200px', '200px'), (
+                "the starting size does not correspond to the expected result"
+            )
             assert max_size == ('500px', '300px'), (
                 "the maximum size does not correspond to the expected result"
             )
             assert min_size == ('150px', '150px'), (
                 "the minimum size does not correspond to the expected result"
+            )
+
+        def test_resizable(self, driver):
+            resizable_page = ResizablePage(driver)
+            resizable_page.open()
+
+            starting_size, max_size, min_size = resizable_page.change_size_resizable()
+
+            assert starting_size != max_size and min_size, (
+                "resizable has not been changed"
+            )
+            assert max_size != min_size, (
+                "resizable has not been changed"
             )

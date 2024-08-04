@@ -22,3 +22,7 @@ class ResizablePageLocators:
     RESIZABLE_BOX = ("xpath", "//div[@id='resizableBoxWithRestriction']")
     RESIZABLE_BOX_HANDLE = ("xpath", "//div[@id='resizableBoxWithRestriction']"
                                      "/span[@class='react-resizable-handle react-resizable-handle-se']")
+
+    RESIZABLE = ("xpath", "//div[@id='resizable']")
+    RESIZABLE_HANDLE = (
+        "xpath", "//div[@id='resizable']/span[@class='react-resizable-handle react-resizable-handle-se']")
