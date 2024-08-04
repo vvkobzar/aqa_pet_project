@@ -46,3 +46,4 @@ class WidgetsPageLinks:
 class InteractionsPageLinks:
     SORTABLE = f"{HOST}/sortable"
     SELECTABLE = f"{HOST}/selectable"
+    RESIZABLE = f"{HOST}/resizable"
