@@ -21,10 +21,9 @@ jobs:
           python-version: "3.12"
       
       - name: Install specific version of Chrome
-        run: |
-          sudo apt-get update
-          wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.110-1_amd64.deb
-          sudo apt-get install -y ./google-chrome-stable_114.0.5735.110-1_amd64.deb
+      - uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 114
       
       - name: Install dependencies
         run: pip install -r requirements.txt
