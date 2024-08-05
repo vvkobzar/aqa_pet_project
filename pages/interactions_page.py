@@ -178,3 +178,18 @@ class DragabblePage(BasePage):
         drag_position_after = self.get_element_position(drag)
         return drag_position_before, drag_position_after
 
+    def check_drag_does_not_go_outside_the_box(self, drag_name):
+        drags = {
+            'Box':
+                {'locator': self.locators.CONTAINER_DRAG_BIG_BOX,
+                'x': 1300, 'y': 700},
+
+            'Parent':
+                {'locator': self.locators.CONTAINER_DRAG_SMALL_BOX,
+                 'x': 500, 'y': 500}
+        }
+        self.element_is_visible(self.locators.CONTAINER_TAB).click()
+        drag = self.element_is_visible(drags[drag_name]['locator'])
+        self.action_drag_and_drop_by_offset(drag, drags[drag_name]['x'], drags[drag_name]['y'])
+        position_drag = self.get_element_position(drag)
+        return position_drag

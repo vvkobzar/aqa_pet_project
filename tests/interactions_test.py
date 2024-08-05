@@ -155,3 +155,22 @@ class TestInteractions:
             assert drag_only_y_position['y'] != drag_only_y_position_after_move['y'], (
                 "the only y drag don't changed y-axis position"
             )
+
+        def test_container_restricted_dragabble_box(self, driver):
+            dragabble_page = DragabblePage(driver)
+            dragabble_page.open()
+
+            actual_position_drag = dragabble_page.check_drag_does_not_go_outside_the_box('Box')
+            expected_position_drag = {'x': 1211, 'y': 457}
+
+            assert actual_position_drag == expected_position_drag, "drag went out of the box"
+
+        def test_container_restricted_dragabble_parent(self, driver):
+            dragabble_page = DragabblePage(driver)
+            dragabble_page.open()
+
+            actual_position_drag = dragabble_page.check_drag_does_not_go_outside_the_box('Parent')
+            expected_position_drag = {'x': 541, 'y': 663}
+
+            assert actual_position_drag == expected_position_drag, "drag went out of the parent box"
+

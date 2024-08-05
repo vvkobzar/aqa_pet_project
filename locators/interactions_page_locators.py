@@ -64,3 +64,9 @@ class DragabblePageLocators:
     AXIS_TAB = ("xpath", "//a[@id='draggableExample-tab-axisRestriction']")
     AXIS_ONLY_X = ("xpath", "//div[@id='restrictedX']")
     AXIS_ONLY_Y = ("xpath", "//div[@id='restrictedY']")
+
+    # Container Restricted
+    CONTAINER_TAB = ("xpath", "//a[@id='draggableExample-tab-containerRestriction']")
+    CONTAINER_DRAG_BIG_BOX = ("xpath", "//div[@id='containmentWrapper']/div[contains(@class, 'draggable')]")
+    CONTAINER_DRAG_SMALL_BOX = (
+        "xpath", "//div[@class='draggable ui-widget-content m-3']/span[contains(@class, 'ui-draggable')]")
