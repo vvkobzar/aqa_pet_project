@@ -1,7 +1,8 @@
 import random
 
 from config.links import InteractionsPageLinks
-from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators, ResizablePageLocators
+from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators, ResizablePageLocators, \
+    DroppablePageLocators
 from pages.base_page import BasePage
 
 
@@ -96,3 +97,17 @@ class ResizablePage(BasePage):
                                             )
         min_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.RESIZABLE))
         return starting_size, max_size, min_size
+
+
+class DroppablePage(BasePage):
+    PAGE_URL = InteractionsPageLinks.DROPPABLE
+    locators = DroppablePageLocators()
+
+    def drop_simple(self):
+        tab_simple_status = self.element_is_visible(self.locators.TAB_SIMPLE).get_attribute('aria-selected')
+        drag_div = self.element_is_visible(self.locators.SIMPLE_DROP_CONTAINER_HANDLE)
+        drop_div = self.element_is_visible(self.locators.SIMPLE_DROP_CONTAINER_DROPPABLE)
+        self.action_drag_and_drop_to_element(drag_div, drop_div)
+        drop_div_text = self.element_is_visible(self.locators.SIMPLE_DROP_CONTAINER_DROPPABLE_TEXT).text
+        return tab_simple_status, drop_div_text
+

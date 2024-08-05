@@ -26,3 +26,14 @@ class ResizablePageLocators:
     RESIZABLE = ("xpath", "//div[@id='resizable']")
     RESIZABLE_HANDLE = (
         "xpath", "//div[@id='resizable']/span[@class='react-resizable-handle react-resizable-handle-se']")
+
+
+class DroppablePageLocators:
+    # Simple
+    TAB_SIMPLE = ("xpath", "//a[@id='droppableExample-tab-simple']")
+    SIMPLE_DROP_CONTAINER_HANDLE = (
+        "xpath", "//div[@id='simpleDropContainer']/div[@class='drag-box mt-4 ui-draggable ui-draggable-handle']")
+    SIMPLE_DROP_CONTAINER_DROPPABLE = (
+        "xpath", "//div[@id='simpleDropContainer']/div[contains(@class, 'drop-box ui-droppable')]")
+    SIMPLE_DROP_CONTAINER_DROPPABLE_TEXT = (
+        "xpath", "//div[@id='simpleDropContainer']/div[contains(@class, 'drop-box ui-droppable')]/p")

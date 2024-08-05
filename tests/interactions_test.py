@@ -1,4 +1,4 @@
-from pages.interactions_page import SortablePage, SelectablePage, ResizablePage
+from pages.interactions_page import SortablePage, SelectablePage, ResizablePage, DroppablePage
 
 
 class TestInteractions:
@@ -52,4 +52,18 @@ class TestInteractions:
             )
             assert max_size != min_size, (
                 "resizable has not been changed"
+            )
+
+    class TestDroppablePage:
+        def test_simple_droppable(self, driver):
+            droppable_page = DroppablePage(driver)
+            droppable_page.open()
+
+            tab_simple_status, drop_box_text = droppable_page.drop_simple()
+
+            assert tab_simple_status == 'true', (
+                "the simple tab is not open by default"
+            )
+            assert drop_box_text == "Dropped!", (
+                "the element has not been dropped"
             )

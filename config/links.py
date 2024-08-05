@@ -47,3 +47,4 @@ class InteractionsPageLinks:
     SORTABLE = f"{HOST}/sortable"
     SELECTABLE = f"{HOST}/selectable"
     RESIZABLE = f"{HOST}/resizable"
+    DROPPABLE = f"{HOST}/droppable"
