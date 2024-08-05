@@ -47,3 +47,9 @@ class DroppablePageLocators:
     PREVENT_NOT_GREEDY_INNER_DROP_BOX = ("xpath", "//div[@id='notGreedyInnerDropBox']/p")
     PREVENT_GREEDY_DROP_BOX = ("xpath", "//div[@id='greedyDropBox']/p")
     PREVENT_GREEDY_INNER_DROP_BOX = ("xpath", "//div[@id='greedyDropBoxInner']/p")
+
+    # Revert Draggable
+    REVERT_TAB = ("xpath", "//a[@id='droppableExample-tab-revertable']")
+    REVERT_DRAG_BOX = ("xpath", "//div[@id='revertable']")
+    REVERT_NOT_DRAG_BOX = ("xpath", "//div[@id='notRevertable']")
+    REVERT_DROP_BOX = ("xpath", "//div[@id='revertableDropContainer']/div[@id='droppable']")

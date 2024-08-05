@@ -137,3 +137,17 @@ class DroppablePage(BasePage):
         self.action_drag_and_drop_to_element(drag_box, greedy_inner_drop)
 
         return not_greedy_outer_drop.text, not_greedy_inner_drop.text, greedy_outer_drop.text, greedy_inner_drop.text
+
+    def drop_revert_draggable(self, name_drag):
+        drags = {
+            'Will Revert': self.locators.REVERT_DRAG_BOX,
+            'Not Revert': self.locators.REVERT_NOT_DRAG_BOX
+        }
+        self.element_is_visible(self.locators.REVERT_TAB).click()
+        drag = self.element_is_visible(drags[name_drag])
+        drop_box = self.element_is_visible(self.locators.REVERT_DROP_BOX)
+        self.action_drag_and_drop_to_element(drag, drop_box)
+        position_after_move = drag.get_attribute('style')
+        time.sleep(1)
+        position_after_revert = drag.get_attribute('style')
+        return position_after_move, position_after_revert
