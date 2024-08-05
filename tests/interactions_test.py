@@ -80,3 +80,23 @@ class TestInteractions:
             assert drop_text_acceptable == "Dropped!", (
                 "the acceptable drag has not been accepted"
             )
+
+        def test_prevent_propogation_droppable(self, driver):
+            droppable_page = DroppablePage(driver)
+            droppable_page.open()
+
+            (not_greedy_outer_drop, not_greedy_inner_drop,
+             greedy_outer_drop, greedy_inner_drop) = droppable_page.drop_prevent_propogation()
+
+            assert not_greedy_outer_drop == 'Dropped!', (
+                "the not greedy outer drop box text has not been changed"
+            )
+            assert not_greedy_inner_drop == 'Dropped!', (
+                "the not greedy inner drop box text has not been changed"
+            )
+            assert greedy_outer_drop == "Outer droppable", (
+                "the greedy outer drop box text has been changed"
+            )
+            assert greedy_inner_drop == 'Dropped!', (
+                "the greedy inner drop box text has not been changed"
+            )

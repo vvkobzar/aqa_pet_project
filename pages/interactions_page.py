@@ -1,4 +1,5 @@
 import random
+import time
 
 from config.links import InteractionsPageLinks
 from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators, ResizablePageLocators, \
@@ -123,3 +124,16 @@ class DroppablePage(BasePage):
         drop_text_acceptable = drop_box.text
 
         return drop_text_not_acceptable, drop_text_acceptable
+
+    def drop_prevent_propogation(self):
+        self.element_is_visible(self.locators.PREVENT_TAB).click()
+        drag_box = self.element_is_visible(self.locators.PREVENT_DRAG_BOX)
+        not_greedy_outer_drop = self.element_is_visible(self.locators.PREVENT_NOT_GREEDY_DROP_BOX)
+        not_greedy_inner_drop = self.element_is_visible(self.locators.PREVENT_NOT_GREEDY_INNER_DROP_BOX)
+        greedy_outer_drop = self.element_is_visible(self.locators.PREVENT_GREEDY_DROP_BOX)
+        greedy_inner_drop = self.element_is_visible(self.locators.PREVENT_GREEDY_INNER_DROP_BOX)
+
+        self.action_drag_and_drop_to_element(drag_box, not_greedy_inner_drop)
+        self.action_drag_and_drop_to_element(drag_box, greedy_inner_drop)
+
+        return not_greedy_outer_drop.text, not_greedy_inner_drop.text, greedy_outer_drop.text, greedy_inner_drop.text
