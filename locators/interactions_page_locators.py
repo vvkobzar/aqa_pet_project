@@ -26,3 +26,30 @@ class ResizablePageLocators:
     RESIZABLE = ("xpath", "//div[@id='resizable']")
     RESIZABLE_HANDLE = (
         "xpath", "//div[@id='resizable']/span[@class='react-resizable-handle react-resizable-handle-se']")
+
+
+class DroppablePageLocators:
+    # Simple
+    SIMPLE_TAB = ("xpath", "//a[@id='droppableExample-tab-simple']")
+    SIMPLE_DRAG_BOX = ("xpath", "//div[@id='draggable']")
+    SIMPLE_DROP_BOX = ("xpath", "//div[@id='simpleDropContainer']/div[@id='droppable']")
+
+    # Accept
+    ACCEPT_TAB = ("xpath", "//a[@id='droppableExample-tab-accept']")
+    ACCEPT_DRAG_BOX_ACCEPTABLE = ("xpath", "//div[@id='acceptable']")
+    ACCEPT_DRAG_BOX_NOT_ACCEPTABLE = ("xpath", "//div[@id='notAcceptable']")
+    ACCEPT_DROP_BOX = ("xpath", "//div[@id='acceptDropContainer']/div[@id='droppable']")
+
+    # Prevent Propogation
+    PREVENT_TAB = ("xpath", "//a[@id='droppableExample-tab-preventPropogation']")
+    PREVENT_DRAG_BOX = ("xpath", "//div[@id='dragBox']")
+    PREVENT_NOT_GREEDY_DROP_BOX = ("xpath", "//div[@id='notGreedyDropBox']/p")
+    PREVENT_NOT_GREEDY_INNER_DROP_BOX = ("xpath", "//div[@id='notGreedyInnerDropBox']/p")
+    PREVENT_GREEDY_DROP_BOX = ("xpath", "//div[@id='greedyDropBox']/p")
+    PREVENT_GREEDY_INNER_DROP_BOX = ("xpath", "//div[@id='greedyDropBoxInner']/p")
+
+    # Revert Draggable
+    REVERT_TAB = ("xpath", "//a[@id='droppableExample-tab-revertable']")
+    REVERT_DRAG_BOX = ("xpath", "//div[@id='revertable']")
+    REVERT_NOT_DRAG_BOX = ("xpath", "//div[@id='notRevertable']")
+    REVERT_DROP_BOX = ("xpath", "//div[@id='revertableDropContainer']/div[@id='droppable']")
