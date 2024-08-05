@@ -67,3 +67,16 @@ class TestInteractions:
             assert drop_box_text == "Dropped!", (
                 "the element has not been dropped"
             )
+
+        def test_accept_droppable(self, driver):
+            droppable_page = DroppablePage(driver)
+            droppable_page.open()
+
+            drop_text_not_acceptable, drop_text_acceptable = droppable_page.drop_accept()
+
+            assert drop_text_not_acceptable == "Drop here", (
+                "the not acceptable drag has been accepted "
+            )
+            assert drop_text_acceptable == "Dropped!", (
+                "the acceptable drag has not been accepted"
+            )

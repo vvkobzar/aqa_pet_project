@@ -104,10 +104,22 @@ class DroppablePage(BasePage):
     locators = DroppablePageLocators()
 
     def drop_simple(self):
-        tab_simple_status = self.element_is_visible(self.locators.TAB_SIMPLE).get_attribute('aria-selected')
-        drag_div = self.element_is_visible(self.locators.SIMPLE_DROP_CONTAINER_HANDLE)
-        drop_div = self.element_is_visible(self.locators.SIMPLE_DROP_CONTAINER_DROPPABLE)
-        self.action_drag_and_drop_to_element(drag_div, drop_div)
-        drop_div_text = self.element_is_visible(self.locators.SIMPLE_DROP_CONTAINER_DROPPABLE_TEXT).text
-        return tab_simple_status, drop_div_text
+        tab_simple_status = self.element_is_visible(self.locators.SIMPLE_TAB).get_attribute('aria-selected')
+        drag_div = self.element_is_visible(self.locators.SIMPLE_DRAG_BOX)
+        drop_box = self.element_is_visible(self.locators.SIMPLE_DROP_BOX)
+        self.action_drag_and_drop_to_element(drag_div, drop_box)
+        return tab_simple_status, drop_box.text
 
+    def drop_accept(self):
+        self.element_is_visible(self.locators.ACCEPT_TAB).click()
+        drag_not_acceptable = self.element_is_visible(self.locators.ACCEPT_DRAG_BOX_NOT_ACCEPTABLE)
+        drag_acceptable = self.element_is_visible(self.locators.ACCEPT_DRAG_BOX_ACCEPTABLE)
+        drop_box = self.element_is_visible(self.locators.ACCEPT_DROP_BOX)
+
+        self.action_drag_and_drop_to_element(drag_not_acceptable, drop_box)
+        drop_text_not_acceptable = drop_box.text
+
+        self.action_drag_and_drop_to_element(drag_acceptable, drop_box)
+        drop_text_acceptable = drop_box.text
+
+        return drop_text_not_acceptable, drop_text_acceptable

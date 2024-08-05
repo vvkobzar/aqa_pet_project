@@ -30,10 +30,12 @@ class ResizablePageLocators:
 
 class DroppablePageLocators:
     # Simple
-    TAB_SIMPLE = ("xpath", "//a[@id='droppableExample-tab-simple']")
-    SIMPLE_DROP_CONTAINER_HANDLE = (
-        "xpath", "//div[@id='simpleDropContainer']/div[@class='drag-box mt-4 ui-draggable ui-draggable-handle']")
-    SIMPLE_DROP_CONTAINER_DROPPABLE = (
-        "xpath", "//div[@id='simpleDropContainer']/div[contains(@class, 'drop-box ui-droppable')]")
-    SIMPLE_DROP_CONTAINER_DROPPABLE_TEXT = (
-        "xpath", "//div[@id='simpleDropContainer']/div[contains(@class, 'drop-box ui-droppable')]/p")
+    SIMPLE_TAB = ("xpath", "//a[@id='droppableExample-tab-simple']")
+    SIMPLE_DRAG_BOX = ("xpath", "//div[@id='draggable']")
+    SIMPLE_DROP_BOX = ("xpath", "//div[@id='simpleDropContainer']/div[@id='droppable']")
+
+    # Accept
+    ACCEPT_TAB = ("xpath", "//a[@id='droppableExample-tab-accept']")
+    ACCEPT_DRAG_BOX_ACCEPTABLE = ("xpath", "//div[@id='acceptable']")
+    ACCEPT_DRAG_BOX_NOT_ACCEPTABLE = ("xpath", "//div[@id='notAcceptable']")
+    ACCEPT_DROP_BOX = ("xpath", "//div[@id='acceptDropContainer']/div[@id='droppable']")
