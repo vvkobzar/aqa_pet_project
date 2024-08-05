@@ -53,3 +53,14 @@ class DroppablePageLocators:
     REVERT_DRAG_BOX = ("xpath", "//div[@id='revertable']")
     REVERT_NOT_DRAG_BOX = ("xpath", "//div[@id='notRevertable']")
     REVERT_DROP_BOX = ("xpath", "//div[@id='revertableDropContainer']/div[@id='droppable']")
+
+
+class DragabblePageLocators:
+    # Simple
+    SIMPLE_TAB = ("xpath", "//a[@id='draggableExample-tab-simple']")
+    SIMPLE_DRAG = ("xpath", "//div[@id='dragBox']")
+
+    # Axis Restricted
+    AXIS_TAB = ("xpath", "//a[@id='draggableExample-tab-axisRestriction']")
+    AXIS_ONLY_X = ("xpath", "//div[@id='restrictedX']")
+    AXIS_ONLY_Y = ("xpath", "//div[@id='restrictedY']")

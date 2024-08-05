@@ -1,4 +1,4 @@
-from pages.interactions_page import SortablePage, SelectablePage, ResizablePage, DroppablePage
+from pages.interactions_page import SortablePage, SelectablePage, ResizablePage, DroppablePage, DragabblePage
 
 
 class TestInteractions:
@@ -114,3 +114,44 @@ class TestInteractions:
 
             assert revert_position_after_move != revert_position_after_revert, "the element has not reverted"
             assert not_revert_position_after_move == not_revert_position_after_revert, "the element has reverted"
+
+    class TestDragabblePage:
+        def test_simple_dragabble(self, driver):
+            dragabble_page = DragabblePage(driver)
+            dragabble_page.open()
+
+            drag_position_default, drag_position_after_move = (
+                dragabble_page.change_drag_position('Simple', 'Drag me')
+            )
+
+            assert drag_position_default == {'x': 517, 'y': 331}, (
+                "the default dragable position has been changed"
+            )
+            assert drag_position_default != drag_position_after_move, (
+                "drag position has not been changed"
+            )
+
+        def test_axis_restricted_dragabble(self, driver):
+            dragabble_page = DragabblePage(driver)
+            dragabble_page.open()
+
+            drag_only_x_position, drag_only_x_position_after_move = (
+                dragabble_page.change_drag_position('Axis Restricted', 'Only X')
+            )
+            drag_only_y_position, drag_only_y_position_after_move = (
+                dragabble_page.change_drag_position('Axis Restricted', 'Only Y')
+            )
+
+            assert drag_only_x_position['y'] == drag_only_x_position_after_move['y'], (
+                "the only x drag changed y-axis position"
+            )
+            assert drag_only_x_position['x'] != drag_only_x_position_after_move['x'], (
+                "the only x drag don't changed x-axis position"
+            )
+
+            assert drag_only_y_position['x'] == drag_only_y_position_after_move['x'], (
+                "the only y drag changed x-axis position"
+            )
+            assert drag_only_y_position['y'] != drag_only_y_position_after_move['y'], (
+                "the only y drag don't changed y-axis position"
+            )

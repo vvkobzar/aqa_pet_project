@@ -3,7 +3,7 @@ import time
 
 from config.links import InteractionsPageLinks
 from locators.interactions_page_locators import SortablePageLocators, SelectablePageLocators, ResizablePageLocators, \
-    DroppablePageLocators
+    DroppablePageLocators, DragabblePageLocators
 from pages.base_page import BasePage
 
 
@@ -151,3 +151,30 @@ class DroppablePage(BasePage):
         time.sleep(1)
         position_after_revert = drag.get_attribute('style')
         return position_after_move, position_after_revert
+
+
+class DragabblePage(BasePage):
+    PAGE_URL = InteractionsPageLinks.DRAGABBLE
+    locators = DragabblePageLocators()
+
+    def get_element_position(self, element):
+        return element.location
+
+    def change_drag_position(self, tab_name, drag_name):
+        tabs = {
+            'Simple': self.locators.SIMPLE_TAB,
+            'Axis Restricted': self.locators.AXIS_TAB
+        }
+        drags = {
+            'Drag me': self.locators.SIMPLE_DRAG,
+            'Only X': self.locators.AXIS_ONLY_X,
+            'Only Y': self.locators.AXIS_ONLY_Y
+        }
+
+        self.element_is_visible(tabs[tab_name]).click()
+        drag = self.element_is_visible(drags[drag_name])
+        drag_position_before = self.get_element_position(drag)
+        self.action_drag_and_drop_by_offset(drag, random.randint(100, 500), random.randint(100, 500))
+        drag_position_after = self.get_element_position(drag)
+        return drag_position_before, drag_position_after
+
