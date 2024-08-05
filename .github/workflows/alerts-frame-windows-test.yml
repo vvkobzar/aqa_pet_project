@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       deployment_target:
-        description: Choose target
+        description: Select the page to be tested
         required: true
-        default:
+        default: Browser Windows Page
         type: choice
         options:
           - Browser Windows Page
@@ -14,6 +14,14 @@ on:
           - Frames Page
           - Nested Frames Page
           - Modal Dialogs Page
+      browser:
+        description: Choose browser
+        required: true
+        default: chrome
+        type: choice
+        options:
+          - chrome
+          - firefox
 
 jobs:
   test:
@@ -27,36 +35,32 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install specific version of Chrome
+      - name: Remove preinstalled Google Chrome
+        if: github.event.inputs.browser == 'chrome'
+        run: sudo apt-get remove -y google-chrome-stable
+
+      - name: Install Google Chrome
+        if: github.event.inputs.browser == 'chrome'
         uses: browser-actions/setup-chrome@v1
         with:
-          chrome-version: 120
-          install-chromedriver: true
+          chrome-version: 114.0.5735.90
+
+      - name: Create symbolic link to Google Chrome
+        if: github.event.inputs.browser == 'chrome'
+        run: |
+           sudo ln -sf /opt/hostedtoolcache/setup-chrome/chromium/114.0.5735.90/x64/chrome /usr/bin/google-chrome
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Browser Windows Page
-        if: github.event.inputs.deployment_target == 'Browser Windows Page'
-        run: pytest -s --headless tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::TestBrowserWindowsPage
-        continue-on-error: true
+      - name: Determine test case
+        id: set-test
+        run: |
+          TARGET="${{ github.event.inputs.deployment_target }}"
+          TEST_NAME="Test${TARGET// /}"
+          echo "TEST_NAME=$TEST_NAME" >> $GITHUB_ENV
+          echo "BROWSER=${{ github.event.inputs.browser }}" >> $GITHUB_ENV
 
-      - name: Alerts Page
-        if: github.event.inputs.deployment_target == 'Alerts Page'
-        run: pytest -s --headless tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::TestAlertsPage
-        continue-on-error: true
-
-      - name: Frames Page
-        if: github.event.inputs.deployment_target == 'Frames Page'
-        run: pytest -s --headless tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::TestFramesPage
-        continue-on-error: true
-
-      - name: Nested Frames Page
-        if: github.event.inputs.deployment_target == 'Nested Frames Page'
-        run: pytest -s --headless tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::TestNestedFramesPage
-        continue-on-error: true
-
-      - name: Modal Dialogs Page
-        if: github.event.inputs.deployment_target == 'Modal Dialogs Page'
-        run: pytest -s --headless tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::TestModalDialogsPage
-        continue-on-error: true
+      - name: Run tests
+        run: |
+          pytest -s --headless --browser $BROWSER tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::$TEST_NAME
