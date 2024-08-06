@@ -37,7 +37,7 @@ def driver(request):
         service = ServiceChrome(executable_path=ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=options)
 
-    if browser_name == 'firefox':
+    elif browser_name == 'firefox':
         print("\nstart firefox browser for test..")
         options = FireFoxOptions()
         options.page_load_strategy = page_load_strategy
