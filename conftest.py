@@ -10,19 +10,23 @@ from selenium.webdriver.firefox.options import Options as FireFoxOptions
 
 
 def pytest_addoption(parser):
-    parser.addoption('--browser_name', action='store', default="chrome",
+    parser.addoption('--browser', action='store', default="chrome",
                      help="Choose browser: chrome or firefox")
     parser.addoption("--headless", action="store_true", help="Run headless")
+    parser.addoption("--page_load_strategy", action="store", default="normal",
+                     help="Set page load strategy: normal, eager, or none")
 
 
 @pytest.fixture(scope="function")
 def driver(request):
-    browser_name = request.config.getoption("browser_name")
-    headless = request.config.getoption("--headless")
+    browser_name = request.config.getoption("browser")
+    headless = request.config.getoption("headless")
+    page_load_strategy = request.config.getoption("page_load_strategy")
 
     if browser_name == 'chrome':
         print("\nstart chrome browser for test..")
         options = ChromeOptions()
+        options.page_load_strategy = page_load_strategy
         preferences = {"download.default_directory": os.path.join(os.getcwd(), "downloads")}
         options.add_experimental_option("prefs", preferences)
         if headless:
@@ -36,6 +40,7 @@ def driver(request):
     if browser_name == 'firefox':
         print("\nstart firefox browser for test..")
         options = FireFoxOptions()
+        options.page_load_strategy = page_load_strategy
         download_dir = os.path.join(os.getcwd(), "downloads")
         options.set_preference("browser.download.folderList", 2)
         options.set_preference("browser.download.manager.showWhenStarting", False)
@@ -48,6 +53,9 @@ def driver(request):
             options.add_argument("--window-size=1920,1080")
         service = ServiceFireFox(executable_path=GeckoDriverManager().install())
         driver = webdriver.Firefox(service=service, options=options)
+
+    else:
+        raise ValueError(f"Unsupported browser: {browser_name}")
 
     yield driver
     driver.quit()
