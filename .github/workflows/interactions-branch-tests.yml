@@ -21,10 +21,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install Google Chrome
-        run: |
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo dpkg -i google-chrome-stable_current_amd64.deb
-          sudo apt-get -f install
+        run: sudo apt-get install google-chrome-stable
 
       - name: Install dependencies
         run: pip install -r requirements.txt
