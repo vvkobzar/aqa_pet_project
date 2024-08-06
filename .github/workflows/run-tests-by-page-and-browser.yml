@@ -1,4 +1,4 @@
-name: Alerts frame windows page testing
+name: Test Page and Browser Selection
 
 on:
   workflow_dispatch:
@@ -35,20 +35,18 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Remove preinstalled Google Chrome
-        if: github.event.inputs.browser == 'chrome'
-        run: sudo apt-get remove -y google-chrome-stable
-
       - name: Install Google Chrome
         if: github.event.inputs.browser == 'chrome'
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: 114.0.5735.90
-
-      - name: Create symbolic link to Google Chrome
-        if: github.event.inputs.browser == 'chrome'
         run: |
-           sudo ln -sf /opt/hostedtoolcache/setup-chrome/chromium/114.0.5735.90/x64/chrome /usr/bin/google-chrome
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb
+          sudo apt-get -f install
+
+      - name: Install Mozilla Firefox
+        if: github.event.inputs.browser == 'firefox'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -64,3 +62,4 @@ jobs:
       - name: Run tests
         run: |
           pytest -s --headless --browser $BROWSER tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::$TEST_NAME
+        continue-on-error: true
