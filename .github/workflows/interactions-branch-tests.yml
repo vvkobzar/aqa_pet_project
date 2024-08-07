@@ -3,10 +3,10 @@ name: Run Tests on Interactions Branch
 on:
   push:
     branches:
-      - interactions_page
+      - feature/tests-interaction-types
   pull_request:
     branches:
-      - interactions_page
+      - feature/tests-interaction-types
 
 jobs:
   test:
