@@ -1,12 +1,6 @@
 import os
 import pytest
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ServiceChrome
-from selenium.webdriver.firefox.service import Service as ServiceFireFox
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.chrome.options import Options as ChromeOptions
-from selenium.webdriver.firefox.options import Options as FireFoxOptions
 
 
 def pytest_addoption(parser):
@@ -25,7 +19,7 @@ def driver(request):
 
     if browser_name == 'chrome':
         print("\nstart chrome browser for test..")
-        options = ChromeOptions()
+        options = webdriver.ChromeOptions()
         options.page_load_strategy = page_load_strategy
         preferences = {"download.default_directory": os.path.join(os.getcwd(), "downloads")}
         options.add_experimental_option("prefs", preferences)
@@ -34,12 +28,11 @@ def driver(request):
             options.add_argument("--no-sandbox")
             options.add_argument("--disable-dev-shm-usage")
             options.add_argument("--window-size=1920,1080")
-        service = ServiceChrome(executable_path=ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
+        driver = webdriver.Chrome(options=options)
 
     elif browser_name == 'firefox':
         print("\nstart firefox browser for test..")
-        options = FireFoxOptions()
+        options = webdriver.FirefoxOptions()
         options.page_load_strategy = page_load_strategy
         download_dir = os.path.join(os.getcwd(), "downloads")
         options.set_preference("browser.download.folderList", 2)
@@ -51,8 +44,7 @@ def driver(request):
             options.add_argument("--no-sandbox")
             options.add_argument("--disable-dev-shm-usage")
             options.add_argument("--window-size=1920,1080")
-        service = ServiceFireFox(executable_path=GeckoDriverManager().install())
-        driver = webdriver.Firefox(service=service, options=options)
+        driver = webdriver.Firefox(options=options)
 
     else:
         raise ValueError(f"Unsupported browser: {browser_name}")

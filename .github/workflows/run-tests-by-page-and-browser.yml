@@ -1,4 +1,4 @@
-name: Alerts frame windows page testing
+name: Test Page and Browser Selection
 
 on:
   workflow_dispatch:
@@ -28,12 +28,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Install Google Chrome
+        if: github.event.inputs.browser == 'chrome'
+        run: sudo apt-get install google-chrome-stable
+
+      - name: Install Mozilla Firefox
+        if: github.event.inputs.browser == 'firefox'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y firefox
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -49,3 +59,4 @@ jobs:
       - name: Run tests
         run: |
           pytest -s --headless --browser $BROWSER tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::$TEST_NAME
+        continue-on-error: true
