@@ -67,9 +67,7 @@ class CheckBoxPage(BasePage):
 
     def get_output_result(self):
         result_list = self.elements_are_present(self.locators.OUTPUT_RESULT)
-        data = []
-        for result in result_list:
-            data.append(result.text)
+        data = [result.text for result in result_list]
         return str(data).replace(" ", "").lower()
 
 
@@ -126,9 +124,7 @@ class WebTablesPage(BasePage):
 
     def check_new_added_person(self):
         person_list = self.elements_are_present(self.locators.FULL_PEOPLE_LIST)
-        data = []
-        for person in person_list:
-            data.append(person.text.splitlines())
+        data = [person.text.splitlines() for person in person_list]
         return data
 
     def search_some_person(self, key_word):

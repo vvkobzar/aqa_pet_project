@@ -25,14 +25,12 @@ class AccordianPage(BasePage):
         return card_title, len(card_text), before_collapse_status, after_collapse_status
 
     def check_second_accordian_card(self):
-        text_data = []
         card_title = self.element_is_visible(self.locators.CARD_SECOND).text
         before_collapse_status = self.element_is_present(
             self.locators.CARD_SECOND_COLLAPSE_STATUS).get_attribute('class')
         self.element_is_visible(self.locators.CARD_SECOND).click()
         card_text_paragraphs = self.elements_are_visible(self.locators.CARD_SECOND_TEXT)
-        for text in card_text_paragraphs:
-            text_data.append(len(text.text))
+        text_data = [(len(text.text)) for text in card_text_paragraphs]
         after_collapse_status = self.element_is_present(
             self.locators.CARD_SECOND_COLLAPSE_STATUS).get_attribute('class')
         return card_title, text_data, before_collapse_status, after_collapse_status
@@ -61,11 +59,9 @@ class AutoCompletePage(BasePage):
         return colors
 
     def check_added_colors(self):
-        result_colors = []
         try:
             added_colors = self.elements_are_visible(self.locators.COLOR_NAMES)
-            for color in added_colors:
-                result_colors.append(color.text)
+            result_colors = [color.text for color in added_colors]
             return result_colors
         except Exception as e:
             return None
@@ -215,7 +211,6 @@ class TabsPage(BasePage):
     locators = TabsPageLocators()
 
     def check_tabs(self, name_tab):
-        tabs_text = []
         tabs = {
             'What':
                 {'tab_status': self.locators.WHAT_TAB,
@@ -235,8 +230,7 @@ class TabsPage(BasePage):
         button.click()
         before_tab_status = self.element_is_present(tabs[name_tab]['tab_status']).get_attribute('aria-selected')
         tab_text = self.elements_are_visible(tabs[name_tab]['tab_text'])
-        for text in tab_text:
-            tabs_text.append(len(text.text))
+        tabs_text = [len(text.text) for text in tab_text]
         return after_tab_status, before_tab_status, tabs_text
 
 
@@ -331,10 +325,8 @@ class SelectMenuPage(BasePage):
         return added_element
 
     def check_items_in_the_multiselect_drop_down(self):
-        field_items = []
         check_item_field = self.elements_are_visible(self.locators.MULTISELECT_ADDED_ITEM_TEXT)
-        for item in check_item_field:
-            field_items.append(item.text)
+        field_items = [item.text for item in check_item_field]
         return field_items
 
     def remove_selected_items_from_multiselect_drop_down(self):
@@ -355,6 +347,5 @@ class SelectMenuPage(BasePage):
             selected_items.append(item)
 
         check_selected_items = self.get_all_selected_options(self.locators.MULTI_SELECT)
-        for item in check_selected_items:
-            check_added_items.append(item.text)
+        check_added_items = [item.text for item in check_selected_items]
         return set(selected_items), set(check_added_items)
