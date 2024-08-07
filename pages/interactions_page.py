@@ -157,39 +157,44 @@ class DragabblePage(BasePage):
     PAGE_URL = InteractionsPageLinks.DRAGABBLE
     locators = DragabblePageLocators()
 
-    def get_element_position(self, element):
-        return element.location
+    def get_position_element(self, element):
+        position_element = element.get_attribute('style')
+        elem = position_element.split(';')
+        if len(elem) > 2:
+            position = [elem[1], elem[2]]
+            return position
+        else:
+            return position_element
 
-    def change_drag_position(self, tab_name, drag_name):
-        tabs = {
-            'Simple': self.locators.SIMPLE_TAB,
-            'Axis Restricted': self.locators.AXIS_TAB
-        }
+    def change_position_drags(self, type_drag):
         drags = {
-            'Drag me': self.locators.SIMPLE_DRAG,
-            'Only X': self.locators.AXIS_ONLY_X,
-            'Only Y': self.locators.AXIS_ONLY_Y
+            'Drag me': {
+                'locator': self.locators.SIMPLE_DRAG,
+                'tab': self.locators.SIMPLE_TAB
+            },
+            'Only X': {
+                'locator': self.locators.AXIS_ONLY_X,
+                'tab': self.locators.AXIS_TAB
+            },
+            'Only Y': {
+                'locator': self.locators.AXIS_ONLY_Y,
+                'tab': self.locators.AXIS_TAB
+            }
         }
+        self.element_is_visible(drags[type_drag]['tab']).click()
+        drag = self.element_is_visible(drags[type_drag]['locator'])
+        before_move = self.get_position_element(drag)
+        self.action_drag_and_drop_by_offset(drag, random.randint(50, 100), random.randint(50, 100))
+        after_move = self.get_position_element(drag)
+        return before_move, after_move
 
-        self.element_is_visible(tabs[tab_name]).click()
-        drag = self.element_is_visible(drags[drag_name])
-        drag_position_before = self.get_element_position(drag)
-        self.action_drag_and_drop_by_offset(drag, random.randint(100, 500), random.randint(100, 500))
-        drag_position_after = self.get_element_position(drag)
-        return drag_position_before, drag_position_after
-
-    def check_drag_does_not_go_outside_the_box(self, drag_name):
+    def container_restricted(self, type_drag):
         drags = {
-            'Box':
-                {'locator': self.locators.CONTAINER_DRAG_BIG_BOX,
-                'x': 1300, 'y': 700},
-
-            'Parent':
-                {'locator': self.locators.CONTAINER_DRAG_SMALL_BOX,
-                 'x': 500, 'y': 500}
+            'Drag box': self.locators.CONTAINER_DRAG_BIG_BOX,
+            'Drag parent': self.locators.CONTAINER_DRAG_SMALL_BOX
         }
         self.element_is_visible(self.locators.CONTAINER_TAB).click()
-        drag = self.element_is_visible(drags[drag_name]['locator'])
-        self.action_drag_and_drop_by_offset(drag, drags[drag_name]['x'], drags[drag_name]['y'])
-        position_drag = self.get_element_position(drag)
-        return position_drag
+        drag = self.element_is_visible(drags[type_drag])
+        self.action_drag_and_drop_by_offset(drag, 700, 300)
+        position_after_move = self.get_position_element(drag)
+        return position_after_move

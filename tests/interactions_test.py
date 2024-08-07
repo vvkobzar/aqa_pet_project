@@ -120,57 +120,35 @@ class TestInteractions:
             dragabble_page = DragabblePage(driver)
             dragabble_page.open()
 
-            drag_position_default, drag_position_after_move = (
-                dragabble_page.change_drag_position('Simple', 'Drag me')
-            )
+            before_move_position, after_move_position = dragabble_page.change_position_drags('Drag me')
 
-            assert drag_position_default == {'x': 517, 'y': 331}, (
-                "the default dragable position has been changed"
-            )
-            assert drag_position_default != drag_position_after_move, (
-                "drag position has not been changed"
-            )
+            assert before_move_position != after_move_position, "element in not dragged"
 
-        def test_axis_restricted_dragabble(self, driver):
+        def test_axis_restricted_draggable(self, driver):
             dragabble_page = DragabblePage(driver)
             dragabble_page.open()
 
-            drag_only_x_position, drag_only_x_position_after_move = (
-                dragabble_page.change_drag_position('Axis Restricted', 'Only X')
+            only_x_before, only_x_after = dragabble_page.change_position_drags('Only X')
+            only_y_before, only_y_after = dragabble_page.change_position_drags('Only Y')
+
+            assert only_x_before != only_x_after, "element in not dragged"
+            assert only_x_after[1] == ' top: 0px', (
+                'element has shifted along the x-axis'
             )
-            drag_only_y_position, drag_only_y_position_after_move = (
-                dragabble_page.change_drag_position('Axis Restricted', 'Only Y')
+            assert only_y_before != only_y_after, "element in not dragged"
+            assert only_y_after[0] == ' left: 0px', (
+                'element has shifted along the y-axis'
             )
 
-            assert drag_only_x_position['y'] == drag_only_x_position_after_move['y'], (
-                "the only x drag changed y-axis position"
-            )
-            assert drag_only_x_position['x'] != drag_only_x_position_after_move['x'], (
-                "the only x drag don't changed x-axis position"
-            )
-
-            assert drag_only_y_position['x'] == drag_only_y_position_after_move['x'], (
-                "the only y drag changed x-axis position"
-            )
-            assert drag_only_y_position['y'] != drag_only_y_position_after_move['y'], (
-                "the only y drag don't changed y-axis position"
-            )
-
-        def test_container_restricted_dragabble_box(self, driver):
+        def test_container_restricted(self, driver):
             dragabble_page = DragabblePage(driver)
             dragabble_page.open()
 
-            actual_position_drag = dragabble_page.check_drag_does_not_go_outside_the_box('Box')
-            expected_position_drag = {'x': 1211, 'y': 457}
+            box_drag_actual_result = dragabble_page.container_restricted('Drag box')
+            box_drag_expected_result = [" left: 674px", " top: 106px"]
 
-            assert actual_position_drag == expected_position_drag, "drag went out of the box"
+            parent_drag_actual_result = dragabble_page.container_restricted('Drag parent')
+            parent_drag_expected_result = [" left: 15px", " top: 88px"]
 
-        def test_container_restricted_dragabble_parent(self, driver):
-            dragabble_page = DragabblePage(driver)
-            dragabble_page.open()
-
-            actual_position_drag = dragabble_page.check_drag_does_not_go_outside_the_box('Parent')
-            expected_position_drag = {'x': 541, 'y': 663}
-
-            assert actual_position_drag == expected_position_drag, "drag went out of the parent box"
-
+            assert box_drag_actual_result == box_drag_expected_result, "box drag goes out of the box"
+            assert parent_drag_actual_result == parent_drag_expected_result, "parent drag goes out of the box"
