@@ -48,3 +48,4 @@ class InteractionsPageLinks:
     SELECTABLE = f"{HOST}/selectable"
     RESIZABLE = f"{HOST}/resizable"
     DROPPABLE = f"{HOST}/droppable"
+    DRAGABBLE = f"{HOST}/dragabble"

@@ -1,4 +1,4 @@
-from pages.interactions_page import SortablePage, SelectablePage, ResizablePage, DroppablePage
+from pages.interactions_page import SortablePage, SelectablePage, ResizablePage, DroppablePage, DragabblePage
 
 
 class TestInteractions:
@@ -114,3 +114,41 @@ class TestInteractions:
 
             assert revert_position_after_move != revert_position_after_revert, "the element has not reverted"
             assert not_revert_position_after_move == not_revert_position_after_revert, "the element has reverted"
+
+    class TestDragabblePage:
+        def test_simple_dragabble(self, driver):
+            dragabble_page = DragabblePage(driver)
+            dragabble_page.open()
+
+            before_move_position, after_move_position = dragabble_page.change_position_drags('Drag me')
+
+            assert before_move_position != after_move_position, "element in not dragged"
+
+        def test_axis_restricted_draggable(self, driver):
+            dragabble_page = DragabblePage(driver)
+            dragabble_page.open()
+
+            only_x_before, only_x_after = dragabble_page.change_position_drags('Only X')
+            only_y_before, only_y_after = dragabble_page.change_position_drags('Only Y')
+
+            assert only_x_before != only_x_after, "element in not dragged"
+            assert only_x_after[1] == ' top: 0px', (
+                'element has shifted along the x-axis'
+            )
+            assert only_y_before != only_y_after, "element in not dragged"
+            assert only_y_after[0] == ' left: 0px', (
+                'element has shifted along the y-axis'
+            )
+
+        def test_container_restricted(self, driver):
+            dragabble_page = DragabblePage(driver)
+            dragabble_page.open()
+
+            box_drag_actual_result = dragabble_page.container_restricted('Drag box')
+            box_drag_expected_result = [" left: 674px", " top: 106px"]
+
+            parent_drag_actual_result = dragabble_page.container_restricted('Drag parent')
+            parent_drag_expected_result = [" left: 15px", " top: 88px"]
+
+            assert box_drag_actual_result == box_drag_expected_result, "box drag goes out of the box"
+            assert parent_drag_actual_result == parent_drag_expected_result, "parent drag goes out of the box"
