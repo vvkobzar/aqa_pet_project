@@ -13,24 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Remove preinstalled Google Chrome
-        run: sudo apt-get remove -y google-chrome-stable
-
       - name: Install Google Chrome
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: 114.0.5735.90
-
-      - name: Create symbolic link to Google Chrome
-        run: |
-           sudo ln -sf /opt/hostedtoolcache/setup-chrome/chromium/114.0.5735.90/x64/chrome /usr/bin/google-chrome
+        run: sudo apt-get install google-chrome-stable
 
       - name: Install dependencies
         run: pip install -r requirements.txt
