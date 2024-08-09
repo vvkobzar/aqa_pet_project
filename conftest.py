@@ -20,6 +20,10 @@ def driver(request):
     if browser_name == 'chrome':
         print("\nstart chrome browser for test..")
         options = webdriver.ChromeOptions()
+        user_agent = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                      "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36")
+        options.add_argument(f"--user-agent={user_agent}")
+        options.add_argument("--disable-blink-features=AutomationControlled")
         options.page_load_strategy = page_load_strategy
         preferences = {"download.default_directory": os.path.join(os.getcwd(), "downloads")}
         options.add_experimental_option("prefs", preferences)
