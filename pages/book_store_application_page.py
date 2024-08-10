@@ -34,8 +34,7 @@ class LoginPage(BasePage):
         return success_alert_text
 
     def check_login_success(self):
-        delite_button = self.element_is_present(self.register_locators.DELETE_ACCOUNT_BUTTON, timeout=15).text
-        profile_user_name_text = self.element_is_visible(self.login_locators.PROFILE_USER_NAME_TEXT, timeout=10).text
+        profile_user_name_text = self.element_is_visible(self.login_locators.PROFILE_USER_NAME_TEXT).text
         url_page = self.get_url_page()
         return url_page, profile_user_name_text
 
