@@ -1,12 +1,15 @@
-import os
 import pytest
+import os
+from dotenv import load_dotenv
 from pages.book_store_application_page import LoginPage
+
+load_dotenv()
 
 
 class TestBookStoreApplication:
     class TestLoginPage:
-        username = os.environ['USERNAME']
-        password = os.environ['PASSWORD']
+        username = os.getenv('USERNAME')
+        password = os.getenv('PASSWORD')
 
         @pytest.mark.xfail(reason="It's not going through because of the captcha.")
         # @pytest.fixture(scope='function', autouse=True)
