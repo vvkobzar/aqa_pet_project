@@ -1,3 +1,5 @@
+import time
+
 from config.links import BookStoreApplicationPageLink
 from generator.generator import generated_person
 from locators.book_store_application_page_locators import LoginPageLocators, RegisterPageLocators
@@ -34,6 +36,9 @@ class LoginPage(BasePage):
         return success_alert_text
 
     def check_login_success(self):
+        time.sleep(8)
+        print(len(self.get_list_windows_handles()))
+        print(self.get_url_page())
         profile_user_name_text = self.element_is_visible(self.login_locators.PROFILE_USER_NAME_TEXT).text
         url_page = self.get_url_page()
         return url_page, profile_user_name_text
@@ -51,8 +56,3 @@ class LoginPage(BasePage):
         self.element_is_visible(self.login_locators.USER_NAME_INPUT).send_keys(username)
         self.element_is_visible(self.login_locators.PASSWORD_INPUT).send_keys(password)
         self.element_is_visible(self.login_locators.LOGIN_BUTTON).click()
-        try:
-            login_error = self.element_is_visible(self.login_locators.LOGIN_ERROR_NOTIFICATION).text
-            print(login_error)
-        except:
-            print("ok")
