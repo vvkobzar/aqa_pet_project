@@ -34,9 +34,14 @@ class LoginPage(BasePage):
         return success_alert_text
 
     def check_login_success(self):
-        profile_user_name_text = self.element_is_visible(self.login_locators.PROFILE_USER_NAME_TEXT).text
-        url_page = self.get_url_page()
-        return url_page, profile_user_name_text
+        try:
+            profile_user_name_text = self.element_is_visible(self.login_locators.PROFILE_USER_NAME_TEXT).text
+            url_page = self.get_url_page()
+            return url_page, profile_user_name_text
+        except Exception:
+            login_error_notification = self.element_is_visible(self.login_locators.LOGIN_ERROR_NOTIFICATION)
+            error_message = login_error_notification.text
+            raise RuntimeError(error_message)
 
     def delete_user(self):
         self.driver.get(BookStoreApplicationPageLink.PROFILE)
@@ -51,8 +56,3 @@ class LoginPage(BasePage):
         self.element_is_visible(self.login_locators.USER_NAME_INPUT).send_keys(username)
         self.element_is_visible(self.login_locators.PASSWORD_INPUT).send_keys(password)
         self.element_is_visible(self.login_locators.LOGIN_BUTTON).click()
-        try:
-            login_error = self.element_is_visible(self.login_locators.LOGIN_ERROR_NOTIFICATION).text
-            print(login_error)
-        except:
-            print("ok")
