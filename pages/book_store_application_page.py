@@ -51,3 +51,8 @@ class LoginPage(BasePage):
         self.element_is_visible(self.login_locators.USER_NAME_INPUT).send_keys(username)
         self.element_is_visible(self.login_locators.PASSWORD_INPUT).send_keys(password)
         self.element_is_visible(self.login_locators.LOGIN_BUTTON).click()
+        try:
+            login_error = self.element_is_visible(self.login_locators.LOGIN_ERROR_NOTIFICATION).text
+            print(login_error)
+        except:
+            print("ok")

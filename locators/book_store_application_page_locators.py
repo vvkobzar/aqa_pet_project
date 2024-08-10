@@ -4,6 +4,7 @@ class LoginPageLocators:
     LOGIN_BUTTON = ("xpath", "//button[@id='login']", )
     LOG_OUT = ("xpath", "//button[@id='submit']")
     PROFILE_USER_NAME_TEXT = ("xpath", "//label[@id='userName-value']")
+    LOGIN_ERROR_NOTIFICATION = ("xpath", "//p[text()='Invalid username or password!']")
 
 
 class RegisterPageLocators:
