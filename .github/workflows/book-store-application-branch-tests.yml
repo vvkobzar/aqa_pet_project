@@ -1,12 +1,12 @@
-name: Run Tests on Interactions Branch
+name: Run Tests on Book Store Application Branch
 
 on:
   push:
     branches:
-      - feature/tests-interaction-types
+      - feature/tests-book-store-application
   pull_request:
     branches:
-      - feature/tests-interaction-types
+      - feature/tests-book-store-application
 
 jobs:
   test:
@@ -27,5 +27,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run tests
-        run: pytest -s --headless tests/interactions_test.py
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: |
+          pytest -s --headless tests/book_store_application_test.py
         continue-on-error: true
