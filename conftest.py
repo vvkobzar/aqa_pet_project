@@ -7,7 +7,9 @@ from selenium import webdriver
 def pytest_addoption(parser):
     parser.addoption('--browser', action='store', default="chrome", help="Choose browser: chrome or firefox")
     parser.addoption("--headless", action="store_true", help="Run headless")
-    parser.addoption("--page_load_strategy", action="store", default="normal", help="Set page load strategy: normal, eager, or none")
+    parser.addoption(
+        "--page_load_strategy", action="store", default="normal", help="Set page load strategy: normal, eager, or none"
+    )
 
 
 # --- Fixture for WebDriver ---
@@ -63,8 +65,9 @@ def setup_firefox(headless, page_load_strategy):
 
 # --- General support functions ---
 def get_user_agent():
-    return ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36")
+    return (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+    )
 
 
 def get_download_directory():
