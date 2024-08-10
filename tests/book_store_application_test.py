@@ -31,7 +31,7 @@ class TestBookStoreApplication:
             login_page = LoginPage(driver)
             login_page.open()
 
-            login_page.login_to_book_store(self.username, self.password)
+            login_page.login_to_book_store(os.getenv('USERNAME'), os.getenv('PASSWORD'))
             url_page, profile_user_name_text = login_page.check_login_success()
 
             assert url_page == "https://demoqa.com/profile"
