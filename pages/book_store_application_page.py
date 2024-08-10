@@ -34,7 +34,7 @@ class LoginPage(BasePage):
         return success_alert_text
 
     def check_login_success(self):
-        profile_user_name_text = self.element_is_visible(self.login_locators.PROFILE_USER_NAME_TEXT).text
+        profile_user_name_text = self.element_is_visible(self.login_locators.PROFILE_USER_NAME_TEXT, timeout=10).text
         url_page = self.get_url_page()
         return url_page, profile_user_name_text
 
