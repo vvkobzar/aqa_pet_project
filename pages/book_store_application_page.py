@@ -47,7 +47,7 @@ class LoginPage(BasePage):
         delite_alert.accept()
         return delite_alert_text
 
-    def check_login_to_book_store(self, username, password):
+    def login_to_book_store(self, username, password):
         self.element_is_visible(self.login_locators.USER_NAME_INPUT).send_keys(username)
         self.element_is_visible(self.login_locators.PASSWORD_INPUT).send_keys(password)
         self.element_is_visible(self.login_locators.LOGIN_BUTTON).click()
