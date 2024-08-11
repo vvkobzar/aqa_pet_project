@@ -21,9 +21,9 @@ class AutoCompletePageLocators:
 
 
 class DatePickerPageLocators:
-    def DATE_SELECT_DAY(self, selected_month_text):
-        return ("xpath", f"//div[contains(@aria-label, '{selected_month_text}')]")
-
+    DATE_SELECT_DAY = lambda self, selected_month_text: (
+        "xpath", f"//div[contains(@aria-label, '{selected_month_text}')]"
+    )
     DATE_INPUT = ("xpath", "//input[@id='datePickerMonthYearInput']")
     DATE_SELECT_MONTH = ("xpath", "//select[@class='react-datepicker__month-select']")
     DATE_SELECT_YEAR = ("xpath", "//select[@class='react-datepicker__year-select']")
