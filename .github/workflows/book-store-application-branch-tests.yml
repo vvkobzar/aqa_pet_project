@@ -31,5 +31,5 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          pytest -s --headless tests/book_store_application_test.py
+          pytest -s --headless tests/ui_tests/book_store_application_test.py
         continue-on-error: true
