@@ -20,7 +20,7 @@ class AccountAPI(Helper):
             url=self.endpoints.create_user,
             json=self.payloads.username_password
         )
-        assert response.status_code == 201
+        assert response.status_code == 201, response.status_code
         self.attach_response(response.json())
         model = CreateUserResponse(**response.json())
         return model.userID
@@ -30,7 +30,7 @@ class AccountAPI(Helper):
             url=self.endpoints.generate_token,
             json=self.payloads.username_password
         )
-        assert response.status_code == 200
+        assert response.status_code == 200, response.status_code
         self.attach_response(response.json())
         model = TokenResponse(**response.json())
         return model.token
@@ -41,7 +41,7 @@ class AccountAPI(Helper):
             headers=self.headers.basic(token)
         )
         try:
-            assert response.status_code == 204
+            assert response.status_code == 204, response.status_code
         except AssertionError as e:
             raise AssertionError(f"Expected status code 200 but got {response.status_code}.") from e
 
