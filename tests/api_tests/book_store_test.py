@@ -44,3 +44,21 @@ class TestBookStore(BaseAPI):
         assert after_books_is_the_profile == [], (
             "there are books in the profile. "
         )
+
+    def test_delete_book_in_the_profile(self, account_setup):
+        user_id, token = account_setup
+
+        isbn_books = self.api_book_store.get_isbn_books_list()
+        for book in isbn_books:
+            self.api_book_store.added_books_in_the_profile(book, user_id, token)
+        before_books_in_profile = self.api_account.get_user(user_id, token)
+        book = random.choice(before_books_in_profile)
+        self.api_book_store.delete_book(book, user_id, token)
+        after_books_in_profile = self.api_account.get_user(user_id, token)
+
+        assert book in before_books_in_profile, (
+            "the book hasn't been added to the profile"
+        )
+        assert book not in after_books_in_profile, (
+            "the book hasn't been deleted from the profile"
+        )

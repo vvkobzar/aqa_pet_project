@@ -53,3 +53,12 @@ class BookStoreAPI(Helper):
         )
         assert response.status_code == 204, response.status_code
         # bug: no json comes in the response
+
+    def delete_book(self, isbn, user_id, token):
+        response = requests.delete(
+            url=self.endpoints.delete_book,
+            headers=self.headers.basic(token),
+            json=self.payloads.delete_book(isbn, user_id)
+        )
+        assert response.status_code == 204, response.status_code
+        # bug: no json comes in the response
