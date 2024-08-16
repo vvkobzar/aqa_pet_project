@@ -27,3 +27,20 @@ class TestBookStore(BaseAPI):
         books_in_the_profile = set(self.api_account.get_user(user_id, token))
 
         assert isbn_books == books_in_the_profile, "added books do not match the books in the profile"
+
+    def test_delete_all_books_in_the_profile(self, account_setup):
+        user_id, token = account_setup
+
+        isbn_books = self.api_book_store.get_isbn_books_list()
+        for book in isbn_books:
+            self.api_book_store.added_books_in_the_profile(book, user_id, token)
+        before_books_is_the_profile = self.api_account.get_user(user_id, token)
+        self.api_book_store.delete_books(user_id, token)
+        after_books_is_the_profile = self.api_account.get_user(user_id, token).books
+
+        assert before_books_is_the_profile != after_books_is_the_profile, (
+            "the books haven't been deleted from the profile"
+        )
+        assert after_books_is_the_profile == [], (
+            "there are books in the profile. "
+        )

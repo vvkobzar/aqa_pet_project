@@ -45,3 +45,11 @@ class BookStoreAPI(Helper):
         model = PostBooksResponse(**response.json())
         isbn_books = random_selection_of_isbn_from_the_book_list(model.books)
         return isbn_books
+
+    def delete_books(self, user_id, token):
+        response = requests.delete(
+            url=self.endpoints.delete_books(user_id),
+            headers=self.headers.basic(token)
+        )
+        assert response.status_code == 204, response.status_code
+        # bug: no json comes in the response
