@@ -72,3 +72,13 @@ class BookStoreAPI(Helper):
         self.attach_response(response.json())
         model = Book(**response.json())
         return model
+
+    def put_books(self, old_isbn, new_isbn, user_id, token):
+        response = requests.put(
+            url=self.endpoints.put_book(old_isbn),
+            headers=self.headers.basic(token),
+            json=self.payloads.put_books(user_id, new_isbn)
+        )
+        assert response.status_code == 200, response.status_code
+        self.attach_response(response.json())
+        # bug: 502 status code

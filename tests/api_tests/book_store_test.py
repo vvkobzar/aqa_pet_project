@@ -73,3 +73,18 @@ class TestBookStore(BaseAPI):
         assert book_information_from_list == book_information_from_get, (
             "book information from get request does not match information from book list"
         )
+
+    @pytest.mark.skip(reason="502 error occurs and the user cannot be deleted")
+    def test_replace_the_book_in_your_profile_with_another_book(self, account_setup):
+        user_id, token = account_setup
+
+        old_isbn_book = random.choices(self.api_book_store.get_isbn_books_list())
+        self.api_book_store.adding_books_in_the_profile(old_isbn_book, user_id, token)
+        before_book_in_the_profile = self.api_account.get_user(user_id, token)[0]
+        new_isbn_book = random.choices(self.api_book_store.get_isbn_books_list())
+        self.api_book_store.put_books(before_book_in_the_profile, new_isbn_book, user_id, token)
+        after_book_in_the_profile = self.api_account.get_user(user_id, token)
+
+        assert before_book_in_the_profile != after_book_in_the_profile, (
+            "the book hasn't changed to the new one in the profile"
+        )
