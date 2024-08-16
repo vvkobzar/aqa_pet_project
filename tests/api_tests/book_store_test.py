@@ -62,3 +62,14 @@ class TestBookStore(BaseAPI):
         assert book not in after_books_in_profile, (
             "the book hasn't been deleted from the profile"
         )
+
+    def test_comparing_book_information_from_get_request_and_book_list(self, account_setup):
+        user_id, token = account_setup
+
+        book_information_from_list = random.choice(self.api_book_store.get_information_books_list())
+        isbn_book = book_information_from_list.isbn
+        book_information_from_get = self.api_book_store.get_book(isbn_book, token)
+
+        assert book_information_from_list == book_information_from_get, (
+            "book information from get request does not match information from book list"
+        )

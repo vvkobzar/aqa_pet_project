@@ -62,3 +62,13 @@ class BookStoreAPI(Helper):
         )
         assert response.status_code == 204, response.status_code
         # bug: no json comes in the response
+
+    def get_book(self, isbn, token):
+        response = requests.get(
+            url=self.endpoints.get_book(isbn),
+            headers=self.headers.basic(token)
+        )
+        assert response.status_code == 200, response.status_code
+        self.attach_response(response.json())
+        model = Book(**response.json())
+        return model
