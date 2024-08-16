@@ -90,3 +90,10 @@ def generator_color_names():
     num_subjects = random.randint(1, len(colors))
     selected_colors = random.sample(colors, num_subjects)
     return selected_colors
+
+
+def random_selection_of_isbn_from_the_book_list(books):
+    isbn = [book.isbn for book in books]
+    num_subjects = random.randint(1, len(isbn))
+    isbn_books = random.sample(isbn, num_subjects)
+    return isbn_books
