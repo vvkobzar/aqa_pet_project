@@ -1,5 +1,7 @@
 import os
 import random
+import allure
+
 from config.data import Person
 from faker import Faker
 from PIL import Image
@@ -92,6 +94,7 @@ def generator_color_names():
     return selected_colors
 
 
+@allure.step("Randomly retrieve isbn from book list")
 def random_selection_of_isbn_from_the_book_list(books):
     isbn = [book.isbn for book in books]
     num_subjects = random.randint(1, len(isbn))
