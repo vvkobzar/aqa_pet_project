@@ -1,8 +1,16 @@
+import allure
+
 from pages.forms_page import PracticeFormPage
 
 
+@allure.epic("UI Tests")
+@allure.feature("Forms")
 class TestForms:
+
+    @allure.story("Practice Form")
     class TestPracticeFormPage:
+
+        @allure.title("Filling in the registration form for students")
         def test_filling_out_the_student_registration_form(self, driver):
             practice_form_page = PracticeFormPage(driver)
             practice_form_page.open()
@@ -25,4 +33,5 @@ class TestForms:
                 current_address, state_and_city
             ]
 
-            assert actual_result == tabel_result, "the data does not match the result of the table"
+            with allure.step("Checking the completed data with the result of the table"):
+                assert actual_result == tabel_result, "the data does not match the result of the table"
