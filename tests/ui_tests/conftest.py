@@ -1,5 +1,6 @@
 import os
 import pytest
+import allure
 from selenium import webdriver
 
 
@@ -19,10 +20,25 @@ def driver(request):
     headless = request.config.getoption("headless")
     page_load_strategy = request.config.getoption("page_load_strategy")
 
-    driver = setup_browser(browser_name, headless, page_load_strategy)
+    with allure.step(
+            f"Setting up {browser_name} browser with headless={headless}, page_load_strategy={page_load_strategy}"
+    ):
+        driver = setup_browser(browser_name, headless, page_load_strategy)
 
     yield driver
-    driver.quit()
+    with allure.step("Quitting the browser"):
+        driver.quit()
+
+
+# --- Hook for capturing screenshot on failure ---
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_exception_interact(node, call, report):
+    driver = node.funcargs.get('driver')
+    if driver and report.failed:
+        with allure.step("Taking screenshot on failure"):
+            screenshot = driver.get_screenshot_as_png()
+            allure.attach(screenshot, name="Failure Screenshot", attachment_type=allure.attachment_type.PNG)
+    yield
 
 
 # --- Browser Setup ---
@@ -37,30 +53,32 @@ def setup_browser(browser_name, headless, page_load_strategy):
 
 # --- Options for Chrome ---
 def setup_chrome(headless, page_load_strategy):
-    print("\nstart chrome browser for test..")
-    options = webdriver.ChromeOptions()
-    options.page_load_strategy = page_load_strategy
-    options.add_argument(f"--user-agent={get_user_agent()}")
-    options.add_argument("--disable-blink-features=AutomationControlled")
-    options.add_experimental_option("prefs", {"download.default_directory": get_download_directory()})
+    with allure.step("Starting Chrome browser for the test"):
+        options = webdriver.ChromeOptions()
+        options.page_load_strategy = page_load_strategy
+        options.add_argument(f"--user-agent={get_user_agent()}")
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        options.add_experimental_option("prefs", {"download.default_directory": get_download_directory()})
 
-    if headless:
-        apply_headless_options(options)
+        if headless:
+            with allure.step("Applying headless options for Chrome"):
+                apply_headless_options(options)
 
-    return webdriver.Chrome(options=options)
+        return webdriver.Chrome(options=options)
 
 
 # --- Options for Firefox ---
 def setup_firefox(headless, page_load_strategy):
-    print("\nstart firefox browser for test..")
-    options = webdriver.FirefoxOptions()
-    options.page_load_strategy = page_load_strategy
-    set_firefox_preferences(options)
+    with allure.step("Starting Firefox browser for the test"):
+        options = webdriver.FirefoxOptions()
+        options.page_load_strategy = page_load_strategy
+        set_firefox_preferences(options)
 
-    if headless:
-        apply_headless_options(options)
+        if headless:
+            with allure.step("Applying headless options for Firefox"):
+                apply_headless_options(options)
 
-    return webdriver.Firefox(options=options)
+        return webdriver.Firefox(options=options)
 
 
 # --- General support functions ---

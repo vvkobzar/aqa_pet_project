@@ -1,3 +1,4 @@
+import allure
 import requests
 from config.headers import Headers
 from services.account.payloads import Payloads
@@ -15,53 +16,58 @@ class AccountAPI(Helper):
         self.endpoints = Endpoints()
         self.headers = Headers()
 
+    @allure.step("Create user")
     def create_user(self):
         response = requests.post(
             url=self.endpoints.create_user,
             json=self.payloads.username_password
         )
-        assert response.status_code == 201, response.status_code
+        self.assert_response_status_code(response, 201)
         self.attach_response(response.json())
-        model = CreateUserResponse(**response.json())
+        with allure.step("Validation create user model"):
+            model = CreateUserResponse(**response.json())
         return model.userID
 
+    @allure.step("Generate user token")
     def generate_user_token(self):
         response = requests.post(
             url=self.endpoints.generate_token,
             json=self.payloads.username_password
         )
-        assert response.status_code == 200, response.status_code
+        self.assert_response_status_code(response, 200)
         self.attach_response(response.json())
-        model = TokenResponse(**response.json())
+        with allure.step("Validation generate user token model"):
+            model = TokenResponse(**response.json())
         return model.token
 
+    @allure.step("Delete user")
     def delete_user(self, user_id, token):
         response = requests.delete(
             url=self.endpoints.delete_user(user_id),
             headers=self.headers.basic(token)
         )
-        try:
-            assert response.status_code == 204, response.status_code
-        except AssertionError as e:
-            raise AssertionError(f"Expected status code 200 but got {response.status_code}.") from e
+        self.assert_response_status_code(response, 204)
 
+    @allure.step("Authorized user status")
     def authorized(self):
         response = requests.post(
             url=self.endpoints.authorized,
             json=self.payloads.username_password
         )
-        assert response.status_code == 200, response.status_code
+        self.assert_response_status_code(response, 200)
         assert response.json() is True
         self.attach_response(response.json())
 
+    @allure.step("Get information about the user and books in his profile")
     def get_user(self, user_id, token):
         response = requests.get(
             url=self.endpoints.get_user(user_id),
             headers=self.headers.basic(token),
         )
-        assert response.status_code == 200, response.status_code
+        self.assert_response_status_code(response, 200)
         self.attach_response(response.json())
-        model = User(**response.json())
+        with allure.step("Validation user model"):
+            model = User(**response.json())
         if len(model.books) >= 1:
             isbn_books = random_selection_of_isbn_from_the_book_list(model.books)
             return isbn_books
