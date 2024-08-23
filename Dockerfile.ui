@@ -1,0 +1,15 @@
+FROM python:3.12-alpine3.20
+
+RUN apk update && \
+    apk add --no-cache chromium chromium-chromedriver tzdata
+
+WORKDIR /usr/workspace
+
+COPY requirements.txt .
+COPY tests/ui_tests/conftest.py .
+COPY pages/ pages/
+COPY locators/ locators/
+COPY generator/ generator/
+COPY config/ config/
+
+RUN pip install -r requirements.txt
