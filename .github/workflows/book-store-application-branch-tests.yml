@@ -15,6 +15,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Set up Docker Compose
+        run: sudo apt-get update && sudo apt-get install -y docker-compose
+
       - name: Run API-Tests via docker-compose
         env:
           USERNAME: ${{ secrets.USERNAME }}
