@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile.api
     volumes:
       - ./allure-results:/usr/workspace/allure-results
+      - ./allure-report:/usr/workspace/allure-report
     command:
       - "pytest"
       - "-v"
@@ -21,6 +22,7 @@ services:
       dockerfile: Dockerfile.ui
     volumes:
       - ./allure-results:/usr/workspace/allure-results
+      - ./allure-report:/usr/workspace/allure-report
     command:
       - "pytest"
       - "-sv"
