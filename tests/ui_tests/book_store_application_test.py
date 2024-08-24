@@ -15,8 +15,8 @@ class TestBookStoreApplication:
     @allure.story("Login")
     class TestLoginPage:
 
-        username = os.getenv('USERNAME')
-        password = os.getenv('PASSWORD')
+        username = os.getenv('UI_USERNAME')
+        password = os.getenv('UI_PASSWORD')
 
         @allure.title("Register to book store")
         @pytest.mark.xfail(reason="It's not going through because of the captcha.")
