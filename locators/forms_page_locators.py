@@ -1,6 +1,3 @@
-import random
-
-
 class PracticeFormPageLocators:
     # name
     FIRST_NAME_FIELD = ("xpath", "//input[@id='firstName']")
@@ -12,14 +9,16 @@ class PracticeFormPageLocators:
     # mobile
     MOBILE_NUMBER_FIELD = ("xpath", "//input[@id='userNumber']")
     # date of birth
-    def DATE_SELECT_DAY(self, selected_month_text):
-        return ("xpath", f"//div[contains(@aria-label, '{selected_month_text}')]")
-
+    DATE_SELECT_DAY = lambda self, selected_month_text: (
+        "xpath", f"//div[contains(@aria-label, '{selected_month_text}')]"
+    )
     DATE_OF_BIRTH_CALENDAR = ("xpath", "//input[@id='dateOfBirthInput']")
     CALENDAR_MONTH_SELECT = ("xpath", "//select[@class='react-datepicker__month-select']")
-    GET_MONTH_AND_YEAR = ("xpath", "//div[@class='react-datepicker__current-month "
-                                   "react-datepicker__current-month--hasYearDropdown "
-                                   "react-datepicker__current-month--hasMonthDropdown']")
+    GET_MONTH_AND_YEAR = (
+        "xpath", "//div[@class='react-datepicker__current-month "
+                 "react-datepicker__current-month--hasYearDropdown "
+                 "react-datepicker__current-month--hasMonthDropdown']"
+    )
     SELECTED_MONTH_CALENDAR = ("xpath", "//select[@class='react-datepicker__month-select']/option")
     CALENDAR_YEAR_SELECT = ("xpath", "//select[@class='react-datepicker__year-select']")
     CALENDAR_DAY = ("xpath", "//div[@role='option']")

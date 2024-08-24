@@ -49,3 +49,9 @@ class InteractionsPageLinks:
     RESIZABLE = f"{HOST}/resizable"
     DROPPABLE = f"{HOST}/droppable"
     DRAGABBLE = f"{HOST}/dragabble"
+
+
+class BookStoreApplicationPageLink:
+    LOGIN = f"{HOST}/login"
+    PROFILE = f"{HOST}/profile"
+

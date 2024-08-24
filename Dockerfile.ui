@@ -1,0 +1,22 @@
+FROM python:3.12-alpine3.20
+
+RUN apk update && \
+    apk add --no-cache chromium chromium-chromedriver tzdata
+
+RUN apk update && \
+    apk add openjdk11-jre curl tar && \
+    curl -o allure-2.30.0.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.30.0/allure-commandline-2.30.0.tgz && \
+    tar -zxvf allure-2.30.0.tgz -C /opt/ && \
+    ln -s /opt/allure-2.30.0/bin/allure /usr/bin/allure && \
+    rm allure-2.30.0.tgz
+
+WORKDIR /usr/workspace
+
+COPY requirements.txt .
+COPY tests/ui_tests/ tests/
+COPY pages/ pages/
+COPY locators/ locators/
+COPY generator/ generator/
+COPY config/ config/
+
+RUN pip install -r requirements.txt

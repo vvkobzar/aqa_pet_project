@@ -1,0 +1,37 @@
+services:
+
+  api-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    volumes:
+      - ./allure-results:/usr/workspace/allure-results
+      - ./allure-report:/usr/workspace/allure-report
+    command:
+      - "pytest"
+      - "-v"
+      - "--alluredir=allure-results"
+    working_dir: /usr/workspace
+    environment:
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
+
+  ui-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    volumes:
+      - ./allure-results:/usr/workspace/allure-results
+      - ./allure-report:/usr/workspace/allure-report
+    command:
+      - "pytest"
+      - "-sv"
+      - "--headless"
+      - "--browser=chrome"
+      - "--page_load_strategy=eager"
+      - "--alluredir=allure-results"
+      - "tests"
+    working_dir: /usr/workspace
+    environment:
+      - UI_USERNAME=${UI_USERNAME}
+      - UI_PASSWORD=${UI_PASSWORD}

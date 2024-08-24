@@ -58,5 +58,5 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest -s --headless --browser $BROWSER tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::$TEST_NAME
+          pytest -s --headless --browser $BROWSER tests/ui_tests/alerts_frame_windows_test.py::TestAlertsFrameWindows::$TEST_NAME
         continue-on-error: true
