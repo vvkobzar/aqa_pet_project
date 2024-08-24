@@ -5,66 +5,31 @@ services:
       context: .
       dockerfile: Dockerfile.api
     volumes:
-      - ./tests/api_tests:/usr/workspace/tests
-    command: ["pytest", "-sv", "tests"]
+      - ./allure-results:/usr/workspace/allure-results
+    command:
+      - "pytest"
+      - "-v"
+      - "--alluredir=allure-results"
     working_dir: /usr/workspace
     environment:
       - USERNAME=${USERNAME}
       - PASSWORD=${PASSWORD}
 
-  ui-tests-book_store_application:
+  ui-tests:
     build:
       context: .
       dockerfile: Dockerfile.ui
     volumes:
-      - ./tests/ui_tests/book_store_application_test.py:/usr/workspace/tests/book_store_application_test.py
-    command: ["pytest", "-sv", "tests", "--browser=chrome", "--headless"]
+      - ./allure-results:/usr/workspace/allure-results
+    command:
+      - "pytest"
+      - "-sv"
+      - "--headless"
+      - "--browser=chrome"
+      - "--page_load_strategy=eager"
+      - "--alluredir=allure-results"
+      - "tests"
     working_dir: /usr/workspace
     environment:
-      - USERNAME=${USERNAME}
-      - PASSWORD=${PASSWORD}
-
-  ui-tests-alerts-frame-windows:
-    build:
-      context: .
-      dockerfile: Dockerfile.ui
-    volumes:
-      - ./tests/ui_tests/alerts_frame_windows_test.py:/usr/workspace/tests/alerts_frame_windows_test.py
-    command: ["pytest", "-sv", "tests", "--browser=chrome", "--headless"]
-    working_dir: /usr/workspace
-
-  ui-tests-elements:
-    build:
-      context: .
-      dockerfile: Dockerfile.ui
-    volumes:
-      - ./tests/ui_tests/elements_test.py:/usr/workspace/tests/elements_test.py
-    command: ["pytest", "-sv", "tests", "--browser=chrome", "--headless"]
-    working_dir: /usr/workspace
-
-  ui-tests-forms:
-    build:
-      context: .
-      dockerfile: Dockerfile.ui
-    volumes:
-      - ./tests/ui_tests/forms_test.py:/usr/workspace/tests/forms_test.py
-    command: ["pytest", "-sv", "tests", "--browser=chrome", "--headless"]
-    working_dir: /usr/workspace
-
-  ui-tests-interactions:
-    build:
-      context: .
-      dockerfile: Dockerfile.ui
-    volumes:
-      - ./tests/ui_tests/interactions_test.py:/usr/workspace/tests/interactions_test.py
-    command: ["pytest", "-sv", "tests", "--browser=chrome", "--headless"]
-    working_dir: /usr/workspace
-
-  ui-tests-widgets:
-    build:
-      context: .
-      dockerfile: Dockerfile.ui
-    volumes:
-      - ./tests/ui_tests/widgets_test.py:/usr/workspace/tests/widgets_test.py
-    command: ["pytest", "-sv", "tests", "--browser=chrome", "--headless"]
-    working_dir: /usr/workspace
+      - USERNAME=${UI_USERNAME}
+      - PASSWORD=${UI_PASSWORD}
