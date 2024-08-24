@@ -43,6 +43,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         if: always()
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.TOKEN_GITHUB }}
           publish_branch: gh-pages
           publish_dir: allure-history
