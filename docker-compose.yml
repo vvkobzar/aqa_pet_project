@@ -31,5 +31,5 @@ services:
       - "tests"
     working_dir: /usr/workspace
     environment:
-      - USERNAME=${UI_USERNAME}
-      - PASSWORD=${UI_PASSWORD}
+      - UI_USERNAME=${UI_USERNAME}
+      - UI_PASSWORD=${UI_PASSWORD}
