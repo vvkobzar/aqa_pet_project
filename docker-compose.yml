@@ -1,6 +1,7 @@
 services:
 
   api-tests:
+    image: api-tests:v1
     build:
       context: .
       dockerfile: Dockerfile.api
@@ -17,6 +18,7 @@ services:
       - PASSWORD=${PASSWORD}
 
   ui-tests:
+    image: ui-tests:v1
     build:
       context: .
       dockerfile: Dockerfile.ui

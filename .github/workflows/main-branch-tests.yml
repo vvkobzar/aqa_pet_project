@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  test:
+  run-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -20,12 +20,40 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Google Chrome
-        run: sudo apt-get install google-chrome-stable
+      - name: Set up Docker Compose
+        run: sudo apt-get update && sudo apt-get install -y docker-compose
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - name: Run API-Tests via docker-compose
+        env:
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          UI_USERNAME: ${{ UI_USERNAME }}
+          UI_PASSWORD: ${{ UI_PASSWORD }}
+        run: |
+          docker-compose up --exit-code-from || true
 
-      - name: Run tests
-        run: pytest -s --headless
+      - name: Load test report history
+        uses: actions/checkout@v4
+        if: always()
         continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate Allure report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
+        with:
+          allure_results: allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+
+      - name: Publish test report
+        uses: peaceiris/actions-gh-pages@v4
+        if: always()
+        with:
+          github_token: ${{ secrets.TOKEN_GITHUB }}
+          publish_branch: gh-pages
+          publish_dir: allure-history

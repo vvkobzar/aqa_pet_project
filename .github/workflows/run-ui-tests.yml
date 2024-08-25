@@ -1,10 +1,10 @@
-name: Run Tests on Book Store Application Branch
+name: Run UI-Tests
 
 on:
   workflow_dispatch:
 
 jobs:
-  api-tests:
+  ui-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -18,12 +18,12 @@ jobs:
       - name: Set up Docker Compose
         run: sudo apt-get update && sudo apt-get install -y docker-compose
 
-      - name: Run API-Tests via docker-compose
+      - name: Run UI-Tests via docker-compose
         env:
-          USERNAME: ${{ secrets.USERNAME }}
-          PASSWORD: ${{ secrets.PASSWORD }}
+          UI_USERNAME: ${{ secrets.UI_USERNAME }}
+          UI_PASSWORD: ${{ secrets.UI_PASSWORD }}
         run: |
-          docker-compose up --exit-code-from api-tests || true
+          docker-compose up --exit-code-from ui-tests || true
 
       - name: Load test report history
         uses: actions/checkout@v4
