@@ -1,0 +1,6 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"UI Tests","Alerts, Frame & Windows","Browser Windows","0","0","2","0","0"
+"UI Tests","Alerts, Frame & Windows","Alerts","0","0","4","0","0"
+"UI Tests","Alerts, Frame & Windows","Modal Dialogs","0","0","1","1","0"
+"UI Tests","Alerts, Frame & Windows","Frames","0","0","1","0","0"
+"UI Tests","Alerts, Frame & Windows","Nested Frames","0","0","1","0","0"
