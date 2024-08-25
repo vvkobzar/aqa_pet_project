@@ -1,0 +1,1 @@
+Person(full_name='Вячеслав Жданова Владиленович', firstname='Матвей', lastname='Романова', username='artem_85', password='$70kO7@OTx', age=24, salary=28742, department='Банкир', email='romanpestov@example.com', current_address='с. Владикавказ, ш. Ключевое, д. 97 к. 76, 705428', permanent_address='к. Старый Оскол, алл. Докучаева, д. 4, 463382', mobile=5276754681)

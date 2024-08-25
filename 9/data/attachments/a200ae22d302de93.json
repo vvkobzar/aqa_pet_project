@@ -1,0 +1,1 @@
+Person(full_name='Якуб Ильин Феликсович', firstname='Мир', lastname='Воронцова', username='lebedevvitali', password='$bVnb$*s*4', age=10, salary=64265, department='Проводник', email='antonin2022@example.com', current_address='г. Плес, ул. Ломоносова, д. 8 к. 110, 828115', permanent_address='ст. Пенза, наб. Гоголя, д. 68, 287100', mobile=3449523375)
