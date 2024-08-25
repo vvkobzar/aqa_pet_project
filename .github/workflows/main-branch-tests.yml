@@ -27,8 +27,8 @@ jobs:
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          UI_USERNAME: ${{ UI_USERNAME }}
-          UI_PASSWORD: ${{ UI_PASSWORD }}
+          UI_USERNAME: ${{ secrets.UI_USERNAME }}
+          UI_PASSWORD: ${{ secrets.UI_PASSWORD }}
         run: |
           docker-compose up --exit-code-from || true
 
