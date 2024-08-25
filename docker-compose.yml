@@ -30,7 +30,7 @@ services:
       - "-sv"
       - "--headless"
       - "--browser=chrome"
-      - "--page_load_strategy=eager"
+      - "--page_load_strategy=normal"
       - "--alluredir=allure-results"
       - "tests/alerts_frame_windows_test.py"
     working_dir: /usr/workspace
