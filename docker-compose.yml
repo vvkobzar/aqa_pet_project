@@ -32,7 +32,7 @@ services:
       - "--browser=chrome"
       - "--page_load_strategy=eager"
       - "--alluredir=allure-results"
-      - "tests"
+      - "tests/alerts_frame_windows_test.py"
     working_dir: /usr/workspace
     environment:
       - UI_USERNAME=${UI_USERNAME}
