@@ -1,7 +1,6 @@
 services:
 
   api-tests:
-    image: api-tests:v1
     build:
       context: .
       dockerfile: Dockerfile.api
@@ -18,7 +17,6 @@ services:
       - PASSWORD=${PASSWORD}
 
   ui-tests:
-    image: ui-tests:v1
     build:
       context: .
       dockerfile: Dockerfile.ui
@@ -30,9 +28,9 @@ services:
       - "-sv"
       - "--headless"
       - "--browser=chrome"
-      - "--page_load_strategy=normal"
+      - "--page_load_strategy=eager"
       - "--alluredir=allure-results"
-      - "tests/alerts_frame_windows_test.py"
+      - "tests"
     working_dir: /usr/workspace
     environment:
       - UI_USERNAME=${UI_USERNAME}
