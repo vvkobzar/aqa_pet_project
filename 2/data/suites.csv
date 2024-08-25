@@ -1,5 +1,2 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"broken","Sun Aug 25 10:47:08 GMT 2024","Sun Aug 25 10:47:08 GMT 2024","0","tests","alerts_frame_windows_test","TestAlertsFrameWindows","","","New windows",""
-"passed","Sun Aug 25 10:47:06 GMT 2024","Sun Aug 25 10:47:08 GMT 2024","1533","tests","alerts_frame_windows_test","TestAlertsFrameWindows","","","New tab",""
-"broken","Sun Aug 25 10:57:08 GMT 2024","Sun Aug 25 10:57:08 GMT 2024","0","tests","alerts_frame_windows_test","TestAlertsFrameWindows","","","Click button to see alert",""
-"passed","Sun Aug 25 11:07:09 GMT 2024","Sun Aug 25 11:07:15 GMT 2024","6232","tests","alerts_frame_windows_test","TestAlertsFrameWindows","","","Alert will appear after 5 seconds",""
+"broken","Sun Aug 25 11:15:52 GMT 2024","Sun Aug 25 11:15:52 GMT 2024","0","tests","alerts_frame_windows_test","TestAlertsFrameWindows","","","New tab",""
