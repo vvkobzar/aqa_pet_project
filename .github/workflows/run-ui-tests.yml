@@ -23,7 +23,7 @@ jobs:
           UI_USERNAME: ${{ secrets.UI_USERNAME }}
           UI_PASSWORD: ${{ secrets.UI_PASSWORD }}
         run: |
-          docker-compose up --exit-code-from ui-tests ui-tests || true
+          docker-compose up --build --exit-code-from ui-tests ui-tests || true
 
       - name: Load test report history
         uses: actions/checkout@v4
