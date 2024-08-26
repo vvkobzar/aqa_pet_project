@@ -1,0 +1,6 @@
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRlc3QxMjMhMyIsInBhc3N3b3JkIjoiVGVzdDEyMyEzIiwiaWF0IjoxNzI0NjYwNjc1fQ.GRK0kSiCFTF815tYqnMxArVETIZJkvGCaSWNRbubEDk",
+    "expires": "2024-09-02T08:24:35.717Z",
+    "status": "Success",
+    "result": "User authorized successfully."
+}
