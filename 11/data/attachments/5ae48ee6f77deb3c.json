@@ -1,0 +1,28 @@
+{
+    "userId": "c0afcaec-355d-42ce-a988-d93c83946df0",
+    "username": "Test123!3",
+    "books": [
+        {
+            "isbn": "9781491950296",
+            "title": "Programming JavaScript Applications",
+            "subTitle": "Robust Web Architecture with Node, HTML5, and Modern JS Libraries",
+            "author": "Eric Elliott",
+            "publish_date": "2014-07-01T00:00:00.000Z",
+            "publisher": "O'Reilly Media",
+            "pages": 254,
+            "description": "Take advantage of JavaScript's power to build robust web-scale or enterprise applications that are easy to extend and maintain. By applying the design patterns outlined in this practical book, experienced JavaScript developers will learn how to write flex",
+            "website": "http://chimera.labs.oreilly.com/books/1234000000262/index.html"
+        },
+        {
+            "isbn": "9781449331818",
+            "title": "Learning JavaScript Design Patterns",
+            "subTitle": "A JavaScript and jQuery Developer's Guide",
+            "author": "Addy Osmani",
+            "publish_date": "2020-06-04T09:11:40.000Z",
+            "publisher": "O'Reilly Media",
+            "pages": 254,
+            "description": "With Learning JavaScript Design Patterns, you'll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-da",
+            "website": "http://www.addyosmani.com/resources/essentialjsdesignpatterns/book/"
+        }
+    ]
+}
