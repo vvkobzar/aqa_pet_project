@@ -1,4 +1,4 @@
-FROM python:3.12.0a4-alpine3.17
+FROM python:3.12-alpine3.17
 
 # update apk repo
 RUN echo "https://dl-4.alpinelinux.org/alpine/v3.10/main" >> /etc/apk/repositories && \
@@ -22,10 +22,5 @@ RUN apk update && \
 WORKDIR /usr/workspace
 
 COPY requirements.txt .
-COPY tests/ui_tests/ tests/
-COPY pages/ pages/
-COPY locators/ locators/
-COPY generator/ generator/
-COPY config/ config/
 
 RUN pip install -r requirements.txt

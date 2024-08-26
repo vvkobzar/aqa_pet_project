@@ -1,30 +1,30 @@
+version: '3.8'
+
+x-common:
+  &default
+  image: run-tests:v1
+  volumes:
+    - ./:/usr/workspace
+  working_dir: /usr/workspace
+
 services:
 
   api-tests:
-    image: api-tests:v1
+    <<: *default
     build:
       context: .
-      dockerfile: Dockerfile.api
-    volumes:
-      - ./allure-results:/usr/workspace/allure-results
-      - ./allure-report:/usr/workspace/allure-report
+      dockerfile: Dockerfile
     command:
       - "pytest"
       - "-v"
       - "--alluredir=allure-results"
-    working_dir: /usr/workspace
+      - "tests/api_tests"
     environment:
       - USERNAME=${USERNAME}
       - PASSWORD=${PASSWORD}
 
-  ui-tests:
-    image: ui-tests:v1
-    build:
-      context: .
-      dockerfile: Dockerfile.ui
-    volumes:
-      - ./allure-results:/usr/workspace/allure-results
-      - ./allure-report:/usr/workspace/allure-report
+  ui-tests-alerts-frame-windows:
+    <<: *default
     command:
       - "pytest"
       - "-sv"
@@ -32,8 +32,62 @@ services:
       - "--browser=chrome"
       - "--page_load_strategy=eager"
       - "--alluredir=allure-results"
-      - "tests"
-    working_dir: /usr/workspace
+      - "tests/ui_tests/alerts_frame_windows_test.py"
+
+  ui-tests-book-store-application:
+    <<: *default
+    command:
+      - "pytest"
+      - "-sv"
+      - "--headless"
+      - "--browser=chrome"
+      - "--page_load_strategy=eager"
+      - "--alluredir=allure-results"
+      - "tests/ui_tests/book_store_application_test.py"
     environment:
       - UI_USERNAME=${UI_USERNAME}
       - UI_PASSWORD=${UI_PASSWORD}
+
+  ui-tests-elements:
+    <<: *default
+    command:
+      - "pytest"
+      - "-sv"
+      - "--headless"
+      - "--browser=chrome"
+      - "--page_load_strategy=eager"
+      - "--alluredir=allure-results"
+      - "tests/ui_tests/elements_test.py"
+
+  ui-tests-forms:
+    <<: *default
+    command:
+      - "pytest"
+      - "-sv"
+      - "--headless"
+      - "--browser=chrome"
+      - "--page_load_strategy=eager"
+      - "--alluredir=allure-results"
+      - "tests/ui_tests/forms_test.py"
+
+  ui-tests-interactions:
+    <<: *default
+    command:
+      - "pytest"
+      - "-sv"
+      - "--headless"
+      - "--browser=chrome"
+      - "--page_load_strategy=eager"
+      - "--alluredir=allure-results"
+      - "tests/ui_tests/interactions_test.py"
+
+  ui-tests-widgets:
+    <<: *default
+    command:
+      - "pytest"
+      - "-sv"
+      - "--headless"
+      - "--browser=chrome"
+      - "--page_load_strategy=eager"
+      - "--alluredir=allure-results"
+      - "tests/ui_tests/widgets_test.py"
