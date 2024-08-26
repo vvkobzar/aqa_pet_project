@@ -1,0 +1,1 @@
+Person(full_name='Никифор Иванов Макаровна', firstname='Игорь', lastname='Силин', username='ferapontfokin', password='501UahUp#f', age=10, salary=19608, department='Военно-полевой хирург', email='petrovermola@example.org', current_address='п. Норильск, наб. Энергетиков, д. 196 стр. 36, 987613', permanent_address='с. Певек, пер. Солнечный, д. 2/3, 820954', mobile=2767076365)
