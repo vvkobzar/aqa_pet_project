@@ -1,0 +1,8 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"UI Tests","Alerts, Frame & Windows","Browser Windows","0","0","1","0","0"
+"UI Tests","Interactions","Sortable","0","0","1","0","0"
+"UI Tests","Widgets","Accordian","1","0","1","0","0"
+"API Tests","Book Store","","4","0","0","2","0"
+"UI Tests","Elements","Text Box","0","0","1","0","0"
+"API Tests","Account","","1","1","0","0","0"
+"UI Tests","Book Store Application","Login","0","0","1","0","0"
