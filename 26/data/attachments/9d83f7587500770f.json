@@ -1,0 +1,1 @@
+Person(full_name='Богдан Меркушев Игоревич', firstname='Егор', lastname='Сафонова', username='nturova', password='^1PDW&Ko1s', age=43, salary=97759, department='Брейдер', email='hmartinova@example.com', current_address='ст. Мыс Шмидта, наб. Иркутская, д. 345 к. 460, 697337', permanent_address='п. Кырен, бул. Тракторный, д. 665 к. 47, 090716', mobile=1447848314)
