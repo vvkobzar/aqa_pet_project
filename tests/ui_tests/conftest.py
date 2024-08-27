@@ -1,3 +1,4 @@
+import platform
 import os
 import pytest
 import allure
@@ -39,6 +40,12 @@ def pytest_exception_interact(node, call, report):
             screenshot = driver.get_screenshot_as_png()
             allure.attach(screenshot, name="Failure Screenshot", attachment_type=allure.attachment_type.PNG)
     yield
+
+
+# --- Hook for creating environment.properties ---
+@pytest.hookimpl(tryfirst=True)
+def pytest_sessionstart(session):
+    create_environment_properties(session.config)
 
 
 # --- Browser Setup ---
@@ -105,3 +112,37 @@ def set_firefox_preferences(options):
     options.set_preference("browser.download.manager.showWhenStarting", False)
     options.set_preference("browser.download.dir", download_dir)
     options.set_preference("browser.helperApps.neverAsk.saveToDisk", "image/jpeg")
+
+
+# --- Function to create environment.properties ---
+def create_environment_properties(config):
+    browser_name = config.getoption("browser")
+    headless = config.getoption("headless")
+    page_load_strategy = config.getoption("page_load_strategy")
+
+    environment_data = {
+        "OS": platform.system(),
+        "OS.Version": platform.version(),
+        "Python.Version": platform.python_version(),
+        "Browser": browser_name,
+        "Headless": str(headless),
+        "Page.Load.Strategy": page_load_strategy,
+        "Docker": str(is_running_in_docker()),
+    }
+
+    properties_file = os.path.join(os.getcwd(), "allure-results/environment.properties")
+    os.makedirs(os.path.dirname(properties_file), exist_ok=True)
+
+    with open(properties_file, 'w') as f:
+        for key, value in environment_data.items():
+            f.write(f"{key}={value}\n")
+
+
+# --- Utility function to detect Docker environment ---
+def is_running_in_docker():
+    """Detect if the tests are running inside a Docker container."""
+    path = '/proc/self/cgroup'
+    return (
+            os.path.exists('/.dockerenv') or
+            (os.path.isfile(path) and any('docker' in line for line in open(path)))
+    )
