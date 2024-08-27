@@ -1,0 +1,1 @@
+[{"values":["Linux"],"name":"OS"},{"values":["#26~22.04.1-Ubuntu SMP Thu Jul 11 22:33:04 UTC 2024"],"name":"OS.Version"},{"values":["3.12.0"],"name":"Python.Version"},{"values":["chrome"],"name":"Browser"},{"values":["True"],"name":"Headless"},{"values":["eager"],"name":"Page.Load.Strategy"},{"values":["True"],"name":"Docker"}]
