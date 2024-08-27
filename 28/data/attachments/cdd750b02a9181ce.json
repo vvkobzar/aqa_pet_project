@@ -1,0 +1,1 @@
+Person(full_name='Кондратий Орехова Фокич', firstname='Прокл', lastname='Бурова', username='bogdangalkin', password='g5xTCXq5_s', age=40, salary=93804, department='Диктор', email='olimpiada1988@example.net', current_address='клх Кош-Агач, пр. Тургенева, д. 453 к. 56, 119073', permanent_address='с. Волгодонск, ш. Глинки, д. 75 к. 3, 391806', mobile=7564493033)

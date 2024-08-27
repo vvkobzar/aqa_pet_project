@@ -1,0 +1,1 @@
+Person(full_name='Флорентин Петухов Александрович', firstname='Тарас', lastname='Одинцова', username='tarasovguri', password='*4%NyJ&Q@f', age=66, salary=41483, department='Хирург', email='blinovagalina@example.com', current_address='п. Элиста, бул. Тенистый, д. 17 стр. 5/7, 117477', permanent_address='с. Чермоз, алл. Геологов, д. 47 стр. 6/4, 735996', mobile=5690501893)
