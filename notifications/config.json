@@ -1,0 +1,20 @@
+{
+  "base": {
+    "logo": "logo.png",
+    "project": "demoqa",
+    "environment": "env",
+    "comment": "some comment",
+    "reportLink": "https://vvkobzar.github.io/aqa_pet_project/index.html",
+    "language": "en",
+    "allureFolder": "allure-report/",
+    "enableChart": true,
+    "enableSuitesPublishing": true,
+    "durationFormat": "HH:mm:ss.SSS"
+  },
+  "telegram": {
+    "token": "7311690648:AAGDuhyMepFV7r8K8HhVJaZN-NYlG3pomgE",
+    "chat": "-1002132957838",
+    "replyTo": "",
+    "templatePath": "/templates/telegram.ftl"
+  }
+}
