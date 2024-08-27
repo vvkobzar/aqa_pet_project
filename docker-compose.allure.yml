@@ -1,0 +1,10 @@
+services:
+  allure-notifications:
+    image: run-tests:v1
+    volumes:
+      - ./:/usr/workspace
+    working_dir: /usr/workspace
+    command: ["sh", "-c", "python notifications/update_config.py && java -DconfigFile=notifications/config.json -jar notifications/allure-notifications.jar"]
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT=${TELEGRAM_CHAT}

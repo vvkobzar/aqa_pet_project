@@ -51,6 +51,13 @@ jobs:
           allure_report: allure-report
           allure_history: allure-history
 
+      - name: Sending notification of Allure report
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT: ${{ secrets.TELEGRAM_CHAT }}
+        run: |
+          docker-compose -f docker-compose.allure.yml up
+
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v4
         if: always()
