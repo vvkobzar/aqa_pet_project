@@ -1,0 +1,1 @@
+Person(full_name='Селиверст Фокина Артемьевич', firstname='Евфросиния', lastname='Некрасова', username='fedotovmina', password='L$oO1@htoM', age=70, salary=10585, department='Мастер маникюра', email='gromovvadim@example.net', current_address='к. Воронеж, бул. Амурский, д. 242, 551537', permanent_address='с. Нарьян-Мар, пер. Смоленский, д. 7, 693150', mobile=2730949147)
