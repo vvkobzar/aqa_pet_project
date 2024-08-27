@@ -1,0 +1,1 @@
+Person(full_name='Степан Алексеев Артемьевич', firstname='Артем', lastname='Гришина', username='vsharov', password='iO6NoAL4*E', age=38, salary=61721, department='Педагог', email='elizarjudin@example.net', current_address='г. Углегорск, пр. Мостовой, д. 3 стр. 2, 631600', permanent_address='д. Амдерма, ул. Вавилова, д. 3/6 к. 77, 912199', mobile=8617337892)

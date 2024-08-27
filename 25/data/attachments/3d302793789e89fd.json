@@ -1,0 +1,17 @@
+{
+    "userId": "21d74c52-8f4f-4956-83fb-4e23ddc7885e",
+    "username": "Test123!3123@",
+    "books": [
+        {
+            "isbn": "9781449365035",
+            "title": "Speaking JavaScript",
+            "subTitle": "An In-Depth Guide for Programmers",
+            "author": "Axel Rauschmayer",
+            "publish_date": "2014-02-01T00:00:00.000Z",
+            "publisher": "O'Reilly Media",
+            "pages": 460,
+            "description": "Like it or not, JavaScript is everywhere these days-from browser to server to mobile-and now you, too, need to learn the language or dive deeper than you have. This concise book guides you into and through JavaScript, written by a veteran programmer who o",
+            "website": "http://speakingjs.com/"
+        }
+    ]
+}
