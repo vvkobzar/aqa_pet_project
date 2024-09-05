@@ -1,9 +1,6 @@
 name: Run All Tests on Main
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
