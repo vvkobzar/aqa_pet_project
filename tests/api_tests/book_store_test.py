@@ -103,7 +103,7 @@ class TestBookStore(BaseAPI):
         user_id, token = account_setup
 
         old_isbn_book = random.choices(self.api_book_store.get_isbn_books_list())
-        self.api_book_store.adding_books_in_the_profile(old_isbn_book, user_id, token)
+        self.api_book_store.added_books_in_the_profile(old_isbn_book, user_id, token)
         before_book_in_the_profile = self.api_account.get_user(user_id, token)[0]
         new_isbn_book = random.choices(self.api_book_store.get_isbn_books_list())
         self.api_book_store.put_books(before_book_in_the_profile, new_isbn_book, user_id, token)
